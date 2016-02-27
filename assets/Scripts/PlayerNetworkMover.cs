@@ -40,7 +40,7 @@ public class PlayerNetworkMover : Photon.MonoBehaviour {
 		{
 			GetComponent<Rigidbody>().useGravity = true;
 			GetComponent<CharacterController>().enabled = true;
-			GetComponent<WeaponManager>().enabled = true;
+			//GetComponent<WeaponManager>().enabled = true;
 			(GetComponent("FirstPersonController") as MonoBehaviour).enabled = true;
 			GetComponentInChildren<DartGun>().enabled = true;
 			GetComponentInChildren<Melee>().enabled = true;
@@ -50,11 +50,11 @@ public class PlayerNetworkMover : Photon.MonoBehaviour {
 			foreach(Camera cam in GetComponentsInChildren<Camera>())
 			cam.enabled = true;
 			// Put weapon back on Gun layer for camera masks
-			transform.Find("FirstPersonCharacter/GunCamera/Gun").gameObject.layer = 10;
-			transform.Find("FirstPersonCharacter/GunCamera/WaterGun").gameObject.layer = 10;
-			transform.Find("FirstPersonCharacter/GunCamera/SodaGrenade").gameObject.layer = 10;
-			transform.Find("Model/Soldier/Body").gameObject.layer = 19;
-			transform.Find("Model/Soldier/Arms").gameObject.layer = 19;
+			//transform.Find("FirstPersonCharacter/GunCamera/Gun").gameObject.layer = 10;
+			//transform.Find("FirstPersonCharacter/GunCamera/WaterGun").gameObject.layer = 10;
+			//transform.Find("FirstPersonCharacter/GunCamera/SodaGrenade").gameObject.layer = 10;
+			//transform.Find("Model/Soldier/Body").gameObject.layer = 19;
+			//transform.Find("Model/Soldier/Arms").gameObject.layer = 19;
 			healthCount = this.transform.parent.transform.Find("VitalsCanvas/HealthBar/HealthCount").gameObject;
 			myHealth = true;
 			
