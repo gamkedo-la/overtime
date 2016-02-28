@@ -46,7 +46,7 @@ public class DartGun : WeaponBase {
 	void Start () 
 	{
 		//anim = GetComponentInChildren<Animator> ();
-		ammoCount = this.transform.parent.parent.transform.Find("VitalsCanvas/VitalsBar/AmmoCount").gameObject;
+		ammoCount = this.transform.parent.parent.parent.transform.Find("VitalsCanvas/VitalsBar/AmmoCount").gameObject;
 
 		UpdateAmmoModelVis();
 	}

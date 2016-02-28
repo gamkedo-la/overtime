@@ -139,11 +139,11 @@ public class NetworkManagerScript : MonoBehaviour {
 		                                    spawnPoints[index].rotation,
 		                                    0);
 		player.transform.SetParent(playerManager.transform);
-		player.GetComponent<PlayerNetworkMover>().RespawnMe += StartSpawnProcess;
+		player.GetComponentInChildren<PlayerNetworkMover>().RespawnMe += StartSpawnProcess;
 		//send PNM the kill/spawn message
-		player.GetComponent<PlayerNetworkMover>().SendNetworkMessage += AddMessage;
+		player.GetComponentInChildren<PlayerNetworkMover>().SendNetworkMessage += AddMessage;
 		//send PlayerScore the kill/death update
-		player.GetComponent<PlayerNetworkMover>().SendNetworkScore += AddScore;
+		player.GetComponentInChildren<PlayerNetworkMover>().SendNetworkScore += AddScore;
 
 	
 

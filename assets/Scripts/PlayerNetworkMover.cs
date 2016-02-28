@@ -44,7 +44,7 @@ public class PlayerNetworkMover : Photon.MonoBehaviour {
 			(GetComponent("FirstPersonController") as MonoBehaviour).enabled = true;
 			GetComponentInChildren<DartGun>().enabled = true;
 			GetComponentInChildren<Melee>().enabled = true;
-			GetComponentInChildren<AudioListener>().enabled = true;
+			//GetComponentInChildren<AudioListener>().enabled = true;
 			transform.tag = "Player";
 			gameObject.layer = 14;
 			foreach(Camera cam in GetComponentsInChildren<Camera>())
@@ -55,7 +55,7 @@ public class PlayerNetworkMover : Photon.MonoBehaviour {
 			//transform.Find("FirstPersonCharacter/GunCamera/SodaGrenade").gameObject.layer = 10;
 			//transform.Find("Model/Soldier/Body").gameObject.layer = 19;
 			//transform.Find("Model/Soldier/Arms").gameObject.layer = 19;
-			healthCount = this.transform.parent.transform.Find("VitalsCanvas/HealthBar/HealthCount").gameObject;
+			healthCount = this.transform.parent.parent.transform.Find("VitalsCanvas/HealthBar/HealthCount").gameObject;
 			myHealth = true;
 			
 		}
