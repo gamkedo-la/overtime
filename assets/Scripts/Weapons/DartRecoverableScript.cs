@@ -72,13 +72,13 @@ public class DartRecoverableScript : WeaponBase {
 						//Stop Physics and stick to what we hit
 						if (killMe == false)
 						{
-							SoundCenter.instance.PlayClipOn(
-								SoundCenter.instance.dartStick,transform.position);
+							//SoundCenter.instance.PlayClipOn(
+								//SoundCenter.instance.dartStick,transform.position);
 							//hitTime = (Time.time + selfdestructTime);
 							recoverable = true;
 							rb.useGravity = false;
 							rb.isKinematic = true;
-							col.GetComponent<Collider>().enabled = false;
+							col.GetComponent<Collider>().isTrigger = true;
 							rb.transform.parent = hit.transform;
 							
 						}
@@ -102,8 +102,10 @@ public class DartRecoverableScript : WeaponBase {
 	{
 		if (recoverable = true)
 		{
+			Debug.Log("Attempting Recovery");
 			if (other.transform.tag == "Player")
 			{
+				Debug.Log("Attempting Player Recovery");
 				other.GetComponentInChildren<DartGun>().GiveAmmo(1);
 				Destroy(gameObject);
 			}

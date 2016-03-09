@@ -30,8 +30,8 @@ public class WeaponManager : Photon.MonoBehaviour {
 	}
 
 	void ChangeWep(WeaponBase toWep) {
-		SoundCenter.instance.PlayClipOn(
-			SoundCenter.instance.playerWepSwitch,transform.position);
+		//SoundCenter.instance.PlayClipOn(
+			//SoundCenter.instance.playerWepSwitch,transform.position);
 
 		foreach(WeaponBase eachWep in allWep) {
 			eachWep.enabled = (eachWep == toWep);

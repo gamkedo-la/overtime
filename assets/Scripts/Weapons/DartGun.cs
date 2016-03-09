@@ -19,6 +19,7 @@ public class DartGun : WeaponBase {
 
 	public int ammoMax = 3;
 	public GameObject gunObj;
+	public GameObject firingPointObj;
 	public GameObject dartAmmoGOFirst;
 	public GameObject dartAmmoGOSecond;
 	public GameObject dartAmmoGOLast;
@@ -56,14 +57,14 @@ public class DartGun : WeaponBase {
 		//Shoot if we hit fire, aren't running, have ammo, and round is loaded
 		if(Input.GetButtonDown ("Fire1") && !Input.GetKey(KeyCode.LeftShift)){
 			if(loaded == true && ammo > 0){
-				SoundCenter.instance.PlayClipOn(
-					SoundCenter.instance.dartShoot,transform.position);
+				//SoundCenter.instance.PlayClipOn(
+					//SoundCenter.instance.dartShoot,transform.position);
 				shooting = true;
 				shotTime = Time.time;
 				Debug.Log ("It's firing");
 			} else {
-				SoundCenter.instance.PlayClipOn(
-					SoundCenter.instance.playerNoAmmoTriedToFire,transform.position);
+				//SoundCenter.instance.PlayClipOn(
+					//SoundCenter.instance.playerNoAmmoTriedToFire,transform.position);
 			}
 		}
 
@@ -80,7 +81,7 @@ public class DartGun : WeaponBase {
 			UpdateAmmoModelVis();
 			//instantiate the dart
 			GameObject dartInstance;
-			dartInstance = PhotonNetwork.Instantiate(dartPrefab, transform.position, transform.rotation, 0) as GameObject;
+			dartInstance = PhotonNetwork.Instantiate(dartPrefab, firingPointObj.transform.position, firingPointObj.transform.rotation, 0) as GameObject;
 		}
 
 		
