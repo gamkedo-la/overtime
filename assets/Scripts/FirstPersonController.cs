@@ -50,6 +50,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
 		private CursorLockMode wantedMode;
 		private float defaultWalkSpeed;
 		private Animator anim;
+        private bool mouseLookEnabled = true;
 
 		public void setMouseSens (float newSens) {
 			m_MouseLook.XSensitivity = newSens;
@@ -101,9 +102,16 @@ namespace UnityStandardAssets.Characters.FirstPerson
             }
 
             m_PreviouslyGrounded = m_CharacterController.isGrounded;
+
+            // Toggle Cursor Lock
 			if(Input.GetKeyDown(KeyCode.L)){
 				ToggleCursorLock();
 			}
+
+            // Toggle Mouse Look
+            if(Input.GetKeyDown(KeyCode.M)){
+                ToggleMouseLook();
+            }
         }
 
 		private void ToggleCursorLock(){
@@ -119,6 +127,16 @@ namespace UnityStandardAssets.Characters.FirstPerson
 			Cursor.lockState = wantedMode;
 			Cursor.visible = (CursorLockMode.Locked != wantedMode);
 		}
+
+        private void ToggleMouseLook(){
+            if (mouseLookEnabled) {
+                mouseLookEnabled = false;
+                Debug.Log("Mouse is locked");
+            } else {
+                mouseLookEnabled = true;
+                Debug.Log("Mouse is unlocked");
+            }
+        }
 
 		IEnumerator SpeedPowerDown() {
 			yield return new WaitForSeconds (speedCoolTime);
@@ -302,7 +320,8 @@ namespace UnityStandardAssets.Characters.FirstPerson
 
         private void RotateView()
         {
-            m_MouseLook.LookRotation (transform, m_Camera.transform);
+            if(mouseLookEnabled){
+                m_MouseLook.LookRotation (transform, m_Camera.transform);}
         }
 
 

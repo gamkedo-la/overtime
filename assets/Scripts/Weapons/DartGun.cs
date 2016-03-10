@@ -19,10 +19,15 @@ public class DartGun : WeaponBase {
 
 	public int ammoMax = 3;
 	public GameObject gunObj;
-	public GameObject firingPointObj;
 	public GameObject dartAmmoGOFirst;
 	public GameObject dartAmmoGOSecond;
 	public GameObject dartAmmoGOLast;
+
+	// Aiming Variables
+	public GameObject firingPointObj;
+	public GameObject aimCursor;
+	public Transform fireFrom;
+
 
 	void UpdateAmmoModelVis() {
 		dartAmmoGOLast.SetActive(ammo>0);
@@ -36,7 +41,7 @@ public class DartGun : WeaponBase {
 			ammo = ammoMax;
 		}*/
 
-		// prompt gun to display its new ammo
+		// Prompt gun to display its new ammo
 		loaded = false;
 		shotTime = Time.time;
 
@@ -47,6 +52,8 @@ public class DartGun : WeaponBase {
 	void Start () 
 	{
 		//anim = GetComponentInChildren<Animator> ();
+
+		// Grab the Ammo Count Object
 		ammoCount = this.transform.parent.parent.parent.transform.Find("VitalsCanvas/VitalsBar/AmmoCount").gameObject;
 
 		UpdateAmmoModelVis();
@@ -54,32 +61,53 @@ public class DartGun : WeaponBase {
 	
 	// Update is called once per frame
 	void Update (){
-		//Shoot if we hit fire, aren't running, have ammo, and round is loaded
+
+		// Variables for Dart Aim Raycast
+		RaycastHit hitInfo;
+		Vector3 shootToward;
+		Ray centerRay = Camera.main.ScreenPointToRay(new Vector3((Camera.main.pixelWidth/2), (Camera.main.pixelHeight/2), 0f));
+		
+
+		// Dart Gun Aiming
+		if(Physics.Raycast(centerRay, out hitInfo, 150.0f)) {
+			shootToward = hitInfo.point;
+		} else {
+			shootToward = centerRay.origin + centerRay.direction * 50.0f;
+		}
+		if(aimCursor != null) {
+			aimCursor.transform.position = shootToward;
+		}
+		firingPointObj.transform.LookAt(shootToward);
+
+
+		// Shoot if we hit fire, aren't running, have ammo, and round is loaded
 		if(Input.GetButtonDown ("Fire1") && !Input.GetKey(KeyCode.LeftShift)){
 			if(loaded == true && ammo > 0){
-				//SoundCenter.instance.PlayClipOn(
-					//SoundCenter.instance.dartShoot,transform.position);
+				
+				/*SoundCenter.instance.PlayClipOn(
+					SoundCenter.instance.dartShoot,transform.position); */
+
 				shooting = true;
 				shotTime = Time.time;
 				Debug.Log ("It's firing");
 			} else {
-				//SoundCenter.instance.PlayClipOn(
-					//SoundCenter.instance.playerNoAmmoTriedToFire,transform.position);
+
+				/*SoundCenter.instance.PlayClipOn(
+					SoundCenter.instance.playerNoAmmoTriedToFire,transform.position); */
 			}
 		}
 
-		//Reload if the cooldown has happened
-		if(loaded == false && Time.time >= (shotTime + loadTime)){
+		// Reload if the cooldown has happened
+		if(loaded == false && Time.time >= (shotTime + loadTime)){ 
 			loaded = true;
 		}
 
-		if (shooting){
-			//stop shooting and unload
+		// Stop shooting, unload, and instantiate the dart
+		if (shooting){ 
 			shooting = false;
 			loaded = false;
 			ammo -= 1;
 			UpdateAmmoModelVis();
-			//instantiate the dart
 			GameObject dartInstance;
 			dartInstance = PhotonNetwork.Instantiate(dartPrefab, firingPointObj.transform.position, firingPointObj.transform.rotation, 0) as GameObject;
 		}
