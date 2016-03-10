@@ -77,7 +77,8 @@ public class DartGun : WeaponBase {
 		if(aimCursor != null) {
 			aimCursor.transform.position = shootToward;
 		}
-		firingPointObj.transform.LookAt(shootToward);
+		//firingPointObj.transform.LookAt(shootToward);
+		gunObj.transform.LookAt(shootToward);
 
 
 		// Shoot if we hit fire, aren't running, have ammo, and round is loaded
