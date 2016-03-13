@@ -12,6 +12,8 @@ ModelImporter:
     100008: //RootNode
     100010: Wheel_interiors
     100012: Wheels
+    100014: Kick_stand_back
+    100016: Kick_stand_front
     400000: Axle
     400002: Hub
     400004: Screen_image
@@ -19,24 +21,32 @@ ModelImporter:
     400008: //RootNode
     400010: Wheel_interiors
     400012: Wheels
+    400014: Kick_stand_back
+    400016: Kick_stand_front
     2300000: Axle
     2300002: Hub
     2300004: Screen_image
     2300006: Screen_mount
     2300008: Wheel_interiors
     2300010: Wheels
+    2300012: Kick_stand_back
+    2300014: Kick_stand_front
     3300000: Axle
     3300002: Hub
     3300004: Screen_image
     3300006: Screen_mount
     3300008: Wheel_interiors
     3300010: Wheels
+    3300012: Kick_stand_back
+    3300014: Kick_stand_front
     4300000: Wheel_interiors
     4300002: Axle
     4300004: Wheels
     4300006: Screen_mount
     4300008: Screen_image
     4300010: Hub
+    4300012: Kick_stand_back
+    4300014: Kick_stand_front
     7400000: Default Take
     9500000: //RootNode
   materials:
