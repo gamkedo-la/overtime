@@ -1,18 +1,21 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-[RequireComponent(typeof(Rigidbody))]
 [RequireComponent(typeof(Animator))]
-public class TelepresenceBotTestControl : MonoBehaviour
+[RequireComponent(typeof(Rigidbody))]
+public class TelepresenceBotMotor : MonoBehaviour
 {
-    [SerializeField] float m_forwardForce = 10f;
+    [SerializeField] float m_forwardForce = 20f;
     [SerializeField] float m_maxForwardSpeed = 2f;
-    [SerializeField] float m_rotationSpeed = 90f;
+    [SerializeField] float m_rotationSpeed = 180f;
 
     private Rigidbody m_rigidbody;
     private Animator m_anim;
     private bool m_movingBefore;
     private float m_forwardVelocity;
+    private float m_vertical;
+    private float m_horizontal;
+
 
     void Awake()
     {
@@ -21,11 +24,11 @@ public class TelepresenceBotTestControl : MonoBehaviour
     }
 
 
-	void Update()
-    { 
-        transform.Rotate(Vector3.up * Time.deltaTime * m_rotationSpeed * Input.GetAxis("Horizontal"));
+    void Update()
+    {
+        transform.Rotate(Vector3.up * Time.deltaTime * m_rotationSpeed * m_horizontal);
 
-        bool moving = Mathf.Abs(m_forwardVelocity) > 0.01f;
+        bool moving = Mathf.Abs(m_forwardVelocity) > 0.01f || Mathf.Abs(m_horizontal) > 0.01f;
 
         if (moving != m_movingBefore)
         {
@@ -39,11 +42,16 @@ public class TelepresenceBotTestControl : MonoBehaviour
     }
 
 
+    public void Move(float vertical, float horizontal)
+    {
+        m_vertical = vertical;
+        m_horizontal = horizontal;  
+    }
+
+
     void FixedUpdate()
     {
-        float input = Input.GetAxisRaw("Vertical");
-
-        m_rigidbody.AddForce(transform.forward * m_forwardForce * input);
+        m_rigidbody.AddForce(transform.forward * m_forwardForce * m_vertical);
 
         float verticalVelocity = m_rigidbody.velocity.y;
         m_forwardVelocity = transform.InverseTransformDirection(m_rigidbody.velocity).z;
@@ -51,9 +59,9 @@ public class TelepresenceBotTestControl : MonoBehaviour
         if (Mathf.Abs(m_forwardVelocity) > m_maxForwardSpeed)
             m_forwardVelocity = Mathf.Sign(m_forwardVelocity) * m_maxForwardSpeed;
 
-        print(m_forwardVelocity);
+        //print(m_forwardVelocity);
 
         var newVelocity = transform.forward * m_forwardVelocity + Vector3.up * verticalVelocity;
-        m_rigidbody.velocity = newVelocity;        
+        m_rigidbody.velocity = newVelocity;
     }
 }
