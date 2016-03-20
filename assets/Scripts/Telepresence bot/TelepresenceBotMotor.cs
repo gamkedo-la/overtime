@@ -49,6 +49,14 @@ public class TelepresenceBotMotor : MonoBehaviour
     }
 
 
+    public void ScreenHeight(float relativeHeight)
+    {
+        relativeHeight = Mathf.Clamp(relativeHeight, -1f, 1f);
+
+        m_anim.SetFloat("Screen height", relativeHeight);
+    }
+
+
     void FixedUpdate()
     {
         m_rigidbody.AddForce(transform.forward * m_forwardForce * m_vertical);
