@@ -6,10 +6,34 @@ ModelImporter:
   serializedVersion: 19
   fileIDToRecycleName:
     100000: //RootNode
+    100002: Conference_table
+    100004: Leg_back_left
+    100006: Leg_back_right
+    100008: Leg_front_left
+    100010: Leg_front_right
     400000: //RootNode
+    400002: Conference_table
+    400004: Leg_back_left
+    400006: Leg_back_right
+    400008: Leg_front_left
+    400010: Leg_front_right
     2300000: //RootNode
+    2300002: Conference_table
+    2300004: Leg_back_left
+    2300006: Leg_back_right
+    2300008: Leg_front_left
+    2300010: Leg_front_right
     3300000: //RootNode
+    3300002: Conference_table
+    3300004: Leg_back_left
+    3300006: Leg_back_right
+    3300008: Leg_front_left
+    3300010: Leg_front_right
     4300000: Conference_table
+    4300002: Leg_back_left
+    4300004: Leg_back_right
+    4300006: Leg_front_right
+    4300008: Leg_front_left
     7400000: Default Take
     9500000: //RootNode
   materials:
