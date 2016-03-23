@@ -15,6 +15,17 @@ public enum StandardEventName
 
 
 /// <summary>
+/// Use general event names for events that need general purpose EventArgs sent to them
+/// </summary>
+public enum GeneralEventName
+{
+    None = 0,
+
+    // Add new event names here as required (add a number too, to prevent serialization problems if they get reordered later)
+}
+
+
+/// <summary>
 /// Use boolean event names for events that need a True or False sent to them
 /// </summary>
 public enum BooleanEventName

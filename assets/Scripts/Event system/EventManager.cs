@@ -2,13 +2,31 @@
 using UnityEngine.Events;
 using System.Collections;
 using System.Collections.Generic;
+using System;
+
+
+public class StringBoolEventArgs : EventArgs
+{
+    public StringBoolEventArgs() { }
+
+    public StringBoolEventArgs(string _string, bool _bool)
+    {
+        String = _string;
+        Bool = _bool;
+    }
+
+    public string String { get; set; }
+    public bool Bool { get; set; }
+}
+
 
 public class EventManager : MonoBehaviour 
 {
     #region Fields
 
     private Dictionary<StandardEventName, UnityEvent> m_eventDictionary;
-	private Dictionary<BooleanEventName, UnityEvent<bool>> m_eventWithBoolDictionary;
+    private Dictionary<GeneralEventName, UnityEvent<EventArgs>> m_eventWithArgsDictionary;
+    private Dictionary<BooleanEventName, UnityEvent<bool>> m_eventWithBoolDictionary;
 	private Dictionary<FloatEventName, UnityEvent<float>> m_eventWithFloatDictionary;
     private Dictionary<StringEventName, UnityEvent<string>> m_eventWithStringDictionary;
     private Dictionary<IntegerEventName, UnityEvent<int>> m_eventWithIntDictionary;
@@ -51,7 +69,10 @@ public class EventManager : MonoBehaviour
 		if (m_eventDictionary == null)
 			m_eventDictionary = new Dictionary<StandardEventName, UnityEvent>();
 
-		if (m_eventWithBoolDictionary == null)
+        if (m_eventWithArgsDictionary == null)
+            m_eventWithArgsDictionary = new Dictionary<GeneralEventName, UnityEvent<EventArgs>>();
+
+        if (m_eventWithBoolDictionary == null)
 			m_eventWithBoolDictionary = new Dictionary<BooleanEventName, UnityEvent<bool>>();
 
 		if (m_eventWithFloatDictionary == null)
@@ -114,6 +135,54 @@ public class EventManager : MonoBehaviour
 			thisEvent.Invoke ();
 		}
 	}
+
+    #endregion
+
+
+    #region General event
+
+    public static void StartListening(GeneralEventName eventName, UnityAction<EventArgs> listener)
+    {
+        UnityEvent<EventArgs> thisEvent = null;
+        if (Instance.m_eventWithArgsDictionary.TryGetValue(eventName, out thisEvent))
+        {
+            thisEvent.AddListener(listener);
+        }
+        else
+        {
+            thisEvent = new GeneralEvent();
+            thisEvent.AddListener(listener);
+            Instance.m_eventWithArgsDictionary.Add(eventName, thisEvent);
+        }
+    }
+
+
+    public static void StopListening(GeneralEventName eventName, UnityAction<EventArgs> listener)
+    {
+        if (m_eventManager == null) return;
+
+        UnityEvent<EventArgs> thisEvent = null;
+        if (Instance.m_eventWithArgsDictionary.TryGetValue(eventName, out thisEvent))
+        {
+            thisEvent.RemoveListener(listener);
+        }
+    }
+
+
+    public static void TriggerEvent(GeneralEventName eventName, EventArgs args)
+    {
+        UnityEvent<EventArgs> thisEvent = null;
+        if (Instance.m_eventWithArgsDictionary.TryGetValue(eventName, out thisEvent))
+        {
+            thisEvent.Invoke(args);
+        }
+    }
+
+
+    public class GeneralEvent : UnityEvent<EventArgs>
+    {
+
+    }
 
     #endregion
 
