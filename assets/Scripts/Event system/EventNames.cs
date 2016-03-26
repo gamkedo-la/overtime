@@ -7,11 +7,22 @@ using System.Collections;
 /// </summary>
 public enum StandardEventName
 {
-    None,
+    StopSpinning = -1,
+    None = 0,
+	ActionButton = 1,
 
-    StopSpinning,
+    // Add new event names here as required (add a number too, to prevent serialization problems if they get reordered later)
+}
 
-    ActionButton,
+
+/// <summary>
+/// Use general event names for events that need general purpose EventArgs sent to them
+/// </summary>
+public enum GeneralEventName
+{
+    None = 0,
+
+    // Add new event names here as required (add a number too, to prevent serialization problems if they get reordered later)
 }
 
 
@@ -20,9 +31,10 @@ public enum StandardEventName
 /// </summary>
 public enum BooleanEventName
 {
-    None,
-   
-    Visible,
+    Visible = -1,
+    None = 0,
+ 
+    // Add new event names here as required (add a number too, to prevent serialization problems if they get reordered later)
 }
 
 
@@ -31,7 +43,9 @@ public enum BooleanEventName
 /// </summary>
 public enum IntegerEventName
 {
-    None,
+    None = 0,
+
+    // Add new event names here as required (add a number too, to prevent serialization problems if they get reordered later)
 }
 
 
@@ -40,9 +54,10 @@ public enum IntegerEventName
 /// </summary>
 public enum StringEventName
 {
-    None,
+    HelloWorld = -1,
+    None = 0,
 
-    HelloWorld,
+    // Add new event names here as required (add a number too, to prevent serialization problems if they get reordered later)
 }
 
 
@@ -51,7 +66,41 @@ public enum StringEventName
 /// </summary>
 public enum FloatEventName
 {
-    None,
+    Spin = -1,
+    None = 0,
 
-    Spin,
+    // Add new event names here as required (add a number too, to prevent serialization problems if they get reordered later)
+}
+
+
+/// <summary>
+/// Use string-string event names that need two strings sent to them
+/// </summary>
+public enum StringStringEventName
+{
+    None = 0,
+
+    // Add new event names here as required (add a number too, to prevent serialization problems if they get reordered later)
+}
+
+
+/// <summary>
+/// Use string-bool event names that need both a string and bool sent to them
+/// </summary>
+public enum StringBoolEventName
+{
+    None = 0,
+
+    // Add new event names here as required (add a number too, to prevent serialization problems if they get reordered later)
+}
+
+
+/// <summary>
+/// Use string-string-float event names that need two strings and a float sent to them
+/// </summary>
+public enum StringStringFloatEventName
+{
+    None = 0,
+
+    // Add new event names here as required (add a number too, to prevent serialization problems if they get reordered later)
 }
