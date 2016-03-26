@@ -12,7 +12,8 @@ public class SoakerGun : WeaponBase {
 	[SerializeField] bool shooting = false;
 	[SerializeField] bool loaded = true; // when unloaded, gun kills itself
 	[SerializeField] float shotTime;
-	public int ammo = 1200;
+    public int ammo = 1200;
+    public int maxAmmo = 1200;
 	public int ammoDecay = 1; // how fast we burn ammo
 	public float range = 10; 
 	public float knockbackForce = 35; // how much force hit pushes with
@@ -100,6 +101,9 @@ public class SoakerGun : WeaponBase {
 		ammoCount.GetComponent<Text>().text = (ammo/6).ToString();  // update UI
 	}
 
-
+    public void refill()
+    {
+        ammo = maxAmmo;
+    }
 
 }

@@ -10,6 +10,8 @@ public enum StandardEventName
     None,
 
     StopSpinning,
+
+    ActionButton,
 }
 
 
