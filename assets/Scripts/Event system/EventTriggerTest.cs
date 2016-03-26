@@ -32,5 +32,11 @@ public class EventTriggerTest : MonoBehaviour
             m_visible = !m_visible;
             EventManager.TriggerEvent(BooleanEventName.Visible, m_visible);
         }
+
+        if (Input.GetKeyDown(KeyCode.G))
+        {
+            m_visible = !m_visible;
+            EventManager.TriggerEvent(GeneralEventName.None, new StringBoolEventArgs(m_messageToPrint, m_visible));
+        }
     }
 }

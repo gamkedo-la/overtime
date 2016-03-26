@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.Events;
 using System.Collections;
+using System;
 
 
 /// <summary>
@@ -49,6 +50,23 @@ public class EventTester : MonoBehaviour
         m_meshRenderer.enabled = visible;
     }
 
+
+    private void VisibleAndPrintMessage(EventArgs args)
+    {
+        var stringBool = args as StringBoolEventArgs;
+
+        // Catch the situation where we accidentally send the wrong type of event arguments
+        if (stringBool == null)
+        {
+            print("The event arguments weren't of type StringBoolEventArgs");
+            return;
+        }
+
+        // If the event arguments are OK, i.e. stringBool isn't null, we can use them
+        m_meshRenderer.enabled = stringBool.Bool;
+        print(stringBool.String + " from " + name);   // Append the game object name to the message sent by the event
+    }
+
     #endregion
 
 
@@ -63,7 +81,8 @@ public class EventTester : MonoBehaviour
         EventManager.StartListening(StandardEventName.StopSpinning, StopSpinning);
         EventManager.StartListening(StringEventName.HelloWorld, PrintMessage);
         EventManager.StartListening(BooleanEventName.Visible, Visible);
-	}
+        EventManager.StartListening(GeneralEventName.None, VisibleAndPrintMessage);
+    }
 
 
     /// <summary>
@@ -76,5 +95,6 @@ public class EventTester : MonoBehaviour
         EventManager.StopListening(StandardEventName.StopSpinning, StopSpinning);
         EventManager.StopListening(StringEventName.HelloWorld, PrintMessage);
         EventManager.StopListening(BooleanEventName.Visible, Visible);
+        EventManager.StopListening(GeneralEventName.None, VisibleAndPrintMessage);
     }
 }
