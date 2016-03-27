@@ -79,7 +79,7 @@ public class DartRecoverableScript : WeaponBase {
 							rb.useGravity = false;
 							rb.isKinematic = true;
 							col.GetComponent<Collider>().isTrigger = true;
-							rb.transform.parent = hit.transform;
+							//rb.transform.parent = hit.transform;
 							
 						}
 
