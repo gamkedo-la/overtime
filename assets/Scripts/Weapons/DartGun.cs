@@ -25,8 +25,8 @@ public class DartGun : WeaponBase {
 
 	// Aiming Variables
 	public GameObject firingPointObj;
-	public GameObject aimCursor;
-	public Transform fireFrom;
+	//public GameObject aimCursor;
+	//public Transform fireFrom;
 
 
 	void UpdateAmmoModelVis() {
@@ -69,16 +69,18 @@ public class DartGun : WeaponBase {
 		
 
 		// Dart Gun Aiming
-		if(Physics.Raycast(centerRay, out hitInfo, 150.0f)) {
-			shootToward = hitInfo.point;
-		} else {
-			shootToward = centerRay.origin + centerRay.direction * 50.0f;
+		if(loaded == true & ammo > 0) {
+			if(Physics.Raycast(centerRay, out hitInfo, 150.0f)) {
+				shootToward = hitInfo.point;
+			} else {
+				shootToward = centerRay.origin + centerRay.direction * 50.0f;
+			}
+			/*if(aimCursor != null) {
+				aimCursor.transform.position = shootToward;
+			}*/
+			//firingPointObj.transform.LookAt(shootToward);
+			gunObj.transform.LookAt(shootToward);
 		}
-		if(aimCursor != null) {
-			aimCursor.transform.position = shootToward;
-		}
-		//firingPointObj.transform.LookAt(shootToward);
-		gunObj.transform.LookAt(shootToward);
 
 
 		// Shoot if we hit fire, aren't running, have ammo, and round is loaded
@@ -119,9 +121,10 @@ public class DartGun : WeaponBase {
 	void FixedUpdate ()
 	{
 		Quaternion gunRotGoal = transform.rotation * Quaternion.AngleAxis(180.0f,Vector3.up);
+		// Point the gun up and away if out of ammo
 		if(loaded == false || ammo == 0) {
-			gunRotGoal *= Quaternion.AngleAxis(-68.0f,Vector3.up);
-			gunRotGoal *= Quaternion.AngleAxis(38.0f,Vector3.right);
+			gunRotGoal *= Quaternion.AngleAxis(68.0f,Vector3.up);
+			gunRotGoal *= Quaternion.AngleAxis(-38.0f,Vector3.right);
 		}
 		
 		gunObj.transform.rotation = Quaternion.Slerp(

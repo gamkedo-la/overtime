@@ -41,8 +41,8 @@ public class SodaGrenScript : WeaponBase {
 	}
 	
 	void SodaBurst() {
-		SoundCenter.instance.PlayClipOn(
-			SoundCenter.instance.sodaSplash,transform.position);
+		/* SoundCenter.instance.PlayClipOn(
+			SoundCenter.instance.sodaSplash,transform.position); */
 		PhotonNetwork.Instantiate(splashPrefab, transform.position, Quaternion.identity, 0);
 		Vector3 dripZoneOrigin = transform.position;
 		dripZoneOrigin.y = ceilingY;
@@ -52,7 +52,7 @@ public class SodaGrenScript : WeaponBase {
 	}
 
 	void OnCollisionEnter(Collision collision) {
-		if(collision.transform.tag != "Friendly"){
+		if(collision.transform.tag != "Player"){
 		SodaBurst();
 		}
 	}

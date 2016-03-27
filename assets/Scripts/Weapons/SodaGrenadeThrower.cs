@@ -26,7 +26,7 @@ public class SodaGrenadeThrower : WeaponBase {
 	void Start () 
 	{
 		//anim = GetComponentInChildren<Animator> ();
-		ammoCount = this.transform.parent.parent.transform.Find("VitalsCanvas/VitalsBar/AmmoCount").gameObject;
+		ammoCount = this.transform.parent.parent.parent.transform.Find("VitalsCanvas/VitalsBar/AmmoCount").gameObject;
 		origPos = canInHand.transform.localPosition;
 	}
 	
@@ -43,6 +43,22 @@ public class SodaGrenadeThrower : WeaponBase {
 				0.15f*Vector3.up * ((shotTime + loadTime) - Time.time);
 		}
 
+	
+		// Variables for Aim Raycast
+		RaycastHit hitInfo;
+		Vector3 shootToward;
+		Ray centerRay = Camera.main.ScreenPointToRay(new Vector3((Camera.main.pixelWidth/2), (Camera.main.pixelHeight/2), 0f));
+
+		// Aiming
+		if(loaded == true & ammo > 0) {
+			if(Physics.Raycast(centerRay, out hitInfo, 150.0f)) {
+				shootToward = hitInfo.point;
+			} else {
+				shootToward = centerRay.origin + centerRay.direction * 50.0f;
+			}
+			canInHand.transform.LookAt(shootToward);
+		}
+
 		//Shoot if we hit fire, aren't running, have ammo, and round is loaded
 		if(Input.GetButtonDown ("Fire1") && !Input.GetKey(KeyCode.LeftShift)){
 			if(loaded == true && ammo > 0){
@@ -50,11 +66,11 @@ public class SodaGrenadeThrower : WeaponBase {
 				ammo--;
 				shotTime = Time.time;
 				Debug.Log ("It's firing");
-				SoundCenter.instance.PlayClipOn(
-					SoundCenter.instance.sodaThrow,transform.position);
+				/* SoundCenter.instance.PlayClipOn(
+					SoundCenter.instance.sodaThrow,transform.position); */
 			} else {
-				SoundCenter.instance.PlayClipOn(
-					SoundCenter.instance.playerNoAmmoTriedToFire,transform.position);
+				/* SoundCenter.instance.PlayClipOn(
+					SoundCenter.instance.playerNoAmmoTriedToFire,transform.position); */
 			}
 		}
 
@@ -73,7 +89,7 @@ public class SodaGrenadeThrower : WeaponBase {
 			loaded = false;
 			//instantiate the dart
 			GameObject dartInstance;
-			dartInstance = PhotonNetwork.Instantiate(dartPrefab, transform.position, transform.rotation, 0) as GameObject;
+			dartInstance = PhotonNetwork.Instantiate(dartPrefab, canInHand.transform.position, canInHand.transform.rotation, 0) as GameObject;
 		}
 
 		
