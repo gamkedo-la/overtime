@@ -51,8 +51,8 @@ public class SoakerGun : WeaponBase {
 				shooting = true;
 				Debug.Log ("It's shooting");
 				waterSprayer.enableEmission = true;
-				SoundCenter.instance.PlayClipOn(
-					SoundCenter.instance.watergunSquirt,transform.position);
+				/* SoundCenter.instance.PlayClipOn(
+					SoundCenter.instance.watergunSquirt,transform.position); */
 			}		
 			else{
 				waterSprayer.enableEmission = false;
