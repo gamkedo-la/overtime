@@ -33,6 +33,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
 		public float hitPoints = 10.0f;
 		public float maxhitPoints = 10.0f;
 
+
         private Camera m_Camera;
         private bool m_Jump;
         private float m_YRotation;
@@ -51,6 +52,8 @@ namespace UnityStandardAssets.Characters.FirstPerson
 		private float defaultWalkSpeed;
 		private Animator anim;
         private bool mouseLookEnabled = true;
+        
+        public bool useButton = false; // for the "use" button
 
 		public void setMouseSens (float newSens) {
 			m_MouseLook.XSensitivity = newSens;
@@ -112,6 +115,15 @@ namespace UnityStandardAssets.Characters.FirstPerson
             if(Input.GetKeyDown(KeyCode.M)){
                 ToggleMouseLook();
             }
+
+            // "Use" Button
+            if (Input.GetButton("Use")){
+                useButton = true;
+            }
+            else{
+                useButton = false;
+            }
+
         }
 
 		private void ToggleCursorLock(){

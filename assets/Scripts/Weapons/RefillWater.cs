@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityStandardAssets.Characters.FirstPerson;
 
 public class RefillWater : MonoBehaviour {
 
@@ -8,6 +9,7 @@ public class RefillWater : MonoBehaviour {
     private GameObject Carboy;
     private SoakerGun soaker;
     [SerializeField] bool playerNearby;
+    private FirstPersonController nearbyPlayerController;
     private bool actionButtonDown;
 
 	void Start () {
@@ -43,12 +45,22 @@ public class RefillWater : MonoBehaviour {
             Carboy.SetActive(false);
         }
 
-        actionButtonDown = false;
+        if(playerNearby && nearbyPlayerController != null && nearbyPlayerController.useButton)
+        {
+            actionButtonDown = true;
+        }
+        else
+        {
+            actionButtonDown = false;
+        }
+
+     
     }
 
     void OnTriggerEnter(Collider other)
     {
         soaker = other.GetComponentInChildren<SoakerGun>();
+        nearbyPlayerController = other.GetComponent<FirstPersonController>();
         if (other.tag == "Player")
         {
             playerNearby = true;
@@ -57,10 +69,13 @@ public class RefillWater : MonoBehaviour {
 
     void OnTriggerExit(Collider other)
     {
+        soaker = null;
+        nearbyPlayerController = null;
         if(other.tag == "Player")
         {
             playerNearby = false;
         }
+
     }
 
     private void actionButtonPressed()

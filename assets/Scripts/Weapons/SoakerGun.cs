@@ -28,7 +28,7 @@ public class SoakerGun : WeaponBase {
 	// Use this for initialization
 	void Start () 
 	{
-		ammoCount = this.transform.parent.parent.transform.Find("VitalsCanvas/VitalsBar/AmmoCount").gameObject;
+		ammoCount = this.transform.parent.parent.parent.transform.Find("VitalsCanvas/VitalsBar/AmmoCount").gameObject;
 		waterPrefab.SetActive(true);
 		waterSprayer = waterPrefab.GetComponent<ParticleSystem>();
 		waterSprayer.enableEmission = false;
@@ -57,8 +57,8 @@ public class SoakerGun : WeaponBase {
 			else{
 				waterSprayer.enableEmission = false;
 				shooting = false;
-				SoundCenter.instance.PlayClipOn(
-					SoundCenter.instance.playerNoAmmoTriedToFire,transform.position);
+				/* SoundCenter.instance.PlayClipOn(
+					SoundCenter.instance.playerNoAmmoTriedToFire,transform.position); */
 			}		
 		}
 		if(Input.GetButtonUp ("Fire1")){
