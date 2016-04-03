@@ -2,10 +2,12 @@
 using System.Collections;
 
 [RequireComponent(typeof(TelepresenceBotMotor))]
-public class TelepresenceBotAiSimple : MonoBehaviour
+public class TelepresenceBotAiPatrol : MonoBehaviour
 {
     [SerializeField] float m_maxForwardSpeed = 2f;
     [SerializeField] float m_rotationSpeed = 180f;
+    [SerializeField] float m_decisionRate = 0.1f;
+    [SerializeField] LayerMask m_avoidanceLayerMask;
 
     private TelepresenceBotMotor m_motor;
 
@@ -27,6 +29,8 @@ public class TelepresenceBotAiSimple : MonoBehaviour
 
         m_moving = true;
         m_turning = false;
+
+        StartCoroutine(CheckSurroundings());
     }
 
 
@@ -36,35 +40,19 @@ public class TelepresenceBotAiSimple : MonoBehaviour
         float horizontal = m_turning ? m_turnDirection : 0f;
 
         m_motor.Move(vertical, horizontal);
+
+        
     }
 
 
-    void OnCollisionStay(Collision col)
+    private IEnumerator CheckSurroundings()
     {
-        if (m_turning || col.gameObject.CompareTag("Ground"))
-            return;
-
-        StopAllCoroutines();
-
-        if (col.gameObject.CompareTag("Friendly"))
+        while (true)
         {
-            StartCoroutine(KeepGoingAndTurn());
+            m_turnDirection = (int) Mathf.Sign(Random.Range(-1f, 1f));
+
+            yield return new WaitForSeconds(m_decisionRate);
         }
-        else
-            StartCoroutine(StopAndTurn());
-    }
-
-
-    private IEnumerator StopAndTurn()
-    {
-        m_moving = false;
-        m_turning = true;
-        m_turnDirection = (int) Mathf.Sign(Random.Range(-1f, 1f));
-
-        yield return new WaitForSeconds(Random.Range(0.5f, 1f));
-
-        m_moving = true;
-        m_turning = false;
     }
 
 
@@ -72,9 +60,8 @@ public class TelepresenceBotAiSimple : MonoBehaviour
     {
         m_moving = true;
         m_turning = true;
-        m_turnDirection = (int) Mathf.Sign(Random.Range(-1f, 1f));
 
-        yield return new WaitForSeconds(Random.Range(0.5f, 1f));
+        yield return new WaitForSeconds(m_decisionRate);
 
         m_moving = true;
         m_turning = false;

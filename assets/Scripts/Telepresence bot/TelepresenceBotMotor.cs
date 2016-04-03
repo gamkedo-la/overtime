@@ -5,9 +5,10 @@ using System.Collections;
 [RequireComponent(typeof(Rigidbody))]
 public class TelepresenceBotMotor : MonoBehaviour
 {
+    public float m_maxForwardSpeed = 2f;
+    public float m_rotationSpeed = 180f;
+
     [SerializeField] float m_forwardForce = 20f;
-    [SerializeField] float m_maxForwardSpeed = 2f;
-    [SerializeField] float m_rotationSpeed = 180f;
 
     private Rigidbody m_rigidbody;
     private Animator m_anim;

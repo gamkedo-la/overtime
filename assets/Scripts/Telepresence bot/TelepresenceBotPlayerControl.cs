@@ -2,8 +2,10 @@
 using System.Collections;
 
 [RequireComponent(typeof(TelepresenceBotMotor))]
-public class TelepresenceBotTestControl : MonoBehaviour
+public class TelepresenceBotPlayerControl : MonoBehaviour
 {
+    [SerializeField] float m_maxForwardSpeed = 4f;
+    [SerializeField] float m_rotationSpeed = 180f;
     [SerializeField] float m_screenHeightAdjustSpeed = 1f;
 
     private TelepresenceBotMotor m_motor;
@@ -16,7 +18,14 @@ public class TelepresenceBotTestControl : MonoBehaviour
     }
 
 
-	void Update()
+    void Start()
+    {
+        m_motor.m_maxForwardSpeed = m_maxForwardSpeed;
+        m_motor.m_rotationSpeed = m_rotationSpeed;
+    }
+
+
+        void Update()
     {
         float vertical = Input.GetAxisRaw("Vertical");
         float horizontal = Input.GetAxis("Horizontal");
