@@ -56,6 +56,7 @@ public enum StringEventName
 {
     HelloWorld = -1,
     None = 0,
+    DummyKill = 1,
 
     // Add new event names here as required (add a number too, to prevent serialization problems if they get reordered later)
 }

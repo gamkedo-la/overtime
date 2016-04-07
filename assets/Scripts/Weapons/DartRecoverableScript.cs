@@ -14,6 +14,7 @@ public class DartRecoverableScript : WeaponBase {
 	public float damage = 100f;
 	public bool recoverable = false;
 	public bool recovered = false;
+	public EventDartTrigger eventDartTrigger;
 
 	[SerializeField] float selfdestructTime;
 	[SerializeField] float hitTime = 0;
@@ -51,6 +52,13 @@ public class DartRecoverableScript : WeaponBase {
 					{
 						hit.transform.GetComponent<PhotonView>().RPC ("GetShot", PhotonTargets.All, damage, owner);
 						//Destroy(gameObject);
+					}
+					if(hit.transform.tag == "Dummy")
+					{
+						GameObject tempGO = hit.transform.gameObject;
+						string hitName = tempGO.transform.name;
+						hit.transform.gameObject.SetActive(false);
+						eventDartTrigger.EventDummyKill(hitName);		
 					}
 					//if(hit.transform.tag == "Ground")
 					//{
