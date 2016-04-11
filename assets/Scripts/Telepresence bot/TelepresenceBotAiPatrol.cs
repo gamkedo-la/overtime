@@ -10,12 +10,14 @@ public class TelepresenceBotAiPatrol : StickySlowsMe
     [SerializeField] LayerMask m_avoidanceLayerMask;
     [SerializeField] float m_rayCastHeight = 0.5f;
     [SerializeField] float m_rayCastRange = 1.5f;
+    [SerializeField] float m_fallBackTurnCooldown = 1f;
 
     private TelepresenceBotMotor m_motor;
 
     private bool m_moving;
     private bool m_turning;
     private int m_turnDirection;
+    private float m_fallbackTurnTime;
 
 
     void Awake()
@@ -41,7 +43,9 @@ public class TelepresenceBotAiPatrol : StickySlowsMe
         float vertical = m_moving ? 1f : 0f;
         float horizontal = m_turning ? m_turnDirection : 0f;
 
-        m_motor.Move(vertical, horizontal);   
+        m_motor.Move(vertical, horizontal);
+
+        m_fallbackTurnTime += Time.deltaTime;  
     }
 
 
@@ -130,6 +134,18 @@ public class TelepresenceBotAiPatrol : StickySlowsMe
     }
 
 
+    void OnCollisionStay(Collision col)
+    {
+        if (m_turning || col.gameObject.CompareTag("Ground") 
+            || m_fallbackTurnTime < m_fallBackTurnCooldown)
+            return;
+
+        StopAllCoroutines();
+
+        StartCoroutine(StopAndTurn());
+    }
+
+
     private IEnumerator KeepGoingAndTurn()
     {
         m_moving = true;
@@ -139,5 +155,21 @@ public class TelepresenceBotAiPatrol : StickySlowsMe
 
         m_moving = true;
         m_turning = false;
+    }
+
+
+    private IEnumerator StopAndTurn()
+    {
+        m_moving = false;
+        m_turning = true;
+        m_turnDirection = (int) Mathf.Sign(Random.Range(-1f, 1f));
+
+        yield return new WaitForSeconds(Random.Range(0.5f, 1f));
+
+        m_moving = true;
+        m_turning = false;
+        m_fallbackTurnTime = 0;
+
+        StartCoroutine(CheckSurroundings());
     }
 }
