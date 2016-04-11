@@ -2,7 +2,7 @@
 using System.Collections;
 
 [RequireComponent(typeof(TelepresenceBotMotor))]
-public class TelepresenceBotAiPatrol : MonoBehaviour
+public class TelepresenceBotAiPatrol : StickySlowsMe
 {
     [SerializeField] float m_maxForwardSpeed = 2f;
     [SerializeField] float m_rotationSpeed = 180f;

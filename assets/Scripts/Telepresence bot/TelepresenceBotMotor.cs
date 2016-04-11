@@ -3,7 +3,7 @@ using System.Collections;
 
 [RequireComponent(typeof(Animator))]
 [RequireComponent(typeof(Rigidbody))]
-public class TelepresenceBotMotor : MonoBehaviour
+public class TelepresenceBotMotor : StickySlowsMe
 {
     public float m_maxForwardSpeed = 2f;
     public float m_rotationSpeed = 180f;
@@ -65,8 +65,8 @@ public class TelepresenceBotMotor : MonoBehaviour
         float verticalVelocity = m_rigidbody.velocity.y;
         m_forwardVelocity = transform.InverseTransformDirection(m_rigidbody.velocity).z;
 
-        if (Mathf.Abs(m_forwardVelocity) > m_maxForwardSpeed)
-            m_forwardVelocity = Mathf.Sign(m_forwardVelocity) * m_maxForwardSpeed;
+        if (Mathf.Abs(m_forwardVelocity) > (m_maxForwardSpeed * m_StickyEffectMult))
+            m_forwardVelocity = Mathf.Sign(m_forwardVelocity) * (m_maxForwardSpeed * m_StickyEffectMult);
 
         //print(m_forwardVelocity);
 

@@ -9,15 +9,15 @@ public class SodaGrenadeThrower : WeaponBase {
 	// DL - This script is responsible for: 1) Graphical Effects of Shooting 2) Physics of shooting 3) Impacts, etc.
 
 	// Animator anim;
-	[SerializeField] string dartPrefab;
+	[SerializeField] string canPrefab;
 	[SerializeField] bool shooting = false;
 	[SerializeField] bool loaded = true;
 	[SerializeField] float shotTime;
 	public float loadTime = 2;	
 	public float ammo = 3;
 	public GameObject ammoCount;
-
 	public GameObject canInHand;
+	string myName;
 
 	Vector3 origPos;
 
@@ -28,6 +28,7 @@ public class SodaGrenadeThrower : WeaponBase {
 		//anim = GetComponentInChildren<Animator> ();
 		ammoCount = this.transform.parent.parent.parent.transform.Find("VitalsCanvas/VitalsBar/AmmoCount").gameObject;
 		origPos = canInHand.transform.localPosition;
+		myName = PhotonNetwork.player.name;
 	}
 	
 	// Update is called once per frame
@@ -88,8 +89,10 @@ public class SodaGrenadeThrower : WeaponBase {
 			shooting = false;
 			loaded = false;
 			//instantiate the dart
-			GameObject dartInstance;
-			dartInstance = PhotonNetwork.Instantiate(dartPrefab, canInHand.transform.position, canInHand.transform.rotation, 0) as GameObject;
+			GameObject canInstance;
+			canInstance = PhotonNetwork.Instantiate(canPrefab, canInHand.transform.position, canInHand.transform.rotation, 0) as GameObject;
+			canInstance.GetComponent<SodaGrenScript>().owner = PhotonNetwork.player.name;
+			
 		}
 
 		

@@ -1,14 +1,14 @@
 using UnityEngine;
 using System.Collections;
 
-public class SodaGrenScript : WeaponBase {
+public class SodaGrenScript : BulletBase {
 	
 	[SerializeField] string splashPrefab;
 	[SerializeField] string dripZonePrefab;
 
 	private float ceilingY = 3.03f;
 
-	public string owner;
+
 	public float moveSpeed;
 	private Rigidbody rb;
 	private Collider col;
