@@ -12,7 +12,7 @@ public class Tripwire : WeaponBase
 	// States
 	private bool deployable = true; 		// TRUE if there is room to place trap
 	private bool deployed = false; 			// TRUE if on the ground and extended
-	private bool activated = false; 		// TRUE if a player has set off the trap
+	public bool activated = false; 		// TRUE if a player has set off the trap
 	//
 	// Components
 	public GameObject receiver;  			// The telephone receiver
@@ -21,6 +21,7 @@ public class Tripwire : WeaponBase
 	public GameObject cord_base_connect;	// Invisible positioning reference: extended cord
 	public GameObject cord_receiver_connect;// Invisible positioning reference: extended cord
 	//
+	public WeaponManager wm; // For auto switching weapons after deployment
 	private Rigidbody rb;
 	private LineRenderer lr;
 	//
@@ -122,6 +123,8 @@ public class Tripwire : WeaponBase
 			static_cord.transform.localScale = Vector3.Lerp(static_cord.transform.localScale, Vector3.zero, 0.1f);
 			receiver.transform.position = Vector3.Lerp(receiver.transform.position, deployedReceiver.transform.position, 0.1f);
 			receiver.transform.rotation = Quaternion.Slerp(receiver.transform.rotation, deployedReceiver.transform.rotation, 0.1f);
+			wm.ReleaseTripwire();
+
 		}
 		//
 		// Update blinking light

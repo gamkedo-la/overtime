@@ -8,11 +8,13 @@ public class WeaponManager : Photon.MonoBehaviour {
 	public GameObject waterGunModel;
 	public GameObject canThrowerModel;
 	public GameObject nukeThrowerModel;
+	public GameObject tripWireModel;
 
 	private DartGun dartGun;
 	private SoakerGun soakerGun;
 	private SodaGrenadeThrower sodaGrenadeThrower;
 	private NukeThrower nukeThrower;
+	private Tripwire tripwire;
 
 	public List<WeaponBase> allWep = new List<WeaponBase>();
 	
@@ -30,8 +32,18 @@ public class WeaponManager : Photon.MonoBehaviour {
 			nukeThrower = GetComponentInChildren<NukeThrower>();
 			allWep.Add((WeaponBase)nukeThrower);
 
+			tripwire = GetComponentInChildren<Tripwire>();
+			allWep.Add((WeaponBase)tripwire);
+
 			ChangeWep(dartGun);
 		}
+	}
+
+	public void ReleaseTripwire() {
+		tripWireModel = null;
+		allWep.Remove((WeaponBase)tripwire);
+		tripwire = null;
+		ChangeWep(dartGun);
 	}
 
 	void ChangeWep(WeaponBase toWep) {
@@ -46,6 +58,7 @@ public class WeaponManager : Photon.MonoBehaviour {
 		waterGunModel.SetActive(toWep == soakerGun);
 		canThrowerModel.SetActive(toWep == sodaGrenadeThrower);
 		nukeThrowerModel.SetActive(toWep == nukeThrower);
+		tripWireModel.SetActive(toWep == tripwire);
 	}
 	
 	void Update () {
@@ -60,6 +73,9 @@ public class WeaponManager : Photon.MonoBehaviour {
 		}
 		if(Input.GetButtonDown ("WeaponSlot4")){
 			ChangeWep(nukeThrower);
+		}
+		if(Input.GetButtonDown ("WeaponSlot5")){
+			ChangeWep(tripwire);
 		}
 	}
 }
