@@ -1,6 +1,9 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+
+// This holds the listing of all possible Scoring Plays
+// and their point values.
 
 public static class ComboList
 {

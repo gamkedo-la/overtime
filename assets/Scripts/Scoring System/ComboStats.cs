@@ -18,6 +18,8 @@ public class ComboStats : MonoBehaviour {
             time = Time.time;
         }
     }
+
+    public ComboGenerator comboGenerator;
     
 	[Header("General")]
 	public string[] players;
@@ -33,6 +35,8 @@ public class ComboStats : MonoBehaviour {
     
 	[Header("Tags")]
 	public List<playerTag> playersTagged;
+	float passUpProwessTimer;
+    public float passUpProwessTimeWindow;
     
 
 	[Header("Multi-Tag")]// - to eliminate repeats
@@ -42,12 +46,41 @@ public class ComboStats : MonoBehaviour {
 	[Header("Trip Wire")]
 	public List<Tripwire> activeTripwires;
 
+	[Header("This Life Stats")]
+	public int sodaHitsTL = 0;
+
+
+
 	void Start(){
 		players = new string[]{"ScoringTarget"}; //Don't include self?
 		mostRecentAssistHit = new string[players.Length];
 		activeTripwires = new List<Tripwire>();
 		lastTimeDartHitMe = new float[players.Length];
 		playersTagged = new List<playerTag>();
+	}
+
+	void Update ()
+    {
+        //Decrement timers
+        if (passUpProwessTimer > 0)
+        {
+            passUpProwessTimer -= Time.deltaTime;
+        }
+	}
+
+	public void TaggedStatClear () {
+
+		// Resets temporary stats when player is Tagged Out
+
+		sodaHitsTL = 0;
+	}
+
+	// ADD STATS FUNCTIONS //
+	// Called by the Generator to Add Stats
+
+	public void AddSodaHit () 
+	{
+		sodaHitsTL ++;
 	}
 
 
