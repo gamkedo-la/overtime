@@ -7,18 +7,13 @@ public class ComboGenerator : MonoBehaviour {
     // This holds all of the functions for acknowledging a Scoring Play
     // has occured and triggering a Combo Counter update.
 
-    public static ComboGenerator Instance;
+    public static ComboGenerator instance;
 
 
-    public ComboCounter comboCounter;
-    public ComboStats comboStats;
-
-
-    
 
 	// Use this for initialization
 	void Start () {
-        Instance = this;
+        instance = this;
     }
 	
 	
@@ -26,157 +21,154 @@ public class ComboGenerator : MonoBehaviour {
     // These are accessed by other objects in the scene
     // to update the Combo Stats script with new information
 
-    public void AddStatSodaHit ()
-    {   
-        comboStats.AddSodaHit();
-    }   
-
 
 
     // SCORING PLAY RECOGNITION FUNCTIONS //
     // These are used to update the Combo Counter when
     // a Scoring Play has been achieved.
 
-    private void simpleSingleTagTest(string playerHit)
+    private void singleTag(string playerHit)
     {
-        comboCounter.addCombo(ComboList.Combos.SimpleSingleTagTest, playerHit);
+		ComboStats.totalTags ++;
+		ComboStats.playersTagged.Add (playerHit); 
+		ComboCounter.addCombo(ComboList.Combos.SingleTag, playerHit);
     }
 
     private void unorthodonculous(string playerHit)
     {
-        comboCounter.addCombo(ComboList.Combos.Unorthodonculous, playerHit);
+        ComboCounter.addCombo(ComboList.Combos.Unorthodonculous, playerHit);
     }
 
     private void aStapleMove(string playerHit)
     {
-        comboCounter.addCombo(ComboList.Combos.AStapleMove, playerHit);
+        ComboCounter.addCombo(ComboList.Combos.AStapleMove, playerHit);
     }
 
     private void humanCorkboard(string playerHit)
     {
-        comboCounter.addCombo(ComboList.Combos.HumanCorkboard, playerHit);
+        ComboCounter.addCombo(ComboList.Combos.HumanCorkboard, playerHit);
     }
 
     private void memoRies(string playerHit)
     {
-        comboCounter.addCombo(ComboList.Combos.MemoRies, playerHit);
+        ComboCounter.addCombo(ComboList.Combos.MemoRies, playerHit);
     }
 
     private void ifYouCantDodgeAWrench(string playerHit)
     {
-        comboCounter.addCombo(ComboList.Combos.IfYouCantDodgeAWrench, playerHit);
+        ComboCounter.addCombo(ComboList.Combos.IfYouCantDodgeAWrench, playerHit);
     }
 
     private void canIBounceSomethingAtYou(string playerHit)
     {
-        comboCounter.addCombo(ComboList.Combos.CanIBounceSomethingAtYou, playerHit);
+        ComboCounter.addCombo(ComboList.Combos.CanIBounceSomethingAtYou, playerHit);
     }
 
     private void doubleYouToo(string playerHit)
     {
-        comboCounter.addCombo(ComboList.Combos.DoubleYouToo, playerHit);
+        ComboCounter.addCombo(ComboList.Combos.DoubleYouToo, playerHit);
     }
 
     private void comeAndGetMe()
     {
-        comboCounter.addCombo(ComboList.Combos.ComeAndGetMe, "");
+        ComboCounter.addCombo(ComboList.Combos.ComeAndGetMe, "");
     }
 
     private void starSixtyNine(string playerHit)
     {
-        comboCounter.addCombo(ComboList.Combos.StarSixtyNine, playerHit);
+        ComboCounter.addCombo(ComboList.Combos.StarSixtyNine, playerHit);
     }
 
     private void phoneTag(string playerHit)
     {
-        comboCounter.addCombo(ComboList.Combos.PhoneTag, playerHit);
+        ComboCounter.addCombo(ComboList.Combos.PhoneTag, playerHit);
     }
 
     private void thisIsAStickUp(string playerHit)
     {
-        comboCounter.addCombo(ComboList.Combos.ThisIsAStickUp, playerHit);
+        ComboCounter.addCombo(ComboList.Combos.ThisIsAStickUp, playerHit);
     }
 
     private void coolRefreshingPushy(string playerHit)
     {
-        comboCounter.addCombo(ComboList.Combos.CoolRefreshingPushy, playerHit);
+        ComboCounter.addCombo(ComboList.Combos.CoolRefreshingPushy, playerHit);
     }
 
     private void soaked(string playerHit)
     {
-        comboCounter.addCombo(ComboList.Combos.Soaked, playerHit);
+        ComboCounter.addCombo(ComboList.Combos.Soaked, playerHit);
     }
 
     private void humanResourceless(string playerHit)
     {
-        comboCounter.addCombo(ComboList.Combos.HumanResourceless, playerHit);
+        ComboCounter.addCombo(ComboList.Combos.HumanResourceless, playerHit);
     }
 
     private void csOutsourced(string playerHit)
     {
-        comboCounter.addCombo(ComboList.Combos.CsOutsourced, playerHit);
+        ComboCounter.addCombo(ComboList.Combos.CsOutsourced, playerHit);
     }
 
     private void cubiKill(string playerHit)
     {
-        comboCounter.addCombo(ComboList.Combos.CubiKill, playerHit);
+        ComboCounter.addCombo(ComboList.Combos.CubiKill, playerHit);
     }
 
     private void outlookOut(string playerHit)
     {
-        comboCounter.addCombo(ComboList.Combos.OutlookOut, playerHit);
+        ComboCounter.addCombo(ComboList.Combos.OutlookOut, playerHit);
     }
 
     private void theCommuter(string playerHit)
     {
-        comboCounter.addCombo(ComboList.Combos.TheCommuter, playerHit);
+        ComboCounter.addCombo(ComboList.Combos.TheCommuter, playerHit);
     }
 
     private void topDownShooter(string playerHit)
     {
-        comboCounter.addCombo(ComboList.Combos.TopDownShooter, playerHit);
+        ComboCounter.addCombo(ComboList.Combos.TopDownShooter, playerHit);
     }
 
     private void theWhitesOfTheirEyes(string playerHit)
     {
-        comboCounter.addCombo(ComboList.Combos.TheWhitesOfTheirEyes, playerHit);
+        ComboCounter.addCombo(ComboList.Combos.TheWhitesOfTheirEyes, playerHit);
     }
 
     private void noHandsNoProblem(string playerHit)
     {
-        comboCounter.addCombo(ComboList.Combos.NoHandsNoProblem, playerHit);
+        ComboCounter.addCombo(ComboList.Combos.NoHandsNoProblem, playerHit);
     }
 
     private void doubleTap(string playerHit)
     {
-        comboCounter.addCombo(ComboList.Combos.DoubleTap, playerHit);
+        ComboCounter.addCombo(ComboList.Combos.DoubleTap, playerHit);
     }
 
     private void aroundTheWorld()
     {
-        comboCounter.addCombo(ComboList.Combos.AroundTheWorld, "");
+        ComboCounter.addCombo(ComboList.Combos.AroundTheWorld, "");
     }
 
     private void lunchThief(string playerHit)
     {
-        comboCounter.addCombo(ComboList.Combos.LunchThief, playerHit);
+        ComboCounter.addCombo(ComboList.Combos.LunchThief, playerHit);
     }
 
    
     private void backAttackStapler(string playerHitName)
     {
-        comboCounter.addCombo(ComboList.Combos.AStapleMove, playerHitName);
+        ComboCounter.addCombo(ComboList.Combos.AStapleMove, playerHitName);
     }
 
     private void nearMiss(string shooterName)
     {
         //passUpProwessTimer = passUpProwessTimeWindow;
-       // comboCounter.addCombo(ComboList.Combos.CloseCall, shooterName);
+       // ComboCounter.addCombo(ComboList.Combos.CloseCall, shooterName);
     }
 
     private void setOffSprinklers()
     {
-        comboCounter.addCombo(ComboList.Combos.WhenItRains, "");
+        ComboCounter.addCombo(ComboList.Combos.WhenItRains, "");
     }
 
 
@@ -199,7 +191,7 @@ public class ComboGenerator : MonoBehaviour {
             {
                 Debug.Log("Double tag!");
                 //DOUBLE TAG
-                comboCounter.addCombo(ComboList.Combos.DoubleTime, playerTaggedName);
+                ComboCounter.addCombo(ComboList.Combos.DoubleTime, playerTaggedName);
             }
 
             if (playersTagged[i].time >= Time.time - 10.0f)
@@ -207,7 +199,7 @@ public class ComboGenerator : MonoBehaviour {
                 if (playerTaggedWithinTenSeconds)
                 {
                     //TRIPPLE TAG!!!
-                    comboCounter.addCombo(ComboList.Combos.ThreesCompany, playerTaggedName);
+                    ComboCounter.addCombo(ComboList.Combos.ThreesCompany, playerTaggedName);
                 }
                 else
                 {
@@ -225,7 +217,7 @@ public class ComboGenerator : MonoBehaviour {
         if(playersTaggedThisLife.Count == players.Length)
         {
             Debug.Log("Around the world!");
-            comboCounter.addCombo(ComboList.Combos.AroundTheWorld, playerTaggedName);
+            ComboCounter.addCombo(ComboList.Combos.AroundTheWorld, playerTaggedName);
         }
 
         //TODO change this to get the other player's last near miss time
@@ -236,14 +228,14 @@ public class ComboGenerator : MonoBehaviour {
         if(playerTaggedComboGenerator.getPassUpProwessTimer() > 0)
         {
             Debug.Log("Pass Up Prowess\nWARNING: THIS NEEDS TO BE CODED TO ACTUALLY CHECK THE OTHER PLAYER");
-            comboCounter.addCombo(ComboList.Combos.PassUpProwess, playerTaggedName);
+            ComboCounter.addCombo(ComboList.Combos.PassUpProwess, playerTaggedName);
             //Alternative method: just have the near miss script keep a timer, then on destruction if the timer
             //is greater than zero, send a pass up prowess event
         }
 
         if (playerTaggedName == targetName)
         {
-            comboCounter.addComboToScore();
+            ComboCounter.addComboToScore();
         }
         else
         {
@@ -271,7 +263,7 @@ public class ComboGenerator : MonoBehaviour {
 // TODO make commented code funtional
 //            if(activeTripwires[i].getOwner() == otherPlayerName)
 //            {
-                comboCounter.addCombo(ComboList.Combos.StarSixtyNine, otherPlayerName);
+                ComboCounter.addCombo(ComboList.Combos.StarSixtyNine, otherPlayerName);
 //            }
 //
         }

@@ -1,0 +1,487 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+			[
+				"combo",
+				"comboStats"
+			],
+			[
+				"trip",
+				"tripWireModel"
+			],
+			[
+				"Photon",
+				"PhotonNetwork"
+			],
+			[
+				"laser",
+				"laser1Ready"
+			],
+			[
+				"scre",
+				"screenHeight"
+			],
+			[
+				"las",
+				"laser1Facing"
+			],
+			[
+				"l1",
+				"l1X"
+			],
+			[
+				"laser2",
+				"laser2Active"
+			],
+			[
+				"la",
+				"laser2Facing"
+			],
+			[
+				"lae",
+				"laserSprite1"
+			],
+			[
+				"tre",
+				"treeSprite"
+			],
+			[
+				"buf",
+				"buffaloSprite"
+			],
+			[
+				"player",
+				"playerFacing"
+			],
+			[
+				"Cen",
+				"CenterPlayer"
+			],
+			[
+				"play",
+				"playerFacing"
+			],
+			[
+				"scr",
+				"screenHeight"
+			],
+			[
+				"buff",
+				"buffaloImg"
+			],
+			[
+				"payer",
+				"playerFacing"
+			],
+			[
+				"key",
+				"keyGoal"
+			],
+			[
+				"max",
+				"maxHealth"
+			],
+			[
+				"fir",
+				"firstToJoin"
+			],
+			[
+				"spa",
+				"spawnIt"
+			],
+			[
+				"ge",
+				"GetComponent"
+			],
+			[
+				"init",
+				"initialLoad"
+			],
+			[
+				"Get",
+				"GetComponent"
+			],
+			[
+				"ini",
+				"initalLoad"
+			],
+			[
+				"mouse",
+				"mouseSpeedY"
+			],
+			[
+				"coll",
+				"colliderDelay"
+			],
+			[
+				"my",
+				"myName"
+			],
+			[
+				"m",
+				"MeshCollider"
+			]
+		]
+	},
+	"buffers":
+	[
+		{
+			"file": "ComboGenerator.cs",
+			"settings":
+			{
+				"buffer_size": 0,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "ComboCounter.cs",
+			"settings":
+			{
+				"buffer_size": 0,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "ScoringSystem.sublime-workspace",
+			"settings":
+			{
+				"buffer_size": 0,
+				"line_ending": "Windows"
+			}
+		}
+	],
+	"build_system": "",
+	"command_palette":
+	{
+		"height": 0.0,
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"console":
+	{
+		"height": 0.0
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"file_history":
+	[
+		"/C/Users/Dan Lazar/Documents/GitHub/overtime/assets/Scripts/Scoring System/ComboGenerator.cs",
+		"/C/Users/Dan Lazar/Documents/GitHub/overtime/assets/Scripts/Scoring System/ComboStats.cs",
+		"/C/Users/Dan Lazar/Documents/GitHub/overtime/assets/Scripts/Scoring System/ComboCounter.cs",
+		"/C/Users/Dan Lazar/Documents/GitHub/overtime/assets/Scripts/Event system/EventManager.cs",
+		"/C/Users/Dan Lazar/Documents/GitHub/overtime/assets/Scripts/Scoring System/ComboList.cs",
+		"/C/Users/Dan Lazar/Documents/GitHub/overtime/assets/Scripts/Scoring System/ScoringSystem.sublime-workspace",
+		"/C/Users/Dan Lazar/Documents/GitHub/overtime/assets/Scripts/Weapons/SodaGrenadeThrower.cs",
+		"/C/Users/Dan Lazar/Documents/GitHub/overtime/assets/Scripts/DemoMainMenuFunctions.cs",
+		"/C/Users/Dan Lazar/Documents/GitHub/overtime/assets/Scripts/Weapons/WeaponBase.cs",
+		"/C/Users/Dan Lazar/Documents/GitHub/overtime/assets/Scripts/Weapons/Tripwire.cs",
+		"/C/Users/Dan Lazar/Documents/GitHub/overtime/assets/Scripts/Weapons/Tripwire_Playertest.cs",
+		"/C/Users/Dan Lazar/Documents/GitHub/overtime/assets/Scripts/Weapons/WeaponManager.cs",
+		"/C/Users/Dan Lazar/Documents/GitHub/overtime/assets/Scripts/Weapons/BulletBase.cs",
+		"/C/Users/Dan Lazar/Documents/GitHub/overtime/assets/Scripts/PlayerNetworkMover.cs",
+		"/C/Users/Dan Lazar/Documents/GitHub/overtime/assets/Scripts/NetworkManagerScript.cs",
+		"/C/Users/Dan Lazar/Documents/GitHub/overtime/assets/Scripts/Weapons/SodaGrenScript.cs",
+		"/C/Users/Dan Lazar/Documents/GitHub/overtime/assets/Scripts/Weapons/SodaGrenSplashDripStickyZone.cs",
+		"/C/Users/Dan Lazar/Documents/GitHub/overtime/assets/Scripts/StickySlowsMe.cs",
+		"/C/Users/Dan Lazar/Documents/GitHub/overtime/assets/Scripts/FirstPersonController.cs",
+		"/C/Users/Dan Lazar/Documents/GitHub/overtime/assets/Scripts/Telepresence bot/TelepresenceBotMotor.cs",
+		"/C/Users/Dan Lazar/Documents/GitHub/overtime/assets/Scripts/Telepresence bot/TelepresenceBotAiPatrol.cs",
+		"/C/Users/Dan Lazar/Documents/GitHub/overtime/assets/Scripts/Event system/ObjectSpecificEventScripts/EventDartTrigger.cs",
+		"/C/Users/Dan Lazar/Documents/GitHub/overtime/assets/Scripts/Weapons/DartRecoverableScript.cs",
+		"/C/Users/Dan Lazar/Documents/GitHub/overtime/assets/Scripts/Telepresence bot/TelepresenceBotPlayerControl.cs",
+		"/C/Users/Dan Lazar/Documents/GitHub/overtime/assets/Scripts/Telepresence bot/TelepresenceBotAiSimple.cs",
+		"/C/Users/Dan Lazar/Documents/GitHub/overtime/assets/Scripts/Combo System/OtherPlayerScoreTriggers.cs",
+		"/C/Users/Dan Lazar/Documents/GitHub/overtime/assets/Scripts/Combo System/NearMissTrigger.cs",
+		"/C/Users/Dan Lazar/Documents/GitHub/overtime/assets/Scripts/Combo System/ComboCounter.cs",
+		"/C/Users/Dan Lazar/Documents/GitHub/overtime/assets/Scripts/Combo System/ComboList.cs",
+		"/C/Users/Dan Lazar/Documents/GitHub/overtime/assets/Scripts/Scoring System/NearMissTrigger.cs",
+		"/C/Users/Dan Lazar/Documents/GitHub/overtime/assets/Scripts/Scoring System/ScoreHolder.cs",
+		"/C/Users/Dan Lazar/Documents/GitHub/overtime/assets/Scripts/Combo System/ComboGenerator.cs",
+		"/C/Users/Dan Lazar/Documents/GitHub/overtime/assets/Scripts/Event system/ObjectSpecificEventScripts/EventScoreNotifierListener.cs",
+		"/C/Users/Dan Lazar/Documents/GitHub/overtime/assets/Scripts/Event system/EventTriggerTest.cs",
+		"/C/Users/Dan Lazar/Documents/GitHub/overtime/assets/Scripts/Event system/EventTriggerTest1.cs",
+		"/C/Users/Dan Lazar/Documents/GitHub/overtime/assets/Scripts/Event system/ObjectSpecificEventScripts/EventTriggerTest.cs",
+		"/C/Users/Dan Lazar/Documents/GitHub/Leap Motion Experimenting/Assets/LeapMotion/Scripts/LeapHandController.cs",
+		"/C/Users/Dan Lazar/Documents/GitHub/360 video v2/Assets/CapturePanorama/Compute Shaders/ConvertPanoramaShader.compute",
+		"/C/Users/Dan Lazar/Documents/GitHub/overtime/assets/Scripts/Event system/EventManagerHowTo.cs",
+		"/C/Program Files/Autodesk/Maya2016/scripts/others/performFileAction.mel",
+		"/C/Program Files/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll",
+		"/C/Users/Dan Lazar/Documents/GitHub/overtime/assets/Scripts/Weapons/DartGun.cs",
+		"/C/Users/Dan Lazar/Documents/GitHub/overtime/assets/Scripts/Weapons/DartScript.cs",
+		"/C/Users/Dan Lazar/Documents/GitHub/overtime/assets/Scripts/CameraFollow.cs",
+		"/C/Users/Dan Lazar/Desktop/Unity_SCratch/Survival Shooter/Assets/_CompletedAssets/Scripts/Player/PlayerHealth.cs",
+		"/C/Users/Dan Lazar/Desktop/Unity_SCratch/Survival Shooter/Assets/_CompletedAssets/Scripts/Player/PlayerMovement.cs",
+		"/C/Users/Dan Lazar/Documents/GitHub/Arcade88/Assets/Dynamic/-Shared Game Core/GameManager.cs",
+		"/C/Users/Dan Lazar/Documents/GitHub/Arcade88/Assets/Dynamic/RainingCatsAndDogs/GamePlayRCAD.cs",
+		"/C/Users/Dan Lazar/Documents/GitHub/Arcade88/Assets/Dynamic/-Shared Game Core/PixelScreenLib.cs",
+		"/C/Users/Dan Lazar/Documents/GitHub/Arcade88/Assets/Dynamic/HatGame/HatGame.cs",
+		"/C/Users/Dan Lazar/Documents/GitHub/Arcade88/Assets/Dynamic/SurvivalSwim/GamePlaySurvivalSwim.cs",
+		"/C/Users/Dan Lazar/Documents/GitHub/Arcade88/Assets/Dynamic/-Shared Game Core/PixelSprite.cs",
+		"/C/Users/Dan Lazar/Documents/GitHub/overtime/assets/Scripts/MainMenuFunctions.cs",
+		"/C/Users/Dan Lazar/Documents/GitHub/overtime/assets/imported_assets/STANDARD_ASSETS/Characters/thirdpersoncharacter/ThirdPersonCharacterGuidelines.txt",
+		"/C/Users/Dan Lazar/Documents/GitHub/Foam_Corps/assets/Photon Unity Networking/Demos/DemoChat/ChatGui.cs",
+		"/C/Users/Dan Lazar/Documents/GitHub/Foam_Corps/assets/Scripts/PlayerNetworkMover.cs",
+		"/C/Users/Dan Lazar/Documents/GitHub/Foam_Corps/assets/Scripts/NetworkManagerScript.cs",
+		"/C/Users/Dan Lazar/Documents/GitHub/Arcade88/Assets/Dynamic/PrarieOverkill/GamePlayPO.cs",
+		"/C/Users/Dan Lazar/Documents/GitHub/Foam_Corps/assets/Scripts/FirstPersonController.cs",
+		"/C/Users/Dan Lazar/Documents/GitHub/Arcade88/Assets/Dynamic/PrarieOverkill/GamePlayPODemo.cs",
+		"/C/Users/Dan Lazar/Documents/GitHub/Foam_Corps/assets/Scripts/Weapons/DartScript.cs",
+		"/C/Users/Dan Lazar/Documents/GitHub/Foam_Corps/assets/Scripts/MusicVolume.cs",
+		"/C/Users/Dan Lazar/Documents/GitHub/Foam_Corps/assets/Scripts/MouseSensitivity.cs",
+		"/C/Users/Dan Lazar/Documents/GitHub/Foam_Corps/assets/Scripts/MouseSensitivity1.cs",
+		"/C/Users/Dan Lazar/Documents/GitHub/Foam_Corps/assets/Scripts/VictoryScreenFunctions.cs",
+		"/C/Users/Dan Lazar/Documents/GitHub/Foam_Corps/assets/Scripts/Weapons/DartGun.cs",
+		"/C/Users/Dan Lazar/Documents/GitHub/Foam_Corps/assets/Scripts/HealthPowerUp.cs",
+		"/C/Users/Dan Lazar/Documents/GitHub/Foam_Corps/assets/Scripts/StickySlowsMe.cs",
+		"/C/Users/Dan Lazar/Documents/GitHub/Foam_Corps/assets/Scripts/KeyItem.cs",
+		"/C/Users/Dan Lazar/Documents/GitHub/Foam_Corps/assets/Scripts/Weapons/SodaGrenScript.cs",
+		"/C/Users/Dan Lazar/Documents/GitHub/Foam_Corps/assets/Scripts/Weapons/SodaGrenSplashDripStickyZone.cs",
+		"/C/Users/Dan Lazar/Documents/GitHub/Foam_Corps/assets/Scripts/Weapons/WeaponManager.cs",
+		"/C/Users/Dan Lazar/Documents/GitHub/Foam_Corps/assets/Scripts/SurvivalModeManager.cs",
+		"/C/Users/Dan Lazar/Documents/GitHub/Foam_Corps/assets/Scripts/MainMenuFunctions1.cs",
+		"/C/Users/Dan Lazar/Documents/GitHub/Foam_Corps/assets/Scripts/Weapons/SoakerGun.cs",
+		"/C/Users/Dan Lazar/Documents/GitHub/Foam_Corps/assets/Scripts/DoorManager.cs",
+		"/C/Users/Dan Lazar/Documents/GitHub/Foam_Corps/assets/MainMenuFunctions.cs",
+		"/C/Users/Dan Lazar/Documents/GitHub/Foam_Corps/assets/Scripts/SpeedPowerUp.cs",
+		"/C/Users/Dan Lazar/Documents/GitHub/Foam_Corps/assets/Scripts/DoorSpawner.cs",
+		"/C/Users/Dan Lazar/Documents/GitHub/Foam_Corps/assets/Scripts/Weapons/SodaGrenadeThrower.cs",
+		"/C/Users/Dan Lazar/Desktop/WeaponManager.cs",
+		"/C/Users/Dan Lazar/Desktop/SodaGrenadeThrower.cs",
+		"/C/Users/Dan Lazar/Documents/GitHub/Foam_Corps/assets/Scripts/Breakable.cs",
+		"/C/Users/Dan Lazar/Documents/GitHub/Foam_Corps/assets/Scripts/Melee.cs",
+		"/C/Users/Dan Lazar/Documents/GitHub/Foam_Corps/assets/Scripts/KeyItemManager.cs",
+		"/C/Users/Dan Lazar/Documents/GitHub/Foam_Corps/assets/Photon Unity Networking/Plugins/PhotonNetwork/PhotonView.cs",
+		"/C/Users/Dan Lazar/Documents/GitHub/Foam_Corps/assets/SelfDestruct.cs",
+		"/C/Users/Dan Lazar/Documents/GitHub/Foam_Corps/assets/Scripts/InputChecker.cs",
+		"/C/Users/Dan Lazar/Documents/GitHub/Foam_Corps/assets/imported_assets/STANDARD_ASSETS/Characters/FirstPersonCharacter/Scripts/MouseLook.cs",
+		"/C/Users/Dan Lazar/Documents/GitHub/Foam_Corps/assets/Scripts/ZombieAI.cs",
+		"/C/Users/Dan Lazar/Documents/GitHub/Foam_Corps/assets/Scripts/ZombieHealth.cs",
+		"/C/Users/Dan Lazar/Documents/GitHub/Foam_Corps/assets/Scripts/ZombieNetwork.cs",
+		"/C/Users/Dan Lazar/Documents/GitHub/Foam_Corps/assets/Scripts/AmmoBoxScript.cs",
+		"/C/Users/Dan Lazar/Documents/GitHub/Foam_Corps/assets/Scripts/DartScript.cs",
+		"/C/Users/Dan Lazar/Documents/GitHub/Foam_Corps/assets/Scripts/DartGun.cs",
+		"/C/Users/Dan Lazar/Documents/GitHub/Foam_Corps/assets/Scripts/SoakerGun.cs",
+		"/C/Users/Dan Lazar/Documents/GitHub/Foam_Corps/assets/Scripts/WeaponManager.cs",
+		"/C/Users/Dan Lazar/Desktop/Unity_Scratch/Assets/Breakable Door/Breakable.cs",
+		"/C/Users/Dan Lazar/Documents/GitHub/Foam_Corps/assets/Scripts/PlayerShooting.cs",
+		"/C/Users/Dan Lazar/Desktop/Unity_Scratch/Assets/Breakable.cs"
+	],
+	"find":
+	{
+		"height": 34.0
+	},
+	"find_in_files":
+	{
+		"height": 0.0,
+		"where_history":
+		[
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": false,
+		"find_history":
+		[
+			"getbut",
+			"getbuto",
+			"maxfor",
+			"maxfow",
+			"sticky",
+			"dartinstance",
+			"dartprefab",
+			"hit",
+			"layermask",
+			"sendnetwork",
+			"laser2Active",
+			"laser1Active",
+			"ballbounceanddraw",
+			"playerdodge",
+			"isanimating",
+			"facingposition",
+			"per",
+			"input",
+			"pergame",
+			"set",
+			"sticky",
+			"hitpoints",
+			"speedcool",
+			"sodaburst",
+			"mouselook",
+			"splashprefab",
+			"ammocount",
+			"selfdestruct",
+			"serverWindow",
+			"connectiontext",
+			"mouselook",
+			"getshot"
+		],
+		"highlight": true,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": false,
+		"replace_history":
+		[
+		],
+		"reverse": false,
+		"show_context": true,
+		"use_buffer2": true,
+		"whole_word": false,
+		"wrap": true
+	},
+	"groups":
+	[
+		{
+			"selected": 1,
+			"sheets":
+			[
+				{
+					"buffer": 0,
+					"file": "ComboGenerator.cs",
+					"settings":
+					{
+						"buffer_size": 0,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/C#/C#.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "ComboCounter.cs",
+					"settings":
+					{
+						"buffer_size": 0,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/C#/C#.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "ScoringSystem.sublime-workspace",
+					"settings":
+					{
+						"buffer_size": 0,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Text/Plain text.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				}
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 0.0
+	},
+	"input":
+	{
+		"height": 0.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"replace":
+	{
+		"height": 0.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 0.0,
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"show_minimap": true,
+	"show_open_files": false,
+	"show_tabs": true,
+	"side_bar_visible": true,
+	"side_bar_width": 150.0,
+	"status_bar_visible": true
+}
