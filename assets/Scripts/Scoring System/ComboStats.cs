@@ -19,7 +19,8 @@ public class ComboStats : MonoBehaviour {
         }
     }
 
-    public ComboGenerator comboGenerator;
+	public static ComboStats instance;
+
     
 	[Header("General")]
 	public string[] players;
@@ -34,7 +35,9 @@ public class ComboStats : MonoBehaviour {
     
     
 	[Header("Tags")]
-	public List<playerTag> playersTagged;
+	//public static List<playerTag> playersTagged; // IMPLEMENT PLAYERTAG LATER - How do I feed that through the variable update?
+	public static List<string> playersTagged;
+	public static int totalTags = 0;
 	float passUpProwessTimer;
     public float passUpProwessTimeWindow;
     
@@ -52,11 +55,13 @@ public class ComboStats : MonoBehaviour {
 
 
 	void Start(){
+		instance = this;
 		players = new string[]{"ScoringTarget"}; //Don't include self?
 		mostRecentAssistHit = new string[players.Length];
 		activeTripwires = new List<Tripwire>();
 		lastTimeDartHitMe = new float[players.Length];
-		playersTagged = new List<playerTag>();
+		//playersTagged = new List<playerTag>();
+		playersTagged = new List<string>();
 	}
 
 	void Update ()

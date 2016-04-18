@@ -3,12 +3,19 @@ using System.Collections;
 using System.Collections.Generic;
 
 public class ComboCounter : MonoBehaviour {
-    [SerializeField] int comboTotal;
-    [SerializeField] int comboMultiplier;
+
+	public static ComboCounter instance;
+
+    [SerializeField] static int comboTotal;
+    [SerializeField] static int comboMultiplier;
+	static bool[] comboUnique;
+
     string playerName;
-    string targetName;
-    bool[] comboUnique;
-	public ScoreHolder scoreHolder;
+    static string targetName;
+
+	[SerializeField] static int score;
+    
+	//public ScoreHolder scoreHolder;
 //    Dictionary<string, ComboData> comboValues = new Dictionary<string, ComboData>();
 
     //This class is used to track value an uniqueness of each combo the player can
@@ -25,7 +32,8 @@ public class ComboCounter : MonoBehaviour {
     }
 
     void Start () {
-		scoreHolder = transform.parent.parent.transform.Find ("VitalsCanvas/ScoreBar/ScoreCount").GetComponent<ScoreHolder> ();
+		instance = this;
+		//scoreHolder = transform.parent.parent.transform.Find ("VitalsCanvas/ScoreBar/ScoreCount").GetComponent<ScoreHolder> ();
         targetName = "ScoringTarget"; //TODO get the actual target name
         comboUnique = new bool[ComboList.count()];
 
@@ -45,7 +53,7 @@ public class ComboCounter : MonoBehaviour {
     }
 
     //Method called by specific combos when a combo is pulled off
-    public void addCombo(ComboList.Combos comboName, string playerName)
+    public static void addCombo(ComboList.Combos comboName, string playerName)
     {
         if (playerName == targetName && comboUnique[(int)comboName])
         {
@@ -63,7 +71,7 @@ public class ComboCounter : MonoBehaviour {
     public void addComboToScore()
     {
 		int scoreToAdd = (comboTotal * comboMultiplier);
-		scoreHolder.score += scoreToAdd;
+		score += scoreToAdd;
 		//score.add(playerName, comboTotal* comboMultiplier);
         //target = newTargetName;
 
