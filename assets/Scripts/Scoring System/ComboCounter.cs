@@ -6,14 +6,15 @@ public class ComboCounter : MonoBehaviour {
 
 	public static ComboCounter instance;
 
-    [SerializeField] static int comboTotal;
-    [SerializeField] static int comboMultiplier;
-	static bool[] comboUnique;
+    [SerializeField] int comboTotal;
+    [SerializeField] int comboMultiplier;
+	bool[] comboUnique;
+
 
     string playerName;
-    static string targetName;
+    string targetName;
 
-	[SerializeField] static int score;
+	[SerializeField] int score;
     
 	//public ScoreHolder scoreHolder;
 //    Dictionary<string, ComboData> comboValues = new Dictionary<string, ComboData>();
@@ -43,38 +44,38 @@ public class ComboCounter : MonoBehaviour {
     //Reset the combo. Used on spawn and death
     public void resetCombo()
     {
-        comboTotal = 0;
-        comboMultiplier = 1;
+		instance.comboTotal = 0;
+		instance.comboMultiplier = 0;
 
         for(int i = 0; i < comboUnique.Length; i++)
         {
-            comboUnique[i] = true;
+			instance.comboUnique[i] = true;
         }
     }
 
     //Method called by specific combos when a combo is pulled off
     public static void addCombo(ComboList.Combos comboName, string playerName)
     {
-        if (playerName == targetName && comboUnique[(int)comboName])
+		if (/*playerName == targetName &&*/ instance.comboUnique[(int)comboName]) // ADD BACK TARGET REQUIREMENT LATER
         {
-            comboTotal += ComboList.getComboValue(comboName) * 2;
-            comboMultiplier++;
-            comboUnique[(int)comboName] = false;
+            instance.comboTotal += ComboList.getComboValue(comboName) * 2;
+			instance.comboMultiplier++;
+			instance.comboUnique[(int)comboName] = false;
         }
         else
         {
-            comboTotal += ComboList.getComboValue(comboName);
+			instance.comboTotal += ComboList.getComboValue(comboName);
         }
     }
 
     //Add the combo points to the player's score
-    public void addComboToScore()
+    public static void addComboToScore()
     {
-		int scoreToAdd = (comboTotal * comboMultiplier);
-		score += scoreToAdd;
+		int scoreToAdd = (instance.comboTotal * instance.comboMultiplier);
+		instance.score += scoreToAdd;
 		//score.add(playerName, comboTotal* comboMultiplier);
         //target = newTargetName;
 
-        resetCombo();
+		instance.resetCombo();
     }
 }

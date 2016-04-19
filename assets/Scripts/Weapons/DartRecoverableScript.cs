@@ -58,7 +58,8 @@ public class DartRecoverableScript : WeaponBase {
 						GameObject tempGO = hit.transform.gameObject;
 						string hitName = tempGO.transform.name;
 						hit.transform.gameObject.SetActive(false);
-						eventDartTrigger.EventDummyKill(hitName);		
+						ComboGenerator.ActionDartTag(hitName);
+						//eventDartTrigger.EventDummyKill(hitName);		
 					}
 					//if(hit.transform.tag == "Ground")
 					//{

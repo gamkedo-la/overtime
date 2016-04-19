@@ -10,27 +10,34 @@ public class ComboGenerator : MonoBehaviour {
     public static ComboGenerator instance;
 
 
-
 	// Use this for initialization
 	void Start () {
         instance = this;
     }
 	
 	
-    // STAT UPDATE FUNCTIONS //
+    // "ACTION" FUNCTIONS //
     // These are accessed by other objects in the scene
-    // to update the Combo Stats script with new information
+    // to UPDATE the COMBO STATS script with new information
+	// and TRIGGER and relevant SCORING PLAY CHECKS
+
+	public static void ActionDartTag (string playerHit)
+	{
+		ComboStats.instance.AddDartTag(playerHit);
+		instance.CheckSingleTag (playerHit);
+		ComboCounter.addComboToScore();
+
+	}
 
 
 
-    // SCORING PLAY RECOGNITION FUNCTIONS //
-    // These are used to update the Combo Counter when
+    // SCORING PLAY CHECK FUNCTIONS //
+    // These are used to TEST for conditions in COMBO STATS and
+	// UPDATE the COMBO COUNTER when
     // a Scoring Play has been achieved.
 
-    private void singleTag(string playerHit)
+    private void CheckSingleTag(string playerHit)
     {
-		ComboStats.totalTags ++;
-		ComboStats.playersTagged.Add (playerHit); 
 		ComboCounter.addCombo(ComboList.Combos.SingleTag, playerHit);
     }
 

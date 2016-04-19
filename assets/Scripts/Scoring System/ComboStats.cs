@@ -36,8 +36,8 @@ public class ComboStats : MonoBehaviour {
     
 	[Header("Tags")]
 	//public static List<playerTag> playersTagged; // IMPLEMENT PLAYERTAG LATER - How do I feed that through the variable update?
-	public static List<string> playersTagged;
-	public static int totalTags = 0;
+	public List<string> playersTagged;
+	public int totalTags = 0;
 	float passUpProwessTimer;
     public float passUpProwessTimeWindow;
     
@@ -51,6 +51,7 @@ public class ComboStats : MonoBehaviour {
 
 	[Header("This Life Stats")]
 	public int sodaHitsTL = 0;
+	public int tagsTL = 0;
 
 
 
@@ -82,6 +83,13 @@ public class ComboStats : MonoBehaviour {
 
 	// ADD STATS FUNCTIONS //
 	// Called by the Generator to Add Stats
+
+
+	public void AddDartTag (string playerHit) 
+	{
+		totalTags ++;
+		playersTagged.Add(playerHit);
+	}
 
 	public void AddSodaHit () 
 	{
