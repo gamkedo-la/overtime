@@ -9,6 +9,7 @@ public class ComboCounter : MonoBehaviour {
     [SerializeField] int comboTotal;
     [SerializeField] int comboMultiplier;
 	bool[] comboUnique;
+	public ScoreHolder scoreHolder;
 
 
     string playerName;
@@ -75,7 +76,7 @@ public class ComboCounter : MonoBehaviour {
 		instance.score += scoreToAdd;
 		//score.add(playerName, comboTotal* comboMultiplier);
         //target = newTargetName;
-
+		instance.scoreHolder.score = instance.score;
 		instance.resetCombo();
     }
 }

@@ -26,9 +26,18 @@ public class ComboGenerator : MonoBehaviour {
 		ComboStats.instance.AddDartTag(playerHit);
 		instance.CheckSingleTag (playerHit);
 		ComboCounter.addComboToScore();
-
 	}
 
+	public static void ActionSodaHit (string playerHit)
+	{
+		ComboStats.instance.AddSodaHit(playerHit);
+		instance.thisIsAStickUp (playerHit);
+	}
+
+	public static void ActionRespawn ()
+	{
+		ComboStats.instance.RespawnClear ();
+	}
 
 
     // SCORING PLAY CHECK FUNCTIONS //

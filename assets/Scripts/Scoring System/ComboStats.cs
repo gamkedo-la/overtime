@@ -35,9 +35,9 @@ public class ComboStats : MonoBehaviour {
     
     
 	[Header("Tags")]
-	//public static List<playerTag> playersTagged; // IMPLEMENT PLAYERTAG LATER - How do I feed that through the variable update?
-	public List<string> playersTagged;
-	public int totalTags = 0;
+	//public static List<playerTag> playersDartTagged; // IMPLEMENT PLAYERTAG LATER - How do I feed that through the variable update?
+	public List<string> playersDartTagged;
+	public int totalDartTags = 0;
 	float passUpProwessTimer;
     public float passUpProwessTimeWindow;
     
@@ -46,12 +46,16 @@ public class ComboStats : MonoBehaviour {
 	public bool doubleTag = false;
 	public bool tripleTag = false;
 
+	[Header("Soda Grenade")]
+	public List<string> playersSodaGrenaded;
+	public int totalSodaHits = 0;
+
 	[Header("Trip Wire")]
 	public List<Tripwire> activeTripwires;
 
 	[Header("This Life Stats")]
 	public int sodaHitsTL = 0;
-	public int tagsTL = 0;
+	public int dartTagsTL = 0;
 
 
 
@@ -61,8 +65,8 @@ public class ComboStats : MonoBehaviour {
 		mostRecentAssistHit = new string[players.Length];
 		activeTripwires = new List<Tripwire>();
 		lastTimeDartHitMe = new float[players.Length];
-		//playersTagged = new List<playerTag>();
-		playersTagged = new List<string>();
+		//playersDartTagged = new List<playerTag>();
+		playersDartTagged = new List<string>();
 	}
 
 	void Update ()
@@ -74,11 +78,12 @@ public class ComboStats : MonoBehaviour {
         }
 	}
 
-	public void TaggedStatClear () {
+	public void RespawnClear () {
 
 		// Resets temporary stats when player is Tagged Out
 
 		sodaHitsTL = 0;
+		dartTagsTL = 0;
 	}
 
 	// ADD STATS FUNCTIONS //
@@ -87,13 +92,16 @@ public class ComboStats : MonoBehaviour {
 
 	public void AddDartTag (string playerHit) 
 	{
-		totalTags ++;
-		playersTagged.Add(playerHit);
+		totalDartTags ++;
+		dartTagsTL ++;
+		playersDartTagged.Add(playerHit);
 	}
 
-	public void AddSodaHit () 
+	public void AddSodaHit (string playerHit) 
 	{
+		totalSodaHits ++;
 		sodaHitsTL ++;
+		playersSodaGrenaded.Add(playerHit);
 	}
 
 

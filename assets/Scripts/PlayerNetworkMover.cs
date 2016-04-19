@@ -12,18 +12,26 @@ public class PlayerNetworkMover : Photon.MonoBehaviour {
 	public event SendMessage SendNetworkMessage;
 	public delegate void SendScore(string fragger, string fragged);
 	public event SendScore SendNetworkScore;
+
+	// ID //
+	public string myName;
 	
+	// MOVEMENT //
 	Vector3 position;
 	Quaternion rotation;
 	float smoothing = 10f;
+
+	// HEALTH //
 	public float health = 100f;
 	public float maxHealth = 100f;
 	public GameObject healthCount;
 	bool myHealth = false;
+
+	// Are these obsolete? //
 	float myPlayerFrag;
 	float myPlayerDeath;
 
-	//syncing animation
+	// ANIMATION SYNC // 
 	bool aim = false;
 	bool sprint = false;
 	bool initialLoad = true;
@@ -57,6 +65,8 @@ public class PlayerNetworkMover : Photon.MonoBehaviour {
 			//transform.Find("Model/Soldier/Arms").gameObject.layer = 19;
 			healthCount = this.transform.parent.parent.transform.Find("VitalsCanvas/HealthBar/HealthCount").gameObject;
 			myHealth = true;
+			ComboGenerator.ActionRespawn();
+			myName = PhotonNetwork.player.name;
 			
 		}
 		else
@@ -135,7 +145,6 @@ public class PlayerNetworkMover : Photon.MonoBehaviour {
 		{
 			SoundCenter.instance.PlayClipOn(
 				SoundCenter.instance.playerDie,transform.position);
-			string myName = PhotonNetwork.player.name;
 			if(SendNetworkScore != null) // Update the scoreboard data
 			{
 				SendNetworkScore(enemyName, myName);	}

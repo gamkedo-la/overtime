@@ -10,6 +10,13 @@ public class SodaGrenSplashDripStickyZone : WeaponBase {
 		StickySlowsMe ssmScript = other.GetComponent<StickySlowsMe>();
 		if(ssmScript) {
 			ssmScript.SpeedStickyZone();
+
+		}
+		if (other.transform.tag == "Dummy")
+		{
+			GameObject tempGO = other.transform.gameObject;
+			string hitName = tempGO.transform.name;
+			ComboGenerator.ActionSodaHit(hitName);
 		}
 	}
 
@@ -17,6 +24,7 @@ public class SodaGrenSplashDripStickyZone : WeaponBase {
 		StickySlowsMe ssmScript = other.GetComponent<StickySlowsMe>();
 		if(ssmScript) {
 			ssmScript.UnstickySpeed();
+
 		}
 	}
 

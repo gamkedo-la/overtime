@@ -46,8 +46,10 @@ public class SodaGrenScript : BulletBase {
 		PhotonNetwork.Instantiate(splashPrefab, transform.position, Quaternion.identity, 0);
 		Vector3 dripZoneOrigin = transform.position;
 		dripZoneOrigin.y = ceilingY;
-		PhotonNetwork.Instantiate(dripZonePrefab, dripZoneOrigin,
+		GameObject dripInstance;
+		dripInstance = PhotonNetwork.Instantiate(dripZonePrefab, dripZoneOrigin,
 		                          Quaternion.AngleAxis(90.0f,Vector3.right), 0);
+		dripInstance.GetComponent<SodaGrenSplashDripStickyZone>().owner = PhotonNetwork.player.name;
 		Destroy(gameObject);
 	}
 
