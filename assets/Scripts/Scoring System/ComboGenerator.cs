@@ -9,13 +9,17 @@ public class ComboGenerator : MonoBehaviour {
 
     public static ComboGenerator instance;
     public ScoringPlayHolder scoringPlayHolder;
+    public float doubleTagGap = 3F;
+    public float tripleTagGap = 5F;
+    private float lastTagTime = 0;
+    private bool doubleTagEnabled = false;
+    private bool tripleTagEnabled = false;
 
 
 	// Use this for initialization
 	void Start () {
         instance = this;
     }
-	
 	
     // "ACTION" FUNCTIONS //
     // These are accessed by other objects in the scene
@@ -24,15 +28,15 @@ public class ComboGenerator : MonoBehaviour {
 
 	public static void ActionDartTag (string playerHit)
 	{
-		ComboStats.instance.AddDartTag(playerHit);
-		instance.CheckSingleTag (playerHit);
-		ComboCounter.addComboToScore();
+		instance.lastTagTime = ComboStats.instance.lastTagTime;
+        ComboStats.instance.AddDartTag(playerHit);
+		instance.CheckTag (playerHit);		
 	}
 
 	public static void ActionSodaHit (string playerHit)
 	{
 		ComboStats.instance.AddSodaHit(playerHit);
-		instance.thisIsAStickUp (playerHit);
+		instance.CheckThisIsAStickUp (playerHit);
 	}
 
 	public static void ActionRespawn ()
@@ -46,12 +50,53 @@ public class ComboGenerator : MonoBehaviour {
 	// UPDATE the COMBO COUNTER when
     // a Scoring Play has been achieved.
 
-    private void CheckSingleTag(string playerHit)
+   
+    private void CheckTag(string playerHit)
     {
-		ComboCounter.addCombo(ComboList.Combos.SingleTag, playerHit);
-        float value = ComboList.getComboValue(ComboList.Combos.SingleTag);
-        instance.scoringPlayHolder.DisplayScoringPlay("Single Tag! " + value + "Pts");
+        
+        if (tripleTagEnabled && ComboStats.instance.lastTagTime < (lastTagTime + tripleTagGap)) // DOUBLE TAG
+        {
+            ComboCounter.addCombo(ComboList.Combos.ThreesCompany, playerHit);
+            float value = ComboList.getComboValue(ComboList.Combos.ThreesCompany);
+            instance.scoringPlayHolder.DisplayScoringPlay("Three's Company! " + value + "Pts");
+            doubleTagEnabled = false;
+            tripleTagEnabled = false;    
+        }
+        else if (doubleTagEnabled && ComboStats.instance.lastTagTime < (lastTagTime + doubleTagGap)) // DOUBLE TAG
+        {
+            ComboCounter.addCombo(ComboList.Combos.DoubleTap, playerHit);
+            float value = ComboList.getComboValue(ComboList.Combos.DoubleTap);
+            instance.scoringPlayHolder.DisplayScoringPlay("Double Tap! " + value + "Pts");
+            doubleTagEnabled = false;
+            tripleTagEnabled = true;    
+        }
+        else // SINGLE TAG
+        {
+            ComboCounter.addCombo(ComboList.Combos.SingleTag, playerHit);
+            float value = ComboList.getComboValue(ComboList.Combos.SingleTag);
+            instance.scoringPlayHolder.DisplayScoringPlay("Single Tag! " + value + "Pts");
+            doubleTagEnabled = true;
+            tripleTagEnabled = false;
+        }
+        ComboCounter.addComboToScore();
+        
     }
+
+    private void CheckThisIsAStickUp(string playerHit)
+    {        
+        ComboCounter.addCombo(ComboList.Combos.ThisIsAStickUp, playerHit);
+        float value = ComboList.getComboValue(ComboList.Combos.ThisIsAStickUp);
+        instance.scoringPlayHolder.DisplayScoringPlay("This is a Stick Up! " + value + "Pts");
+    }
+
+
+   
+
+
+
+   // STILL TO DO //
+
+
 
     private void unorthodonculous(string playerHit)
     {
@@ -103,12 +148,7 @@ public class ComboGenerator : MonoBehaviour {
         ComboCounter.addCombo(ComboList.Combos.PhoneTag, playerHit);
     }
 
-    private void thisIsAStickUp(string playerHit)
-    {        
-        ComboCounter.addCombo(ComboList.Combos.ThisIsAStickUp, playerHit);
-        float value = ComboList.getComboValue(ComboList.Combos.ThisIsAStickUp);
-        instance.scoringPlayHolder.DisplayScoringPlay("This is a Stick Up! " + value + "Pts");
-    }
+   
 
     private void coolRefreshingPushy(string playerHit)
     {
@@ -160,10 +200,7 @@ public class ComboGenerator : MonoBehaviour {
         ComboCounter.addCombo(ComboList.Combos.NoHandsNoProblem, playerHit);
     }
 
-    private void doubleTap(string playerHit)
-    {
-        ComboCounter.addCombo(ComboList.Combos.DoubleTap, playerHit);
-    }
+    
 
     private void aroundTheWorld()
     {

@@ -38,6 +38,7 @@ public class ComboStats : MonoBehaviour {
 	//public static List<playerTag> playersDartTagged; // IMPLEMENT PLAYERTAG LATER - How do I feed that through the variable update?
 	public List<string> playersDartTagged;
 	public int totalDartTags = 0;
+	public float lastTagTime = 0;
 	float passUpProwessTimer;
     public float passUpProwessTimeWindow;
     
@@ -92,9 +93,11 @@ public class ComboStats : MonoBehaviour {
 
 	public void AddDartTag (string playerHit) 
 	{
+		lastTagTime = Time.time;
 		totalDartTags ++;
 		dartTagsTL ++;
 		playersDartTagged.Add(playerHit);
+
 	}
 
 	public void AddSodaHit (string playerHit) 
