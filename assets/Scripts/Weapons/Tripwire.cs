@@ -42,6 +42,7 @@ public class Tripwire : WeaponBase
     public AudioClip deploymentSound;
     public AudioClip activationSound;
 
+	public string owner;
 
 
     //--------------------
@@ -55,6 +56,13 @@ public class Tripwire : WeaponBase
 	{
 		rb = GetComponent<Rigidbody>();
 		lr = GetComponent<LineRenderer>();
+
+		// cdeleon changed: deploys on instantiate, isn't same as model in hand
+		deployed = true;
+		rb.isKinematic = false; 	// Manifest as a physical object
+		transform.parent = null; 	// Leave player space
+		rb.useGravity = true; 		// Start falling
+		soundPlayer.PlayOneShot(deploymentSound);
 	}
 
 
@@ -108,22 +116,13 @@ public class Tripwire : WeaponBase
 		// Update the dynamic cord drawing start/end points
 		lr.SetPosition(0, cord_base_connect.transform.position);
 		lr.SetPosition(1, cord_receiver_connect.transform.position);
-		//
-		// Check for deployment
-		if(deployable && !deployed && Input.GetButtonDown("Fire1") && !Input.GetKey(KeyCode.LeftShift)) {
-			deployed = true;
-			rb.isKinematic = false; 	// Manifest as a physical object
-			transform.parent = null; 	// Leave player space
-			rb.useGravity = true; 		// Start falling
-			soundPlayer.PlayOneShot(deploymentSound);
-		}
-		//
+
 		// Update deployment animation
 		if(deployed) {
 			static_cord.transform.localScale = Vector3.Lerp(static_cord.transform.localScale, Vector3.zero, 0.1f);
 			receiver.transform.position = Vector3.Lerp(receiver.transform.position, deployedReceiver.transform.position, 0.1f);
 			receiver.transform.rotation = Quaternion.Slerp(receiver.transform.rotation, deployedReceiver.transform.rotation, 0.1f);
-			wm.ReleaseTripwire();
+			// wm.ReleaseTripwire();
 
 		}
 		//
@@ -149,6 +148,12 @@ public class Tripwire : WeaponBase
 				} 
 			}	
 		}
+	}
+
+	[PunRPC]
+	public void NameNukeRPC (string playerName)
+	{
+		owner = playerName;
 	}
 
 }

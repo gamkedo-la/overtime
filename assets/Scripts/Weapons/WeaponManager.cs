@@ -14,7 +14,7 @@ public class WeaponManager : Photon.MonoBehaviour {
 	private SoakerGun soakerGun;
 	private SodaGrenadeThrower sodaGrenadeThrower;
 	private NukeThrower nukeThrower;
-	private Tripwire tripwire;
+	private TripwireDropper tripwire;
 
 	public List<WeaponBase> allWep = new List<WeaponBase>();
 	
@@ -32,7 +32,7 @@ public class WeaponManager : Photon.MonoBehaviour {
 			nukeThrower = GetComponentInChildren<NukeThrower>();
 			allWep.Add((WeaponBase)nukeThrower);
 
-			tripwire = GetComponentInChildren<Tripwire>();
+			tripwire = GetComponentInChildren<TripwireDropper>();
 			allWep.Add((WeaponBase)tripwire);
 
 			ChangeWep(dartGun);
@@ -40,10 +40,11 @@ public class WeaponManager : Photon.MonoBehaviour {
 	}
 
 	public void ReleaseTripwire() {
-		tripWireModel = null;
+		/*tripWireModel = null;
 		allWep.Remove((WeaponBase)tripwire);
 		tripwire = null;
-		ChangeWep(dartGun);
+		ChangeWep(dartGun);*/
+		Debug.Log("this should not be called anymore, whoops, use TripwireDropper not WeaponManager");
 	}
 
 	void ChangeWep(WeaponBase toWep) {
