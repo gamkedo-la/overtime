@@ -60,7 +60,7 @@ public class ComboCounter : MonoBehaviour {
     {
 		if (/*playerName == targetName &&*/ instance.comboUnique[(int)comboName]) // ADD BACK TARGET REQUIREMENT LATER
         {
-            instance.comboTotal += ComboList.getComboValue(comboName) * 2;
+            instance.comboTotal += ComboList.getComboValue(comboName);
 			instance.comboMultiplier++;
 			instance.comboUnique[(int)comboName] = false;
         }

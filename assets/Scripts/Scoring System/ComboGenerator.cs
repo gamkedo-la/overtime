@@ -8,6 +8,7 @@ public class ComboGenerator : MonoBehaviour {
     // has occured and triggering a Combo Counter update.
 
     public static ComboGenerator instance;
+    public ScoringPlayHolder scoringPlayHolder;
 
 
 	// Use this for initialization
@@ -48,6 +49,8 @@ public class ComboGenerator : MonoBehaviour {
     private void CheckSingleTag(string playerHit)
     {
 		ComboCounter.addCombo(ComboList.Combos.SingleTag, playerHit);
+        float value = ComboList.getComboValue(ComboList.Combos.SingleTag);
+        instance.scoringPlayHolder.DisplayScoringPlay("Single Tag! " + value + "Pts");
     }
 
     private void unorthodonculous(string playerHit)
@@ -101,8 +104,10 @@ public class ComboGenerator : MonoBehaviour {
     }
 
     private void thisIsAStickUp(string playerHit)
-    {
+    {        
         ComboCounter.addCombo(ComboList.Combos.ThisIsAStickUp, playerHit);
+        float value = ComboList.getComboValue(ComboList.Combos.ThisIsAStickUp);
+        instance.scoringPlayHolder.DisplayScoringPlay("This is a Stick Up! " + value + "Pts");
     }
 
     private void coolRefreshingPushy(string playerHit)
