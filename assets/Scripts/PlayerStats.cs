@@ -6,9 +6,16 @@ using PhotonHashtable = ExitGames.Client.Photon.Hashtable;
 public class PlayerStats : MonoBehaviour {
 	
 public string playerMe;
-public float playerFrag;
-public float playerDeath;
-public float playerAmmo;
+public float playerScore;
+
+// DEATHMATCH LEGACY //
+/*
+	public float playerFrag;
+	public float playerDeath;
+	public float playerAmmo;
+*/
+
+
 public GameObject vitalsPanel;
 public ScoreManager scoreManager;
 
@@ -24,48 +31,72 @@ photonView = GetComponent<PhotonView> ();
 
 void OnJoinedRoom ()
 	{
+// DEATHMATCH LEGACY VARIABLES //	
+/*
+			
 		playerFrag = 0;
 		playerDeath = 0;
 		playerAmmo = 3;
+*/
+		playerScore = 0;		
 		//Turn my username into a string
 		playerMe = PhotonNetwork.player.name;
 
 	}
 
-
 [PunRPC]
-void AddScore_RPC(string fragger, string fragged)
+void AddScoreTag_RPC(int score, string playerScoring)
 {
-
-
-	//If I'm the killer, add to my frags, call AddMessage and say how many opponents I've defeated
-	if(fragger == playerMe)
+	if(playerScoring == playerMe)
 	{
 		PhotonHashtable PlayerCustomProps = new PhotonHashtable();
-		PlayerCustomProps["kills"] = ((playerFrag + 1).ToString());
+		PlayerCustomProps["score"] = (score.ToString());
 		PhotonNetwork.player.SetCustomProperties(PlayerCustomProps);
-		playerFrag = (float.Parse(PlayerCustomProps["kills"].ToString()));
-		AddMessage (fragger + " has defeated " + playerFrag + " opponents.");
-		
-		
-
+		score = (int.Parse(PlayerCustomProps["score"].ToString()));
+		AddMessage (playerMe + " has " + score + " points!");
 	}
 
-	if(fragged == playerMe)
+	scoreManager.UpdateScore(playerScoring, "score", score);
+	
+}
+// DEATHMATCH LEGACY AddScore RPC//		
+/*
+	[PunRPC]
+	void AddScore_RPC(string fragger, string fragged)
 	{
-		PhotonHashtable PlayerCustomProps = new PhotonHashtable();
-		PlayerCustomProps["Deaths"] = ((playerDeath + 1).ToString());
-		PhotonNetwork.player.SetCustomProperties(PlayerCustomProps);
-		playerDeath = (float.Parse(PlayerCustomProps["Deaths"].ToString()));
-		AddMessage (fragged + " has perished " + playerDeath + " times.");
-		
-		
-	}
 
-	scoreManager.ChangeScore(fragger, "kills", 1);
-	scoreManager.ChangeScore(fragged, "deaths", 1);
+
+
+		
+		//If I'm the killer, add to my frags, call AddMessage and say how many opponents I've defeated
+		if(fragger == playerMe)
+		{
+			PhotonHashtable PlayerCustomProps = new PhotonHashtable();
+			PlayerCustomProps["kills"] = ((playerFrag + 1).ToString());
+			PhotonNetwork.player.SetCustomProperties(PlayerCustomProps);
+			playerFrag = (float.Parse(PlayerCustomProps["kills"].ToString()));
+			AddMessage (fragger + " has defeated " + playerFrag + " opponents.");
+			
+			
+
+		}
+
+		if(fragged == playerMe)
+		{
+			PhotonHashtable PlayerCustomProps = new PhotonHashtable();
+			PlayerCustomProps["Deaths"] = ((playerDeath + 1).ToString());
+			PhotonNetwork.player.SetCustomProperties(PlayerCustomProps);
+			playerDeath = (float.Parse(PlayerCustomProps["Deaths"].ToString()));
+			AddMessage (fragged + " has perished " + playerDeath + " times.");
+			
+			
+		}
+
+		scoreManager.ChangeScore(fragger, "kills", 1);
+		scoreManager.ChangeScore(fragged, "deaths", 1);
 
 }
+*/
 
 //Call AddMessage to report to the chat, pass through death or frag message
 void AddMessage(string message)

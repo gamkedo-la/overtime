@@ -11,7 +11,7 @@ public class ComboCounter : MonoBehaviour {
 	bool[] comboUnique;
 	public ScoreHolder scoreHolder;
     public ComboHolder comboHolder;
-
+    public NetworkManagerScript networkManager;
 
     string playerName;
     string targetName;
@@ -83,8 +83,12 @@ public class ComboCounter : MonoBehaviour {
         instance.UpdateUITag();
         instance.resetCombo();
         instance.UpdateUI();
+        instance.networkManager.AddScoreTag_RPC(instance.score, instance.playerName);
 
     }
+
+    //Call the RPC
+   
 
     public void UpdateUI() 
     {

@@ -145,12 +145,17 @@ public class PlayerNetworkMover : Photon.MonoBehaviour {
 		{
 			SoundCenter.instance.PlayClipOn(
 				SoundCenter.instance.playerDie,transform.position);
+			
+/*
+			// DEATHMATCH LEGACY //
 			if(SendNetworkScore != null) // Update the scoreboard data
 			{
 				SendNetworkScore(enemyName, myName);	}
 
 			if(SendNetworkMessage != null) // send messaging of the frag event
-				SendNetworkMessage(myName + " was killed by " + enemyName);
+				SendNetworkMessage(myName + " was tagged by " + enemyName);
+*/
+
 
 			if(RespawnMe != null)
 				RespawnMe(3f);

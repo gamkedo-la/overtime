@@ -61,6 +61,11 @@ public class ScoreManager : MonoBehaviour {
 		SetScore(username, scoreType, currScore + amount);
 	}
 
+	public void UpdateScore(string username, string scoreType, int amount) {
+		Init ();		
+		SetScore(username, scoreType, amount);
+	}
+
 	public string[] GetPlayerNames() {
 		Init ();
 		return playerScores.Keys.ToArray();

@@ -90,10 +90,9 @@ public class NetworkManagerScript : MonoBehaviour {
 
 	public void JoinRoom()
 	{
-		//Set player name to username text
+		//Set player name to username text and zero out score
 		PhotonNetwork.player.name = username.text;
-		scoreManager.SetScore(username.text, "kills", 0);
-		scoreManager.SetScore(username.text, "deaths", 0);
+		scoreManager.SetScore(username.text, "score", 0);
 
 		// DL - join room or create one
 		RoomOptions roomOptions = new RoomOptions(){ isVisible = true, maxPlayers = 10 }; PhotonNetwork.JoinOrCreateRoom(roomName.text, roomOptions, TypedLobby.Default);
@@ -113,8 +112,7 @@ public class NetworkManagerScript : MonoBehaviour {
 		connectionText.text = "";
 		//Set CustomProperties
 		PhotonHashtable PlayerCustomProps = new PhotonHashtable();
-		PlayerCustomProps["Kills"] = 0;
-		PlayerCustomProps["Deaths"] = 0;
+		PlayerCustomProps["score"] = 0;
 		PhotonNetwork.player.SetCustomProperties(PlayerCustomProps);
 		//Start spawn, 0 cooldown
 		StartSpawnProcess (0f);
@@ -143,24 +141,34 @@ public class NetworkManagerScript : MonoBehaviour {
 		//send PNM the kill/spawn message
 		player.GetComponentInChildren<PlayerNetworkMover>().SendNetworkMessage += AddMessage;
 		//send PlayerScore the kill/death update
-		player.GetComponentInChildren<PlayerNetworkMover>().SendNetworkScore += AddScore;
+		//player.GetComponentInChildren<PlayerNetworkMover>().SendNetworkScore += AddScore;
 
 	
 
 		//Turn off top down view when we spawn
 		sceneCamera.enabled = false;
 
-		AddMessage ("Spawned player: " + PhotonNetwork.player.name);
+		AddMessage (PhotonNetwork.player.name + "has entered the office.");
 	}
 
+	
+// DEATHMATCH LEGACY //
+/*
 	//Call the RPC
 	void AddScore(string fragger, string fragged)
 	{
 		//               what we call       who sent to       parameter (what passes)
 		photonView.RPC ("AddScore_RPC", PhotonTargets.All, fragger, fragged);
 	}
+*/	
 
 
+
+	public void AddScoreTag_RPC(int scoreToSend, string scoringPlayer)
+    {
+        //               what we call       who sent to       parameter (what passes)
+        photonView.RPC ("AddScoreTag_RPC", PhotonTargets.All, scoreToSend, scoringPlayer);
+    }
 
 	//Call the RPC
 	void AddMessage(string message)
