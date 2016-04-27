@@ -53,7 +53,7 @@ void AddScoreTag_RPC(int score, string playerScoring)
 		PlayerCustomProps["score"] = (score.ToString());
 		PhotonNetwork.player.SetCustomProperties(PlayerCustomProps);
 		score = (int.Parse(PlayerCustomProps["score"].ToString()));
-		AddMessage (playerMe + " has " + score + " points!");
+		AddMessage (playerScoring + " has " + score + " points!");
 	}
 
 	scoreManager.UpdateScore(playerScoring, "score", score);

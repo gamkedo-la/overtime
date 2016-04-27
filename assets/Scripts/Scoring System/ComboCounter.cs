@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using PhotonHashtable = ExitGames.Client.Photon.Hashtable;
 
 public class ComboCounter : MonoBehaviour {
 
@@ -12,8 +13,9 @@ public class ComboCounter : MonoBehaviour {
 	public ScoreHolder scoreHolder;
     public ComboHolder comboHolder;
     public NetworkManagerScript networkManager;
+    public string myPlayerName;
 
-    string playerName;
+    string hitPlayerName;
     string targetName;
 
 	[SerializeField] int score;
@@ -39,8 +41,12 @@ public class ComboCounter : MonoBehaviour {
 		//scoreHolder = transform.parent.parent.transform.Find ("VitalsCanvas/ScoreBar/ScoreCount").GetComponent<ScoreHolder> ();
         targetName = "ScoringTarget"; //TODO get the actual target name
         comboUnique = new bool[ComboList.count()];
-
         resetCombo();
+    }
+
+    public void GetMyPlayerName()
+    {
+        myPlayerName = PhotonNetwork.player.name;
     }
 
     //Reset the combo. Used on spawn and death
@@ -56,7 +62,7 @@ public class ComboCounter : MonoBehaviour {
     }
 
     //Method called by specific combos when a combo is pulled off
-    public static void addCombo(ComboList.Combos comboName, string playerName)
+    public static void addCombo(ComboList.Combos comboName, string hitPlayerName)
     {
 		if (/*playerName == targetName &&*/ instance.comboUnique[(int)comboName]) // ADD BACK TARGET REQUIREMENT LATER
         {
@@ -83,7 +89,7 @@ public class ComboCounter : MonoBehaviour {
         instance.UpdateUITag();
         instance.resetCombo();
         instance.UpdateUI();
-        instance.networkManager.AddScoreTag_RPC(instance.score, instance.playerName);
+        instance.networkManager.AddScoreTag_RPC(instance.score, instance.myPlayerName);
 
     }
 

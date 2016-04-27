@@ -114,6 +114,7 @@ public class NetworkManagerScript : MonoBehaviour {
 		PhotonHashtable PlayerCustomProps = new PhotonHashtable();
 		PlayerCustomProps["score"] = 0;
 		PhotonNetwork.player.SetCustomProperties(PlayerCustomProps);
+		ComboCounter.instance.GetMyPlayerName();
 		//Start spawn, 0 cooldown
 		StartSpawnProcess (0f);
 	}

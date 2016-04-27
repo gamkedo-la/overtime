@@ -60,7 +60,7 @@ public class ComboGenerator : MonoBehaviour {
             float value = ComboList.getComboValue(ComboList.Combos.ThreesCompany);
             instance.scoringPlayHolder.DisplayScoringPlay("Three's Company! " + value + "Pts");
             doubleTagEnabled = false;
-            tripleTagEnabled = false;    
+            tripleTagEnabled = false;
         }
         else if (doubleTagEnabled && ComboStats.instance.lastTagTime < (lastTagTime + doubleTagGap)) // DOUBLE TAG
         {

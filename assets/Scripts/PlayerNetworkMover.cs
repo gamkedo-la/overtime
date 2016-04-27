@@ -57,12 +57,6 @@ public class PlayerNetworkMover : Photon.MonoBehaviour {
 			gameObject.layer = 14;
 			foreach(Camera cam in GetComponentsInChildren<Camera>())
 			cam.enabled = true;
-			// Put weapon back on Gun layer for camera masks
-			//transform.Find("FirstPersonCharacter/GunCamera/Gun").gameObject.layer = 10;
-			//transform.Find("FirstPersonCharacter/GunCamera/WaterGun").gameObject.layer = 10;
-			//transform.Find("FirstPersonCharacter/GunCamera/SodaGrenade").gameObject.layer = 10;
-			//transform.Find("Model/Soldier/Body").gameObject.layer = 19;
-			//transform.Find("Model/Soldier/Arms").gameObject.layer = 19;
 			healthCount = this.transform.parent.parent.transform.Find("VitalsCanvas/HealthBar/HealthCount").gameObject;
 			myHealth = true;
 			ComboGenerator.ActionRespawn();

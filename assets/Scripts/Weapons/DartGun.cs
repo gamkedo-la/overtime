@@ -19,14 +19,19 @@ public class DartGun : WeaponBase {
 
 	public int ammoMax = 3;
 	public GameObject gunObj;
+	
+	// DARTS DISAPPEARING //
 	public GameObject dartAmmoGOFirst;
 	public GameObject dartAmmoGOSecond;
 	public GameObject dartAmmoGOLast;
 
-	// Aiming Variables
+	// AIMING VARIABLES //
 	public GameObject firingPointObj;
-	//public GameObject aimCursor;
-	//public Transform fireFrom;
+
+	// PNM FOR NAMING //
+	public PlayerNetworkMover playerNetworkMover;
+	
+
 
 
 	void UpdateAmmoModelVis() {
@@ -37,14 +42,10 @@ public class DartGun : WeaponBase {
 
 	public void GiveAmmo(int amt) {
 		ammo += amt;
-		/*if(ammo > ammoMax) { // allow overload?
-			ammo = ammoMax;
-		}*/
-
+		
 		// Prompt gun to display its new ammo
 		loaded = false;
 		shotTime = Time.time;
-
 		UpdateAmmoModelVis();
 	}
 
@@ -75,10 +76,7 @@ public class DartGun : WeaponBase {
 			} else {
 				shootToward = centerRay.origin + centerRay.direction * 50.0f;
 			}
-			/*if(aimCursor != null) {
-				aimCursor.transform.position = shootToward;
-			}*/
-			//firingPointObj.transform.LookAt(shootToward);
+			
 			gunObj.transform.LookAt(shootToward);
 		}
 
@@ -113,6 +111,7 @@ public class DartGun : WeaponBase {
 			UpdateAmmoModelVis();
 			GameObject dartInstance;
 			dartInstance = PhotonNetwork.Instantiate(dartPrefab, firingPointObj.transform.position, firingPointObj.transform.rotation, 0) as GameObject;
+			dartInstance.GetComponent<DartRecoverableScript>().owner = playerNetworkMover.myName;
 		}
 
 		

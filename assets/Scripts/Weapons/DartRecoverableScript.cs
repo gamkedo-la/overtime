@@ -122,7 +122,7 @@ public class DartRecoverableScript : WeaponBase {
 	}
 
 
-	[PunRPC]
+	
 	public void NameDartRPC (string playerName)
 	{
 		owner = playerName;
