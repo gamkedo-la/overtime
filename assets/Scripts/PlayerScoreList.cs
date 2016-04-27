@@ -7,6 +7,7 @@ public class PlayerScoreList : MonoBehaviour {
 	public GameObject playerScoreEntryPrefab;
 
 	public ScoreManager scoreManager;
+	bool postRoundUpdated = false;
 
 	int lastChangeCounter;
 
@@ -45,4 +46,23 @@ public class PlayerScoreList : MonoBehaviour {
 			go.transform.Find ("Score").GetComponent<Text>().text = scoreManager.GetScore(name,"score").ToString();
 		}
 	}
+
+	public void ForceScoreboardUpdate ()
+	{
+		if (postRoundUpdated == false)
+		{
+				string[] names = scoreManager.GetPlayerNames("score");
+				
+				foreach(string name in names)
+				{
+					GameObject go = (GameObject)Instantiate(playerScoreEntryPrefab);
+					go.transform.SetParent(this.transform);
+					go.transform.Find ("Username").GetComponent<Text>().text = name;
+					go.transform.Find ("Score").GetComponent<Text>().text = scoreManager.GetScore(name,"score").ToString();
+				}
+		}
+
+		postRoundUpdated = true;
+		Debug.Log("Forced Scoreboard Update Ran");
+	}		
 }
