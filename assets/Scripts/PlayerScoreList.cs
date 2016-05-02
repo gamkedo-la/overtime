@@ -49,20 +49,31 @@ public class PlayerScoreList : MonoBehaviour {
 
 	public void ForceScoreboardUpdate ()
 	{
-		if (postRoundUpdated == false)
-		{
-				string[] names = scoreManager.GetPlayerNames("score");
-				
-				foreach(string name in names)
-				{
-					GameObject go = (GameObject)Instantiate(playerScoreEntryPrefab);
-					go.transform.SetParent(this.transform);
-					go.transform.Find ("Username").GetComponent<Text>().text = name;
-					go.transform.Find ("Score").GetComponent<Text>().text = scoreManager.GetScore(name,"score").ToString();
-				}
-		}
+		if (postRoundUpdated == false) {
+			string[] names = scoreManager.GetPlayerNames ("score");
 
-		postRoundUpdated = true;
-		Debug.Log("Forced Scoreboard Update Ran");
+			if(this.transform.childCount > 0) {
+				Transform c = this.transform.GetChild(0);
+				c.SetParent(null);  // Become Batman
+				Destroy (c.gameObject);
+			}
+				
+			foreach (string name in names) {
+				GameObject go = (GameObject)Instantiate (playerScoreEntryPrefab);
+				go.transform.SetParent (this.transform);
+				go.transform.Find ("Username").GetComponent<Text> ().text = name;
+				go.transform.Find ("Score").GetComponent<Text> ().text = scoreManager.GetScore (name, "score").ToString ();
+			}
+			postRoundUpdated = true;
+			Debug.Log("Forced Scoreboard Update Ran");
+		}
+	}
+
+	public void OnLevelWasLoaded(int level) { 
+			if (level == 1) // Set to the index of Post Round in Build Settings, UPDATE if changed
+			{
+				scoreManager = GameObject.Find ("NetworkManager").GetComponent<ScoreManager>();
+				ForceScoreboardUpdate();
+			}
 	}		
 }

@@ -95,7 +95,8 @@ public class NetworkManagerScript : MonoBehaviour {
 		scoreManager.SetScore(username.text, "score", 0);
 
 		// DL - join room or create one
-		RoomOptions roomOptions = new RoomOptions(){ isVisible = true, maxPlayers = 10 }; PhotonNetwork.JoinOrCreateRoom(roomName.text, roomOptions, TypedLobby.Default);
+		RoomOptions roomOptions = new RoomOptions(){ isVisible = true, maxPlayers = 10 };
+		PhotonNetwork.JoinOrCreateRoom(roomName.text, roomOptions, TypedLobby.Default);
     
 	}
 
@@ -149,7 +150,7 @@ public class NetworkManagerScript : MonoBehaviour {
 		//Turn off top down view when we spawn
 		sceneCamera.enabled = false;
 
-		AddMessage (PhotonNetwork.player.name + "has entered the office.");
+		AddMessage (PhotonNetwork.player.name + " has entered the office.");
 	}
 
 	

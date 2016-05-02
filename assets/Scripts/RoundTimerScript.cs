@@ -58,6 +58,7 @@ public class RoundTimerScript : MonoBehaviour
 	private Text text;
 	[SerializeField] string minutes;
 	[SerializeField] string seconds;
+	int currentLevel = 0; // Prevents double round over
 
 
     private void StartRoundNow()
@@ -123,6 +124,18 @@ public class RoundTimerScript : MonoBehaviour
         }
     }
 
+	public void OnLevelWasLoaded(int level)
+	{
+		if (level == 1)
+		{
+			// Get TimeCount after load for the
+			currentLevel = level;
+			timeCount = GameObject.Find ("TimeCount");
+			text = timeCount.transform.GetComponent<Text> ();
+			Debug.Log ("Level " + level + " was loaded.", gameObject);
+		}
+	}
+
 
     void Update()
     {
@@ -139,9 +152,13 @@ public class RoundTimerScript : MonoBehaviour
 
 		text.text = (minutes + ":" + seconds);
 
-		if (remainingTime <= 1)
-		{
-			GameManager.instance.RoundOver();
+		if (remainingTime <= 1) {
+			if (currentLevel == 0) {
+				GameManager.instance.RoundOver ();
+			}
+			if (currentLevel == 1) {
+				GameManager.instance.PostRoundOver ();
+			}
 		}
     }
 

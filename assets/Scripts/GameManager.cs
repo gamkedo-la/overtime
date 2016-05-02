@@ -9,17 +9,14 @@ public class GameManager : MonoBehaviour {
 	public ScoreManager scoreManager;
 	public NetworkManagerScript networkManager;
 	public PlayerStats playerStats;
+	public int LevelThatWasLoadedTest = 0;
 
 	// Use this for initialization
 	void Start ()
 	{
 		instance = this;
 		DontDestroyOnLoad(transform.gameObject);
-
-		if (postRound)
-		{
-
-		}
+		
 	}
 	
 	// Update is called once per frame
@@ -30,35 +27,34 @@ public class GameManager : MonoBehaviour {
 
 	public void RoundOver ()
 	{
-		if(!postRound) // Load the Post-Round Stats Scene
-		{
 			// THINGS TO KEEP ACROSS THE LOAD //
 			DontDestroyOnLoad(networkManager.transform.gameObject);
 			instance.networkManager.enabled = false;
 
 			Application.LoadLevel("Main_PostRound");
-		}
-		else // This is the Post-Round, so restart the game
-		{
-
-		}
-
 	}
 
-	void OnLevelWasLoaded(int level) { 
-		if (level == 1) // Set to the index of Post Round in Build Settings, UPDATE if changed
-		{ 
+	public void PostRoundOver ()
+	{
+		Application.LoadLevel ("Main");
+	}
+
+
+	public void OnLevelWasLoaded(int level) { 
+		if (level == 1) { // Set to the index of Post Round in Build Settings, UPDATE if changed 
 			// Get the Network Manager after load
-			GameObject netMan = GameObject.Find("NetworkManager");
+			GameObject netMan = GameObject.Find ("NetworkManager");
+		 
+
 			// Relink all the needed variables
-			instance.playerScoreList = netMan.transform.GetComponent<PlayerScoreList>();
-			instance.scoreManager = netMan.transform.GetComponent<ScoreManager>();
+			instance.playerScoreList = netMan.transform.GetComponent<PlayerScoreList> ();
+			instance.scoreManager = netMan.transform.GetComponent<ScoreManager> ();
 			instance.playerScoreList.scoreManager = instance.scoreManager;
+			instance.postRound = true;
 
-			// Run the score update
-			playerScoreList.ForceScoreboardUpdate();
-
-		}	
+			// Read out level that was loaded
+		
+		}
 		
 	}
 
