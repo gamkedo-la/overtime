@@ -52,7 +52,7 @@ public class PlayerScoreList : MonoBehaviour {
 		}
 	}
 
-	public void ForceScoreboardUpdate ()
+	public void ForceScoreboardUpdate () // Trigger an update in the Post Round when no updates are naturally called
 	{
 		if (postRoundUpdated == false) {
 			string[] names = scoreManager.GetPlayerNames ("score");
@@ -77,7 +77,8 @@ public class PlayerScoreList : MonoBehaviour {
 	public void OnLevelWasLoaded(int level) { 
 			if (level == 1) // Set to the index of Post Round in Build Settings, UPDATE if changed
 			{
-				scoreManager = GameObject.Find ("NetworkManager").GetComponent<ScoreManager>();
+			// 	
+			scoreManager = GameObject.Find ("NetworkManager").GetComponent<ScoreManager>();
 				ForceScoreboardUpdate();
 			}
 	}
