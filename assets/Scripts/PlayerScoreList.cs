@@ -8,6 +8,7 @@ public class PlayerScoreList : MonoBehaviour {
 
 	public ScoreManager scoreManager;
 	bool postRoundUpdated = false;
+	public bool freezeUpdate = false;
 
 	int lastChangeCounter;
 
@@ -31,19 +32,23 @@ public class PlayerScoreList : MonoBehaviour {
 
 		lastChangeCounter = scoreManager.GetChangeCounter();
 
-		while(this.transform.childCount > 0) {
-			Transform c = this.transform.GetChild(0);
-			c.SetParent(null);  // Become Batman
-			Destroy (c.gameObject);
-		}
+		if(!freezeUpdate)
+		{
+			while(this.transform.childCount > 0) {
+				Transform c = this.transform.GetChild(0);
+				c.SetParent(null);  // Become Batman
+				Destroy (c.gameObject);
+			}
 
-		string[] names = scoreManager.GetPlayerNames("score");
+			string[] names = scoreManager.GetPlayerNames("score");
 		
-		foreach(string name in names) {
-			GameObject go = (GameObject)Instantiate(playerScoreEntryPrefab);
-			go.transform.SetParent(this.transform);
-			go.transform.Find ("Username").GetComponent<Text>().text = name;
-			go.transform.Find ("Score").GetComponent<Text>().text = scoreManager.GetScore(name,"score").ToString();
+			foreach(string name in names)
+			{
+					GameObject go = (GameObject)Instantiate(playerScoreEntryPrefab);
+					go.transform.SetParent(this.transform);
+					go.transform.Find ("Username").GetComponent<Text>().text = name;
+					go.transform.Find ("Score").GetComponent<Text>().text = scoreManager.GetScore(name,"score").ToString();
+			}
 		}
 	}
 
@@ -75,5 +80,10 @@ public class PlayerScoreList : MonoBehaviour {
 				scoreManager = GameObject.Find ("NetworkManager").GetComponent<ScoreManager>();
 				ForceScoreboardUpdate();
 			}
-	}		
+	}
+
+	public void FreezeUpdate()
+	{
+		freezeUpdate = true;
+	}
 }

@@ -15,7 +15,6 @@ public class GameManager : MonoBehaviour {
 	void Start ()
 	{
 		instance = this;
-		DontDestroyOnLoad(transform.gameObject);
 		
 	}
 	
@@ -44,18 +43,23 @@ public class GameManager : MonoBehaviour {
 		if (level == 1) { // Set to the index of Post Round in Build Settings, UPDATE if changed 
 			// Get the Network Manager after load
 			GameObject netMan = GameObject.Find ("NetworkManager");
-		 
 
 			// Relink all the needed variables
 			instance.playerScoreList = netMan.transform.GetComponent<PlayerScoreList> ();
 			instance.scoreManager = netMan.transform.GetComponent<ScoreManager> ();
 			instance.playerScoreList.scoreManager = instance.scoreManager;
 			instance.postRound = true;
-
-			// Read out level that was loaded
+			StartCoroutine(SelfDestructSequence(15));
 		
 		}
-		
+	}
+
+	// Destory self in Post Round once Scoreboard has had time to update. This is to counter DontDestroyOnLoad
+	IEnumerator SelfDestructSequence (float destructTimer)
+	{
+		yield return new WaitForSeconds(destructTimer);
+		instance.playerScoreList.FreezeUpdate ();
+		Destroy (this.gameObject);
 	}
 
 }
