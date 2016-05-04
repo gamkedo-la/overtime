@@ -31,13 +31,7 @@ photonView = GetComponent<PhotonView> ();
 
 void OnJoinedRoom ()
 	{
-// DEATHMATCH LEGACY VARIABLES //	
-/*
-			
-		playerFrag = 0;
-		playerDeath = 0;
-		playerAmmo = 3;
-*/
+
 		playerScore = 0;		
 		//Turn my username into a string
 		playerMe = PhotonNetwork.player.name;
@@ -59,6 +53,28 @@ void AddScoreTag_RPC(int score, string playerScoring)
 	scoreManager.UpdateScore(playerScoring, "score", score);
 	
 }
+
+
+
+//Call AddMessage to report to the chat, pass through death or frag message
+void AddMessage(string message)
+{
+	//               what we call       who sent to       parameter (what passes)
+	photonView.RPC ("AddMessage_RPC", PhotonTargets.All, message);
+}
+
+}
+
+// DEATHMATCH LEGACY VARIABLES //	
+/*
+			
+		playerFrag = 0;
+		playerDeath = 0;
+		playerAmmo = 3;
+*/
+
+
+
 // DEATHMATCH LEGACY AddScore RPC//		
 /*
 	[PunRPC]
@@ -97,12 +113,3 @@ void AddScoreTag_RPC(int score, string playerScoring)
 
 }
 */
-
-//Call AddMessage to report to the chat, pass through death or frag message
-void AddMessage(string message)
-{
-	//               what we call       who sent to       parameter (what passes)
-	photonView.RPC ("AddMessage_RPC", PhotonTargets.All, message);
-}
-
-}

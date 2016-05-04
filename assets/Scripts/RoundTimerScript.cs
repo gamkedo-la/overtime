@@ -47,6 +47,8 @@ public class RoundTimerScript : MonoBehaviour
 {
     public int MinutesPerRound = 5;
     public int MinutesPerPostRound = 1;
+	bool roundOverCallSwitch = true;
+	public bool postRoundOverCallSwitch = false;
     int SecondsPerTurn;                 // time per round/turn
     [SerializeField] double StartTime;                        // this should could also be a private. i just like to see this in inspector
 
@@ -153,10 +155,12 @@ public class RoundTimerScript : MonoBehaviour
 		text.text = (minutes + ":" + seconds);
 
 		if (remainingTime <= 1) {
-			if (currentLevel == 0) {
+			if (currentLevel == 0 && roundOverCallSwitch) {
+				roundOverCallSwitch = false;
 				GameManager.instance.RoundOver ();
+
 			}
-			if (currentLevel == 1) {
+			if (remainingTime <= 1 && postRoundOverCallSwitch) {
 				GameManager.instance.PostRoundOver ();
 			}
 		}
