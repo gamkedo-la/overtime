@@ -46,7 +46,8 @@ public class GameManager : MonoBehaviour {
 
 	public void PostRoundOver ()
 	{
-		Application.LoadLevel ("Main");
+		PhotonNetwork.LoadLevel ("Main");
+		//Application.LoadLevel ("Main");
 	}
 
 	IEnumerator EnableReset ()
