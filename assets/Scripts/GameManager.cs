@@ -46,6 +46,7 @@ public class GameManager : MonoBehaviour {
 
 	public void PostRoundOver ()
 	{
+		PhotonNetwork.LeaveRoom ();
 		PhotonNetwork.LoadLevel ("Main");
 		//Application.LoadLevel ("Main");
 	}
