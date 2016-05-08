@@ -9,8 +9,12 @@ using PhotonHashtable = ExitGames.Client.Photon.Hashtable;
 public class NetworkManagerScript : MonoBehaviour {
 
 	[SerializeField] Text connectionText;
+
+	// SPAWNING // 
 	[SerializeField] Transform[] spawnPoints;
-	// DL - And so we can turn it off when we need to
+	[SerializeField] GameObject SpawnPointManager;
+
+	// SCENE CAMERA // 
 	[SerializeField] Camera sceneCamera;
 
 	[SerializeField] string version;
@@ -42,6 +46,9 @@ public class NetworkManagerScript : MonoBehaviour {
 		if (PhotonNetwork.offlineMode == true){
 			PhotonNetwork.CreateRoom("Offline Room");
 		}
+
+		GetSpawnPoints ();
+
 		//Get Photon view and messsage queue
 		photonView = GetComponent<PhotonView> ();
 		messages = new Queue<string> (messagesCount);
@@ -52,6 +59,7 @@ public class NetworkManagerScript : MonoBehaviour {
 		PhotonNetwork.ConnectUsingSettings (version);
 		//Start the connection dialogue
 		StartCoroutine ("UpdateConnectionString");
+
 
 	
 	}
@@ -151,6 +159,15 @@ public class NetworkManagerScript : MonoBehaviour {
 		sceneCamera.enabled = false;
 
 		AddMessage (PhotonNetwork.player.name + " has entered the office.");
+	}
+
+	void GetSpawnPoints()
+	{
+		spawnPoints = new Transform[SpawnPointManager.transform.childCount];
+		for (int i = 0; i < SpawnPointManager.transform.childCount; i++)
+		{
+			spawnPoints[i] = SpawnPointManager.transform.GetChild(i).transform;
+		}
 	}
 
 	

@@ -125,6 +125,7 @@ public class PlayerNetworkMover : Photon.MonoBehaviour {
 			stream.SendNext(health);
 			stream.SendNext(anim.GetBool ("Aim"));
             stream.SendNext(anim.GetBool ("Sprint"));
+			stream.SendNext(myName);
 		}
 		// DL - Stream Output. Read/Write order must be the same
 		else
@@ -134,6 +135,7 @@ public class PlayerNetworkMover : Photon.MonoBehaviour {
 			health = (float)stream.ReceiveNext();
 			aim = (bool)stream.ReceiveNext();
 			sprint = (bool)stream.ReceiveNext();
+			myName = (string)stream.ReceiveNext();
 		}
 	}
 

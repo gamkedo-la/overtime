@@ -12,7 +12,7 @@ public class SodaGrenSplashDripStickyZone : WeaponBase {
 			ssmScript.SpeedStickyZone();
 
 		}
-		if (other.transform.tag == "Dummy")
+		if (other.transform.tag == "Enemy")
 		{
 			GameObject tempGO = other.transform.gameObject;
 			string hitName = tempGO.transform.name;

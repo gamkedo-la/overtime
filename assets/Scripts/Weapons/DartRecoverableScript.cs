@@ -15,6 +15,7 @@ public class DartRecoverableScript : WeaponBase {
 	public bool recoverable = false;
 	public bool recovered = false;
 	public EventDartTrigger eventDartTrigger;
+	public string lastHit;
 
 	[SerializeField] float selfdestructTime;
 	[SerializeField] float hitTime = 0;
@@ -51,9 +52,14 @@ public class DartRecoverableScript : WeaponBase {
 					if(hit.transform.tag == "Enemy")
 					{
 						GameObject tempGO = hit.transform.gameObject;
-						string hitName = tempGO.transform.name;
+						string hitName = hit.transform.GetComponent<PlayerNetworkMover>().myName;
+						if(hitName != lastHit)
+						{
 						hit.transform.GetComponent<PhotonView>().RPC ("GetShot", PhotonTargets.All, damage, owner);
 						ComboGenerator.ActionDartTag(hitName);
+						hitName = lastHit;
+						}
+						StartCoroutine ("LastHitReset");
 						//Destroy(gameObject);
 					}
 					if(hit.transform.tag == "Dummy")
@@ -61,7 +67,7 @@ public class DartRecoverableScript : WeaponBase {
 						GameObject tempGO = hit.transform.gameObject;
 						string hitName = tempGO.transform.name;
 						hit.transform.gameObject.SetActive(false);
-						ComboGenerator.ActionDartTag(hitName);
+						//ComboGenerator.ActionDartTag(hitName);
 						//eventDartTrigger.EventDummyKill(hitName);		
 					}
 					//if(hit.transform.tag == "Ground")
@@ -108,6 +114,12 @@ public class DartRecoverableScript : WeaponBase {
 			Destroy(gameObject);
 		}
 
+	}
+
+	IEnumerator LastHitReset ()
+	{
+		yield return new WaitForSeconds(2);
+		lastHit = "";
 	}
 
 	void OnTriggerEnter (Collider other)
