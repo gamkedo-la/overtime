@@ -21,6 +21,8 @@ public class NukeThrower : WeaponBase {
 
 	Vector3 origPos;
 
+	[SerializeField] PlayerNetworkMover playerNetworkMover;
+
 
 	// Use this for initialization
 	void Start () 
@@ -88,8 +90,10 @@ public class NukeThrower : WeaponBase {
 			shooting = false;
 			loaded = false;
 			//instantiate the dart
-			GameObject dartInstance;
-			dartInstance = PhotonNetwork.Instantiate(dartPrefab, canInHand.transform.position, canInHand.transform.rotation, 0) as GameObject;
+			GameObject nukeInstance;
+			nukeInstance = PhotonNetwork.Instantiate(dartPrefab, canInHand.transform.position, canInHand.transform.rotation, 0) as GameObject;
+			nukeInstance.GetComponent<PhotonView>().RPC ("NameNukeRPC", PhotonTargets.All, playerNetworkMover.myName);
+
 		}
 
 		

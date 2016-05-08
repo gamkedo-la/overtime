@@ -14,7 +14,7 @@ public class DartGun : WeaponBase {
 	[SerializeField] bool loaded = true;
 	[SerializeField] float shotTime;
 	public float loadTime = 2;	
-	private int ammo = 3;
+	public int ammo = 3;
 	public GameObject ammoCount;
 
 	public int ammoMax = 3;
@@ -24,6 +24,8 @@ public class DartGun : WeaponBase {
 	public GameObject dartAmmoGOFirst;
 	public GameObject dartAmmoGOSecond;
 	public GameObject dartAmmoGOLast;
+
+	public ScoringPlayHolder scoringPlayHolder;
 
 	// AIMING VARIABLES //
 	public GameObject firingPointObj;
@@ -41,12 +43,12 @@ public class DartGun : WeaponBase {
 	}
 
 	public void GiveAmmo(int amt) {
-		ammo += amt;
-		
-		// Prompt gun to display its new ammo
-		loaded = false;
-		shotTime = Time.time;
-		UpdateAmmoModelVis();
+			ammo += amt;
+			// Prompt gun to display its new ammo
+			loaded = false;
+			shotTime = Time.time;
+			UpdateAmmoModelVis ();
+
 	}
 
 	// Use this for initialization
@@ -112,6 +114,9 @@ public class DartGun : WeaponBase {
 			GameObject dartInstance;
 			dartInstance = PhotonNetwork.Instantiate(dartPrefab, firingPointObj.transform.position, firingPointObj.transform.rotation, 0) as GameObject;
 			dartInstance.GetComponent<PhotonView>().RPC ("NameDartRPC", PhotonTargets.All, playerNetworkMover.myName);
+			/*scoringPlayHolder.DisplayScoringPlay ("THIS IS ONE" + "! " + Random.Range(5,100) + "Pts");
+			scoringPlayHolder.DisplayScoringPlay ("THIS IS TWO" + "! " + Random.Range(5,100) + "Pts");
+			scoringPlayHolder.DisplayScoringPlay ("THIS IS THREE" + "! " + Random.Range(5,100) + "Pts");*/
 		}
 
 		

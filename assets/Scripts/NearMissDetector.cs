@@ -4,12 +4,13 @@ using PhotonHashtable = ExitGames.Client.Photon.Hashtable;
 
 public class NearMissDetector : MonoBehaviour {
 
-	public float bufferTime = 0.25F;
+	public float bufferTime = 0.5F;
 
 	// Use this for initialization
 	void OnTriggerEnter (Collider other)
 	{
-		if (other.transform.GetComponent<DartRecoverableScript> () != null) 
+		DartRecoverableScript dart = other.transform.GetComponent<DartRecoverableScript> ();
+		if (dart != null && dart.owner != PhotonNetwork.player.name) 
 		{
 			StartCoroutine("NearMissBuffer", bufferTime);
 		}

@@ -98,13 +98,27 @@ public class NetworkManagerScript : MonoBehaviour {
 
 	public void JoinRoom()
 	{
-		//Set player name to username text and zero out score
 		PhotonNetwork.player.name = username.text;
 		scoreManager.SetScore(username.text, "score", 0);
 
 		// DL - join room or create one
 		RoomOptions roomOptions = new RoomOptions(){ isVisible = true, maxPlayers = 10 };
 		PhotonNetwork.JoinOrCreateRoom(roomName.text, roomOptions, TypedLobby.Default);
+
+		// DUPLICATE NAME DETECTION - Not yet Working //
+		/*bool collisionFound = true;
+		do {
+			collisionFound = false;
+			foreach (PhotonPlayer pl in PhotonNetwork.playerList) {
+				if (username.text == pl.name) {
+					username.text = (username.text + "_");
+					Debug.Log ("There was a name conflict and the rename is " + username.text);
+					collisionFound = true;
+				}
+			}
+		} while (collisionFound);*/
+		
+
     
 	}
 

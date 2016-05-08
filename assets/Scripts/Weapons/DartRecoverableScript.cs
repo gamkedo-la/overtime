@@ -12,7 +12,7 @@ public class DartRecoverableScript : WeaponBase {
 	public bool airborne = false;
 	private bool killMe = false;
 	public float damage = 100f;
-	public bool recoverable = false;
+	[SerializeField] bool recoverable = false;
 	public bool recovered = false;
 	public EventDartTrigger eventDartTrigger;
 	public string lastHit;
@@ -57,7 +57,7 @@ public class DartRecoverableScript : WeaponBase {
 			if(Physics.Raycast(transform.position, transform.forward, out hit, dartRange))
 				{
 					
-					if(hit.transform.tag == "Enemy")
+					if(hit.transform.tag == "Enemy" && !recoverable)
 					{
 						distanceTravelled = Vector3.Distance (transform.position, initialPosition);
 						GameObject tempGO = hit.transform.gameObject;
@@ -71,7 +71,7 @@ public class DartRecoverableScript : WeaponBase {
 						StartCoroutine ("LastHitReset");
 						//Destroy(gameObject);
 					}
-					if(hit.transform.tag == "Dummy")
+					if(hit.transform.tag == "Dummy" && !recoverable)
 					{
 						GameObject tempGO = hit.transform.gameObject;
 						string hitName = tempGO.transform.name;
@@ -106,23 +106,15 @@ public class DartRecoverableScript : WeaponBase {
 							rb.useGravity = false;
 							rb.isKinematic = true;
 							col.GetComponent<Collider>().isTrigger = true;
-							//rb.transform.parent = hit.transform;
-							
-						}
-
-
-						
-					}
-					
+						}	
+					}					
 				}
-
 		}
 
 		if (killMe == true && Time.time >= hitTime)
 		{
 			Destroy(gameObject);
 		}
-
 	}
 
 	IEnumerator LastHitReset ()
@@ -139,8 +131,12 @@ public class DartRecoverableScript : WeaponBase {
 			if (other.transform.tag == "Player")
 			{
 				Debug.Log("Attempting Player Recovery");
-				other.GetComponentInChildren<DartGun>().GiveAmmo(1);
-				Destroy(gameObject);
+				DartGun dartGun = other.GetComponentInChildren<DartGun>();
+				if (dartGun.ammo < dartGun.ammoMax)
+				{
+					dartGun.GiveAmmo(1);
+					Destroy(gameObject);
+				}
 			}
 		}
 	}

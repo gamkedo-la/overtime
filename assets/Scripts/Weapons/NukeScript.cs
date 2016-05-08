@@ -17,6 +17,7 @@ public class NukeScript : WeaponBase {
 	public float damage = 100f;
 	PhotonView photonView;
 	public int dartsToSpray = 55;
+
 	
 	[SerializeField] float selfdestructTime;
 	[SerializeField] float hitTime = 0;
@@ -47,8 +48,10 @@ public class NukeScript : WeaponBase {
 		PhotonNetwork.Instantiate(burstPrefab, transform.position,
 			Random.rotationUniform, 0);
 		for(int i = 0; i < dartsToSpray; i++) {
-			PhotonNetwork.Instantiate(dartPrefab, transform.position,
+			GameObject dartInstance;
+			dartInstance = PhotonNetwork.Instantiate(dartPrefab, transform.position,
 				Random.rotationUniform, 0);
+			dartInstance.GetComponent<PhotonView>().RPC ("NameDartRPC", PhotonTargets.All, owner);
 		}
 		Destroy(gameObject);
 	}

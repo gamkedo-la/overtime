@@ -98,6 +98,13 @@ public class SodaGrenadeThrower : WeaponBase {
 		
 	}
 
+	public void GiveAmmo(int amt) {
+		ammo += amt;
+		// Prompt gun to display its new ammo
+		loaded = false;
+		shotTime = Time.time;		
+	}
+
 	void FixedUpdate ()
 	{
 		ammoCount.GetComponent<Text>().text = ammo.ToString();

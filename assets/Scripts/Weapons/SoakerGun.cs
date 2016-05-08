@@ -101,7 +101,7 @@ public class SoakerGun : WeaponBase {
 		ammoCount.GetComponent<Text>().text = (ammo/6).ToString();  // update UI
 	}
 
-    public void refill()
+    public void GiveAmmo()
     {
         ammo = maxAmmo;
     }
