@@ -18,6 +18,9 @@ public class TripwireDropper : WeaponBase {
 
 	Vector3 origPos;
 
+	// PNM FOR NAMING //
+	public PlayerNetworkMover playerNetworkMover;
+
 
 	// Use this for initialization
 	void Start () 
@@ -88,6 +91,7 @@ public class TripwireDropper : WeaponBase {
 			Debug.Log("trying to drop tripwire");
 			GameObject bombInstance;
 			bombInstance = PhotonNetwork.Instantiate(bombPrefab, tripwireInHand.transform.position, tripwireInHand.transform.rotation, 0) as GameObject;
+			bombInstance.GetComponent<Tripwire>().owner = playerNetworkMover.myName;
 		}
 
 		

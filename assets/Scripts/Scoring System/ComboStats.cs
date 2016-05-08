@@ -53,10 +53,12 @@ public class ComboStats : MonoBehaviour {
 
 	[Header("Trip Wire")]
 	public List<Tripwire> activeTripwires;
+	public int totalTripwireHits = 0;
 
-	[Header("This Life Stats")]
+	[Header("This Life Stats")] // ADD ALL OF THESE TO RespawnClear()
 	public int sodaHitsTL = 0;
 	public int dartTagsTL = 0;
+	public int tripwireHitsTL = 0;
 
 
 
@@ -85,6 +87,7 @@ public class ComboStats : MonoBehaviour {
 
 		sodaHitsTL = 0;
 		dartTagsTL = 0;
+		tripwireHitsTL = 0;
 	}
 
 	// ADD STATS FUNCTIONS //

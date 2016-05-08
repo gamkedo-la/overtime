@@ -36,7 +36,14 @@ public class ComboGenerator : MonoBehaviour {
 	public static void ActionSodaHit (string playerHit)
 	{
 		ComboStats.instance.AddSodaHit(playerHit);
-		instance.CheckThisIsAStickUp (playerHit);
+		instance.CheckStickyHit (playerHit);
+	}
+
+	public static void ActionWireTrip (string tripOwner, string playerHit)
+	{
+		//instance.lastTagTime = ComboStats.instance.lastTagTime;
+		ComboStats.instance.AddDartTag(playerHit);
+		instance.CheckTrip (tripOwner, playerHit);		
 	}
 
 	public static void ActionRespawn ()
@@ -82,12 +89,31 @@ public class ComboGenerator : MonoBehaviour {
         
     }
 
-    private void CheckThisIsAStickUp(string playerHit)
+    private void CheckStickyHit(string playerHit)
     {        
         ComboCounter.addCombo(ComboList.Combos.ThisIsAStickUp, playerHit);
         float value = ComboList.getComboValue(ComboList.Combos.ThisIsAStickUp);
         instance.scoringPlayHolder.DisplayScoringPlay("This is a Stick Up! " + value + "Pts");
     }
+
+	private void CheckTrip(string owner, string playerHit)
+	{
+		// COME AND GET ME - Trip Self //
+		if (owner == playerHit) 
+		{
+			ComboCounter.addCombo (ComboList.Combos.ComeAndGetMe, playerHit);
+			float value = ComboList.getComboValue (ComboList.Combos.ComeAndGetMe);
+			instance.scoringPlayHolder.DisplayScoringPlay ("Come and Get Me! " + value + "Pts");
+		}
+
+		// PHONE TAG - Trip another //
+		if (owner != playerHit)
+		{
+			ComboCounter.addCombo (ComboList.Combos.PhoneTag, playerHit);
+			float value = ComboList.getComboValue (ComboList.Combos.PhoneTag);
+			instance.scoringPlayHolder.DisplayScoringPlay ("Phone Tag! " + value + "Pts");
+		}
+	}
 
 
    

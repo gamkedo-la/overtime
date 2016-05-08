@@ -8,40 +8,42 @@ using PhotonHashtable = ExitGames.Client.Photon.Hashtable;
 
 public class Tripwire : WeaponBase 
 {
-	//
-	// States
+
+	// STATES //
 	private bool deployable = true; 		// TRUE if there is room to place trap
 	private bool deployed = false; 			// TRUE if on the ground and extended
 	public bool activated = false; 		// TRUE if a player has set off the trap
 	//
-	// Components
+	// COMPONENTS // 
 	public GameObject receiver;  			// The telephone receiver
 	public GameObject deployedReceiver;		// Invisible, used as a positioning reference
 	public GameObject static_cord; 			// Curly cord, just as a visual decoration
 	public GameObject cord_base_connect;	// Invisible positioning reference: extended cord
 	public GameObject cord_receiver_connect;// Invisible positioning reference: extended cord
-	//
+	public SelfDestruct selfDestruct;
+
 	public WeaponManager wm; // For auto switching weapons after deployment
 	private Rigidbody rb;
 	private LineRenderer lr;
-	//
-	// Blinking red light
+
+	// BLINKING RED LIGHT //
 	public Light redLight;
 	public int pulseCluster;
     public int pulseClusterDelay;
     public float pulseSpeed; 
     public int totalCycles;
-    //
+    
   	private int clusterCtr = 0;
 	private int delayCtr = 0;
 	private int cycleCtr;
 	private float timer;
-	//
-    // Audio
+
+    // AUDIO //
     public AudioSource soundPlayer;
     public AudioClip deploymentSound;
     public AudioClip activationSound;
 
+	// ID //
 	public string owner;
 
 
@@ -82,7 +84,11 @@ public class Tripwire : WeaponBase
 			return;
 		}
 		activated = true;
+		string hitName = other.transform.GetComponent<PlayerNetworkMover>().myName;
+		ComboGenerator.ActionWireTrip(owner, hitName);
 		soundPlayer.PlayOneShot(activationSound);
+		selfDestruct.enabled = true;
+		
 	}
 	//
 	void OnTriggerStay(Collider other)
