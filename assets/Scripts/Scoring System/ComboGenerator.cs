@@ -51,6 +51,12 @@ public class ComboGenerator : MonoBehaviour {
 		}
 	}
 
+	public static void ActionNearMiss ()
+	{
+		ComboStats.instance.AddNearMiss();
+		instance.CheckNearMiss ();
+	}
+
 	public static void ActionRespawn ()
 	{
 		ComboStats.instance.RespawnClear ();
@@ -71,31 +77,35 @@ public class ComboGenerator : MonoBehaviour {
 		{
 			ComboCounter.addCombo(ComboList.Combos.TheCommuter, playerHit);
 			float value = ComboList.getComboValue(ComboList.Combos.TheCommuter);
-			instance.scoringPlayHolder.DisplayScoringPlay("The Commuter! " + value + "Pts");
+			string comboName = ComboList.getComboName (ComboList.Combos.TheCommuter);
+			instance.scoringPlayHolder.DisplayScoringPlay (comboName + "! " + value + "Pts");
 		}
 
 		if (tripleTagEnabled && ComboStats.instance.lastTagTime < (lastTagTime + tripleTagGap)) // TRIPLE TAG //
         {
             ComboCounter.addCombo(ComboList.Combos.ThreesCompany, playerHit);
             float value = ComboList.getComboValue(ComboList.Combos.ThreesCompany);
-            instance.scoringPlayHolder.DisplayScoringPlay("Three's Company! " + value + "Pts");
-            doubleTagEnabled = false;
+			string comboName = ComboList.getComboName (ComboList.Combos.ThreesCompany);
+			instance.scoringPlayHolder.DisplayScoringPlay (comboName + "! " + value + "Pts");
+			doubleTagEnabled = false;
             tripleTagEnabled = false;
         }
         else if (doubleTagEnabled && ComboStats.instance.lastTagTime < (lastTagTime + doubleTagGap)) // DOUBLE TAG
         {
-            ComboCounter.addCombo(ComboList.Combos.DoubleTap, playerHit);
-            float value = ComboList.getComboValue(ComboList.Combos.DoubleTap);
-            instance.scoringPlayHolder.DisplayScoringPlay("Double Tap! " + value + "Pts");
-            doubleTagEnabled = false;
+            ComboCounter.addCombo(ComboList.Combos.DoubleTime, playerHit);
+            float value = ComboList.getComboValue(ComboList.Combos.DoubleTime);
+			string comboName = ComboList.getComboName (ComboList.Combos.DoubleTime);
+			instance.scoringPlayHolder.DisplayScoringPlay (comboName + "! " + value + "Pts");
+			doubleTagEnabled = false;
             tripleTagEnabled = true;    
         }
         else // SINGLE TAG //
         {
             ComboCounter.addCombo(ComboList.Combos.SingleTag, playerHit);
             float value = ComboList.getComboValue(ComboList.Combos.SingleTag);
-            instance.scoringPlayHolder.DisplayScoringPlay("Single Tag! " + value + "Pts");
-            doubleTagEnabled = true;
+			string comboName = ComboList.getComboName (ComboList.Combos.SingleTag);
+			instance.scoringPlayHolder.DisplayScoringPlay (comboName + "! " + value + "Pts");
+			doubleTagEnabled = true;
             tripleTagEnabled = false;
         }
         ComboCounter.addComboToScore();
@@ -106,9 +116,10 @@ public class ComboGenerator : MonoBehaviour {
     {        
         ComboCounter.addCombo(ComboList.Combos.ThisIsAStickUp, playerHit);
         float value = ComboList.getComboValue(ComboList.Combos.ThisIsAStickUp);
-        instance.scoringPlayHolder.DisplayScoringPlay("This is a Stick Up! " + value + "Pts");
-    }
-
+		string comboName = ComboList.getComboName (ComboList.Combos.ThisIsAStickUp);
+		instance.scoringPlayHolder.DisplayScoringPlay (comboName + "! " + value + "Pts");
+	}
+	
 	private void CheckTrip(string owner, string playerHit)
 	{
 		// COME AND GET ME - Trip Self //
@@ -116,7 +127,8 @@ public class ComboGenerator : MonoBehaviour {
 		{
 			ComboCounter.addCombo (ComboList.Combos.ComeAndGetMe, playerHit);
 			float value = ComboList.getComboValue (ComboList.Combos.ComeAndGetMe);
-			instance.scoringPlayHolder.DisplayScoringPlay ("Come and Get Me! " + value + "Pts");
+			string comboName = ComboList.getComboName (ComboList.Combos.ComeAndGetMe);
+			instance.scoringPlayHolder.DisplayScoringPlay (comboName + "! " + value + "Pts");
 		}
 
 		// PHONE TAG - Trip another //
@@ -124,9 +136,21 @@ public class ComboGenerator : MonoBehaviour {
 		{
 			ComboCounter.addCombo (ComboList.Combos.PhoneTag, playerHit);
 			float value = ComboList.getComboValue (ComboList.Combos.PhoneTag);
-			instance.scoringPlayHolder.DisplayScoringPlay ("Phone Tag! " + value + "Pts");
+			string comboName = ComboList.getComboName (ComboList.Combos.PhoneTag);
+			instance.scoringPlayHolder.DisplayScoringPlay (comboName + "! " + value + "Pts");
 		}
 	}
+
+	private void CheckNearMiss()
+	{
+		string playerHit = "null"; // REPLACE THIS WHEN TARGETS ARE IN PLAY
+		ComboCounter.addCombo (ComboList.Combos.NearMiss, playerHit);
+		float value = ComboList.getComboValue (ComboList.Combos.NearMiss);
+		string comboName = ComboList.getComboName (ComboList.Combos.NearMiss);
+		instance.scoringPlayHolder.DisplayScoringPlay (comboName + "! " + value + "Pts");
+	}
+
+
 
 
    
@@ -172,19 +196,9 @@ public class ComboGenerator : MonoBehaviour {
         ComboCounter.addCombo(ComboList.Combos.DoubleYouToo, playerHit);
     }
 
-    private void comeAndGetMe()
-    {
-        ComboCounter.addCombo(ComboList.Combos.ComeAndGetMe, "");
-    }
-
     private void starSixtyNine(string playerHit)
     {
         ComboCounter.addCombo(ComboList.Combos.StarSixtyNine, playerHit);
-    }
-
-    private void phoneTag(string playerHit)
-    {
-        ComboCounter.addCombo(ComboList.Combos.PhoneTag, playerHit);
     }
 
    
@@ -217,11 +231,6 @@ public class ComboGenerator : MonoBehaviour {
     private void outlookOut(string playerHit)
     {
         ComboCounter.addCombo(ComboList.Combos.OutlookOut, playerHit);
-    }
-
-    private void theCommuter(string playerHit)
-    {
-        ComboCounter.addCombo(ComboList.Combos.TheCommuter, playerHit);
     }
 
     private void topDownShooter(string playerHit)
@@ -257,11 +266,6 @@ public class ComboGenerator : MonoBehaviour {
         ComboCounter.addCombo(ComboList.Combos.AStapleMove, playerHitName);
     }
 
-    private void nearMiss(string shooterName)
-    {
-        //passUpProwessTimer = passUpProwessTimeWindow;
-       // ComboCounter.addCombo(ComboList.Combos.CloseCall, shooterName);
-    }
 
     private void setOffSprinklers()
     {

@@ -42,6 +42,9 @@ public class PlayerNetworkMover : Photon.MonoBehaviour {
 	bool sprint = false;
 	bool initialLoad = true;
 
+	// ADDITIONAL COLLIDERS //
+	public GameObject nearMissCollider;
+
 	Animator anim;
 
 	// Use this for initialization
@@ -58,6 +61,7 @@ public class PlayerNetworkMover : Photon.MonoBehaviour {
 			(GetComponent("FirstPersonController") as MonoBehaviour).enabled = true;
 			GetComponentInChildren<DartGun>().enabled = true;
 			playerCamera.GetComponentInChildren<Camera>().enabled = true;
+			nearMissCollider.SetActive(true);
 			//GetComponentInChildren<Melee>().enabled = true;
 			//GetComponentInChildren<AudioListener>().enabled = true;
 			transform.tag = "Player";

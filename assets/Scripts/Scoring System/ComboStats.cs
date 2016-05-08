@@ -29,9 +29,10 @@ public class ComboStats : MonoBehaviour {
 	[Header("Generic Assist")]
 	public string[] mostRecentAssistHit;
 
-	[Header("Deaths")]
+	[Header("Incoming Attacks")]
 	public float[] lastTimeDartHitMe;
 	public float lastDeathTime;
+	public int totalNearMisses;
     
     
 	[Header("Tags")]
@@ -61,6 +62,7 @@ public class ComboStats : MonoBehaviour {
 	public int sodaHitsTL = 0;
 	public int dartTagsTL = 0;
 	public int tripwireHitsTL = 0;
+	public int nearMissesTL = 0;
 
 
 
@@ -90,6 +92,7 @@ public class ComboStats : MonoBehaviour {
 		sodaHitsTL = 0;
 		dartTagsTL = 0;
 		tripwireHitsTL = 0;
+		nearMissesTL = 0;
 	}
 
 	// ADD STATS FUNCTIONS //
@@ -118,6 +121,12 @@ public class ComboStats : MonoBehaviour {
 		totalTripwireHits ++;
 		tripwireHitsTL ++;
 		playersTripwired.Add(playerHit);
+	}
+
+	public void AddNearMiss ()
+	{
+		totalNearMisses ++;
+		nearMissesTL ++;
 	}
 
 

@@ -42,6 +42,7 @@ public static class ComboList
         Unorthodonculous,
         WhenItRains,
         SingleTag,
+		NearMiss,
     }
 
     static ComboList()
@@ -76,6 +77,7 @@ public static class ComboList
         comboValues.Add(Combos.Unorthodonculous, 5);
         comboValues.Add(Combos.WhenItRains, 5);
 		comboValues.Add(Combos.SingleTag, 5);
+		comboValues.Add(Combos.NearMiss, 5);
 
         comboNames.Add(Combos.AroundTheWorld, "Around the World!");
         comboNames.Add(Combos.AStapleMove, "A Staple Move");
@@ -106,7 +108,8 @@ public static class ComboList
         comboNames.Add(Combos.TopDownShooter, "Top-Down Shooter");
         comboNames.Add(Combos.Unorthodonculous, "Unorthodonculous");
         comboNames.Add(Combos.WhenItRains, "When it rains");
-		comboNames.Add(Combos.SingleTag, "When it rains");
+		comboNames.Add(Combos.SingleTag, "Single Tag");
+		comboNames.Add(Combos.NearMiss, "Near Miss");
 
         if(comboValues.Count != comboNames.Count)
         {
