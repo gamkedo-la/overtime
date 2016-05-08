@@ -45,6 +45,7 @@ public class Tripwire : WeaponBase
 
 	// ID //
 	public string owner;
+	PhotonView photonView;
 
 
     //--------------------
@@ -58,6 +59,7 @@ public class Tripwire : WeaponBase
 	{
 		rb = GetComponent<Rigidbody>();
 		lr = GetComponent<LineRenderer>();
+		photonView =  transform.GetComponent<PhotonView> ();
 
 		// cdeleon changed: deploys on instantiate, isn't same as model in hand
 		deployed = true;
@@ -83,11 +85,11 @@ public class Tripwire : WeaponBase
 		if(activated || !deployed || other.gameObject.tag != "Player") {
 			return;
 		}
-		activated = true;
-		string hitName = other.transform.GetComponent<PlayerNetworkMover>().myName;
-		ComboGenerator.ActionWireTrip(owner, hitName);
-		soundPlayer.PlayOneShot(activationSound);
-		selfDestruct.enabled = true;
+		string hitName = other.transform.GetComponent<PlayerNetworkMover> ().myName;	
+		photonView.RPC ("tripwireActivated", PhotonTargets.All, hitName);
+			
+			
+
 		
 	}
 	//
@@ -157,9 +159,18 @@ public class Tripwire : WeaponBase
 	}
 
 	[PunRPC]
-	public void NameNukeRPC (string playerName)
+	public void NameTripwireRPC (string playerName)
 	{
 		owner = playerName;
+	}
+
+	[PunRPC]
+	public void tripwireActivated (string hitName)
+	{
+		activated = true;
+		ComboGenerator.ActionWireTrip (owner, hitName);
+		soundPlayer.PlayOneShot (activationSound);
+		selfDestruct.enabled = true;
 	}
 
 }

@@ -17,11 +17,19 @@ public class DartRecoverableScript : WeaponBase {
 	public EventDartTrigger eventDartTrigger;
 	public string lastHit;
 
+	PhotonView photonView;
+
+	// DISTANCE TRAVELED //
+	[SerializeField] Vector3 initialPosition;
+	[SerializeField] float distanceTravelled;
+
 	[SerializeField] float selfdestructTime;
 	[SerializeField] float hitTime = 0;
 
 	void Start() 
 	{
+		photonView = transform.GetComponent<PhotonView> ();
+		initialPosition = transform.position;
 		rb = GetComponent<Rigidbody>();
 		col = GetComponent<Collider>();
 		shot = true;
@@ -51,12 +59,13 @@ public class DartRecoverableScript : WeaponBase {
 					
 					if(hit.transform.tag == "Enemy")
 					{
+						distanceTravelled = Vector3.Distance (transform.position, initialPosition);
 						GameObject tempGO = hit.transform.gameObject;
 						string hitName = hit.transform.GetComponent<PlayerNetworkMover>().myName;
 						if(hitName != lastHit)
 						{
 						hit.transform.GetComponent<PhotonView>().RPC ("GetShot", PhotonTargets.All, damage, owner);
-						ComboGenerator.ActionDartTag(hitName);
+						ComboGenerator.ActionDartTag(hitName, distanceTravelled);
 						hitName = lastHit;
 						}
 						StartCoroutine ("LastHitReset");
@@ -86,7 +95,7 @@ public class DartRecoverableScript : WeaponBase {
 					//COME BACK TO THIS. Currently happens too far from the collision
 					if((hit.transform.tag == "Map") || (hit.transform.tag == "Ground"))
 					{
-				
+					distanceTravelled = Vector3.Distance (transform.position, initialPosition);
 						//Stop Physics and stick to what we hit
 						if (killMe == false)
 						{
@@ -137,7 +146,7 @@ public class DartRecoverableScript : WeaponBase {
 	}
 
 
-	
+	[PunRPC]
 	public void NameDartRPC (string playerName)
 	{
 		owner = playerName;

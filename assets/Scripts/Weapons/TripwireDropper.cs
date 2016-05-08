@@ -91,7 +91,7 @@ public class TripwireDropper : WeaponBase {
 			Debug.Log("trying to drop tripwire");
 			GameObject bombInstance;
 			bombInstance = PhotonNetwork.Instantiate(bombPrefab, tripwireInHand.transform.position, tripwireInHand.transform.rotation, 0) as GameObject;
-			bombInstance.GetComponent<Tripwire>().owner = playerNetworkMover.myName;
+			bombInstance.GetComponent<PhotonView>().RPC ("NameTripwireRPC", PhotonTargets.All, playerNetworkMover.myName);
 		}
 
 		

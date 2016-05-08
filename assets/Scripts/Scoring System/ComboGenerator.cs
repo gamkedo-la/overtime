@@ -15,6 +15,8 @@ public class ComboGenerator : MonoBehaviour {
     private bool doubleTagEnabled = false;
     private bool tripleTagEnabled = false;
 
+	public float longRangeShotLimit = 30;
+
 
 	// Use this for initialization
 	void Start () {
@@ -26,11 +28,11 @@ public class ComboGenerator : MonoBehaviour {
     // to UPDATE the COMBO STATS script with new information
 	// and TRIGGER and relevant SCORING PLAY CHECKS
 
-	public static void ActionDartTag (string playerHit)
+	public static void ActionDartTag (string playerHit, float distanceTravelled)
 	{
 		instance.lastTagTime = ComboStats.instance.lastTagTime;
-        ComboStats.instance.AddDartTag(playerHit);
-		instance.CheckTag (playerHit);		
+        ComboStats.instance.AddDartTag(playerHit, distanceTravelled);
+		instance.CheckTag (playerHit, distanceTravelled);		
 	}
 
 	public static void ActionSodaHit (string playerHit)
@@ -42,8 +44,11 @@ public class ComboGenerator : MonoBehaviour {
 	public static void ActionWireTrip (string tripOwner, string playerHit)
 	{
 		//instance.lastTagTime = ComboStats.instance.lastTagTime;
-		ComboStats.instance.AddDartTag(playerHit);
-		instance.CheckTrip (tripOwner, playerHit);		
+		if (tripOwner == PhotonNetwork.player.name)
+		{
+			ComboStats.instance.AddTripwireHit (playerHit);
+			instance.CheckTrip (tripOwner, playerHit);
+		}
 	}
 
 	public static void ActionRespawn ()
@@ -58,10 +63,18 @@ public class ComboGenerator : MonoBehaviour {
     // a Scoring Play has been achieved.
 
    
-    private void CheckTag(string playerHit)
+    private void CheckTag(string playerHit, float distanceTravelled)
     {
         
-        if (tripleTagEnabled && ComboStats.instance.lastTagTime < (lastTagTime + tripleTagGap)) // DOUBLE TAG
+		// THE COMMUTER - Long Range Tag //
+		if (distanceTravelled > longRangeShotLimit)
+		{
+			ComboCounter.addCombo(ComboList.Combos.TheCommuter, playerHit);
+			float value = ComboList.getComboValue(ComboList.Combos.TheCommuter);
+			instance.scoringPlayHolder.DisplayScoringPlay("The Commuter! " + value + "Pts");
+		}
+
+		if (tripleTagEnabled && ComboStats.instance.lastTagTime < (lastTagTime + tripleTagGap)) // TRIPLE TAG //
         {
             ComboCounter.addCombo(ComboList.Combos.ThreesCompany, playerHit);
             float value = ComboList.getComboValue(ComboList.Combos.ThreesCompany);
@@ -77,7 +90,7 @@ public class ComboGenerator : MonoBehaviour {
             doubleTagEnabled = false;
             tripleTagEnabled = true;    
         }
-        else // SINGLE TAG
+        else // SINGLE TAG //
         {
             ComboCounter.addCombo(ComboList.Combos.SingleTag, playerHit);
             float value = ComboList.getComboValue(ComboList.Combos.SingleTag);

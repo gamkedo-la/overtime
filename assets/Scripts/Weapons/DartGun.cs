@@ -111,7 +111,7 @@ public class DartGun : WeaponBase {
 			UpdateAmmoModelVis();
 			GameObject dartInstance;
 			dartInstance = PhotonNetwork.Instantiate(dartPrefab, firingPointObj.transform.position, firingPointObj.transform.rotation, 0) as GameObject;
-			dartInstance.GetComponent<DartRecoverableScript>().owner = playerNetworkMover.myName;
+			dartInstance.GetComponent<PhotonView>().RPC ("NameDartRPC", PhotonTargets.All, playerNetworkMover.myName);
 		}
 
 		

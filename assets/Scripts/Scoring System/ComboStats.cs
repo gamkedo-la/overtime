@@ -41,6 +41,7 @@ public class ComboStats : MonoBehaviour {
 	public float lastTagTime = 0;
 	float passUpProwessTimer;
     public float passUpProwessTimeWindow;
+	public float longestTag = 0;
     
 
 	[Header("Multi-Tag")]// - to eliminate repeats
@@ -52,6 +53,7 @@ public class ComboStats : MonoBehaviour {
 	public int totalSodaHits = 0;
 
 	[Header("Trip Wire")]
+	public List<string> playersTripwired;
 	public List<Tripwire> activeTripwires;
 	public int totalTripwireHits = 0;
 
@@ -94,12 +96,13 @@ public class ComboStats : MonoBehaviour {
 	// Called by the Generator to Add Stats
 
 
-	public void AddDartTag (string playerHit) 
+	public void AddDartTag (string playerHit, float distanceTraveled) 
 	{
 		lastTagTime = Time.time;
 		totalDartTags ++;
 		dartTagsTL ++;
 		playersDartTagged.Add(playerHit);
+		if (distanceTraveled > longestTag) { longestTag = distanceTraveled;}
 
 	}
 
@@ -108,6 +111,13 @@ public class ComboStats : MonoBehaviour {
 		totalSodaHits ++;
 		sodaHitsTL ++;
 		playersSodaGrenaded.Add(playerHit);
+	}
+
+	public void AddTripwireHit (string playerHit) 
+	{
+		totalTripwireHits ++;
+		tripwireHitsTL ++;
+		playersTripwired.Add(playerHit);
 	}
 
 
