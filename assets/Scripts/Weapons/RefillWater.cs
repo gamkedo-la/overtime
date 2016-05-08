@@ -84,7 +84,7 @@ public class RefillWater : MonoBehaviour {
         actionButtonDown = true;
     }
 
-    void OnEnable()
+   /* void OnEnable()
     {
         EventManager.StartListening(StandardEventName.ActionButton, actionButtonPressed);
     }
@@ -92,5 +92,5 @@ public class RefillWater : MonoBehaviour {
     void OnDisable()
     {
         EventManager.StopListening(StandardEventName.ActionButton, actionButtonPressed);
-    }
+    }*/
 }
