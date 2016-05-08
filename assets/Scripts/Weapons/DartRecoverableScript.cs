@@ -50,7 +50,10 @@ public class DartRecoverableScript : WeaponBase {
 					
 					if(hit.transform.tag == "Enemy")
 					{
+						GameObject tempGO = hit.transform.gameObject;
+						string hitName = tempGO.transform.name;
 						hit.transform.GetComponent<PhotonView>().RPC ("GetShot", PhotonTargets.All, damage, owner);
+						ComboGenerator.ActionDartTag(hitName);
 						//Destroy(gameObject);
 					}
 					if(hit.transform.tag == "Dummy")

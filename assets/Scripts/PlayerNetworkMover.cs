@@ -13,6 +13,11 @@ public class PlayerNetworkMover : Photon.MonoBehaviour {
 	public delegate void SendScore(string fragger, string fragged);
 	public event SendScore SendNetworkScore;
 
+	// CAMERA //
+
+	[SerializeField] GameObject playerCamera;
+
+
 	// ID //
 	public string myName;
 	
@@ -26,6 +31,7 @@ public class PlayerNetworkMover : Photon.MonoBehaviour {
 	public float maxHealth = 100f;
 	public GameObject healthCount;
 	bool myHealth = false;
+	bool respawnSwitch = false; // Prevents multiple respawns from one kill
 
 	// Are these obsolete? //
 	float myPlayerFrag;
@@ -51,12 +57,15 @@ public class PlayerNetworkMover : Photon.MonoBehaviour {
 			GetComponent<WeaponManager>().enabled = true;
 			(GetComponent("FirstPersonController") as MonoBehaviour).enabled = true;
 			GetComponentInChildren<DartGun>().enabled = true;
-			GetComponentInChildren<Melee>().enabled = true;
+			playerCamera.GetComponentInChildren<Camera>().enabled = true;
+			//GetComponentInChildren<Melee>().enabled = true;
 			//GetComponentInChildren<AudioListener>().enabled = true;
 			transform.tag = "Player";
 			gameObject.layer = 14;
-			foreach(Camera cam in GetComponentsInChildren<Camera>())
+			/*foreach(Camera cam in GetComponentsInChildren<Camera>())
+			{
 			cam.enabled = true;
+			}*/
 			healthCount = this.transform.parent.parent.transform.Find("VitalsCanvas/HealthBar/HealthCount").gameObject;
 			myHealth = true;
 			ComboGenerator.ActionRespawn();
@@ -133,33 +142,29 @@ public class PlayerNetworkMover : Photon.MonoBehaviour {
 	[PunRPC]
 	public void GetShot(float damage, string enemyName)
 	{
-		health -= damage;
+		//health -= damage;
 
-		if (health <= 0 && photonView.isMine)
-		{
-			SoundCenter.instance.PlayClipOn(
-				SoundCenter.instance.playerDie,transform.position);
-			
-/*
+		if (photonView.isMine && !respawnSwitch) {
+
+
+			if (SendNetworkMessage != null) // send messaging of the frag event
+				SendNetworkMessage (myName + " was tagged by " + enemyName);
+			if (RespawnMe != null)
+				RespawnMe (3f);
+			respawnSwitch = true;
+
+			PhotonNetwork.Destroy (transform.parent.gameObject);
+			/*SoundCenter.instance.PlayClipOn(
+				//SoundCenter.instance.playerDie,transform.position);
+				
 			// DEATHMATCH LEGACY //
 			if(SendNetworkScore != null) // Update the scoreboard data
 			{
 				SendNetworkScore(enemyName, myName);	}
-
-			if(SendNetworkMessage != null) // send messaging of the frag event
-				SendNetworkMessage(myName + " was tagged by " + enemyName);
-*/
-
-
-			if(RespawnMe != null)
-				RespawnMe(3f);
-		
-			PhotonNetwork.Destroy (gameObject);
 		} else {
-			SoundCenter.instance.PlayClipOn(
-				SoundCenter.instance.playerHurt,transform.position);
+			//SoundCenter.instance.PlayClipOn(
+				//SoundCenter.instance.playerHurt,transform.position);
+		}*/
 		}
 	}
-
-
 }
