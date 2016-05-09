@@ -11,6 +11,7 @@ public class RefillWater : MonoBehaviour {
     [SerializeField] bool playerNearby;
     private FirstPersonController nearbyPlayerController;
     private bool actionButtonDown;
+	private bool refillAvailable;
 
 	void Start () {
         refillTimer = 0.0f;
@@ -19,14 +20,7 @@ public class RefillWater : MonoBehaviour {
 	
 	void Update () {
         //Cooldown timer
-        if (refillTimer > 0)
-        {
-            refillTimer -= Time.deltaTime;
-        }
-        else if(!Carboy.GetActive())
-        {
-            Carboy.SetActive(true);
-        }
+
 
         if(playerNearby)
         {
@@ -38,11 +32,13 @@ public class RefillWater : MonoBehaviour {
             Debug.Log("ActionButtonDown");
         }
 
-        if(playerNearby && actionButtonDown)
+        if(playerNearby && actionButtonDown && refillAvailable)
         {
 			soaker.GiveAmmo();
-            refillTimer = Random.Range(minRefillTime, maxRefillTime);
-            Carboy.SetActive(false);
+			refillAvailable = false;
+			refillTimer = Random.Range(minRefillTime, maxRefillTime);
+			StartCoroutine(RefillCooldown(refillTimer));
+			Carboy.SetActive(false);
         }
 
         if(playerNearby && nearbyPlayerController != null && nearbyPlayerController.useButton)
@@ -56,6 +52,13 @@ public class RefillWater : MonoBehaviour {
 
      
     }
+
+	IEnumerator RefillCooldown (float cooldownTime)
+	{
+		yield return new WaitForSeconds (cooldownTime);
+		refillAvailable = true;
+		Carboy.SetActive(true);
+	}
 
     void OnTriggerEnter(Collider other)
     {
