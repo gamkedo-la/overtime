@@ -11,7 +11,7 @@ public class RefillWater : MonoBehaviour {
     [SerializeField] bool playerNearby;
     private FirstPersonController nearbyPlayerController;
     private bool actionButtonDown;
-	private bool refillAvailable;
+	[SerializeField] bool refillAvailable = true;
 
 	void Start () {
         refillTimer = 0.0f;
@@ -29,7 +29,7 @@ public class RefillWater : MonoBehaviour {
 
         if (actionButtonDown)
         {
-            Debug.Log("ActionButtonDown");
+            Debug.Log("ActionButtonDown", gameObject);
         }
 
         if(playerNearby && actionButtonDown && refillAvailable)

@@ -54,7 +54,7 @@ public class PlayerScoreList : MonoBehaviour {
 
 	public void ForceScoreboardUpdate () // Trigger an update in the Post Round when no updates are naturally called
 	{
-		if (postRoundUpdated == false) {
+		//if (postRoundUpdated == false) {
 			string[] names = scoreManager.GetPlayerNames ("score");
 
 			if(this.transform.childCount > 0) {
@@ -69,9 +69,9 @@ public class PlayerScoreList : MonoBehaviour {
 				go.transform.Find ("Username").GetComponent<Text> ().text = name;
 				go.transform.Find ("Score").GetComponent<Text> ().text = scoreManager.GetScore (name, "score").ToString ();
 			}
-			postRoundUpdated = true;
+		//	postRoundUpdated = true;
 			Debug.Log("Forced Scoreboard Update Ran");
-		}
+		//}
 	}
 
 	public void OnLevelWasLoaded(int level) { 

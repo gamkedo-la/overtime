@@ -43,7 +43,7 @@ public class PlayerNetworkMover : Photon.MonoBehaviour {
 	bool initialLoad = true;
 
 	// ADDITIONAL COLLIDERS //
-	public GameObject nearMissCollider;
+	//public GameObject nearMissCollider;
 
 	Animator anim;
 
@@ -61,11 +61,11 @@ public class PlayerNetworkMover : Photon.MonoBehaviour {
 			(GetComponent("FirstPersonController") as MonoBehaviour).enabled = true;
 			GetComponentInChildren<DartGun>().enabled = true;
 			playerCamera.GetComponentInChildren<Camera>().enabled = true;
-			nearMissCollider.SetActive(true);
+			//nearMissCollider.SetActive(true);
+			gameObject.tag =  "Player";
+			gameObject.layer = 14;
 			//GetComponentInChildren<Melee>().enabled = true;
 			//GetComponentInChildren<AudioListener>().enabled = true;
-			transform.tag = "Player";
-			gameObject.layer = 14;
 			/*foreach(Camera cam in GetComponentsInChildren<Camera>())
 			{
 			cam.enabled = true;
@@ -74,13 +74,16 @@ public class PlayerNetworkMover : Photon.MonoBehaviour {
 			myHealth = true;
 			ComboGenerator.ActionRespawn();
 			myName = PhotonNetwork.player.name;
-			
+
+
 		}
 		else
 		{
 			StartCoroutine("UpdateData");
 		}
 	}
+
+
 
 	public void HealPowerUp(){
 			health += (maxHealth * 0.20f);

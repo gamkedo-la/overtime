@@ -11,7 +11,7 @@ public class ScoreManager : MonoBehaviour {
 
 	Dictionary< string, Dictionary<string, int> > playerScores;
 
-	int changeCounter = 0;
+	[SerializeField] int changeCounter = 0;
 
 	void Start() {
 	}
@@ -79,6 +79,11 @@ public class ScoreManager : MonoBehaviour {
 
 	public int GetChangeCounter() {
 		return changeCounter;
+	}
+
+	public void ForceUpdate()
+	{
+		changeCounter ++;
 	}
 
 	public void DEBUG_ADD_KILL_TO_QUILL() {

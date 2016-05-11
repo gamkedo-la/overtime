@@ -12,10 +12,9 @@ public class RefillSoda : MonoBehaviour {
 	[SerializeField] bool playerNearby;
 	private FirstPersonController nearbyPlayerController;
 	private bool actionButtonDown;
-	private bool refillAvailable = true;
+	[SerializeField] bool refillAvailable = true;
 	
 	void Start () {
-		refillTimer = 0.0f;
 	}
 	
 	void Update () {
@@ -27,7 +26,7 @@ public class RefillSoda : MonoBehaviour {
 		
 		if (actionButtonDown)
 		{
-			Debug.Log("ActionButtonDown");
+			Debug.Log("ActionButtonDown", gameObject);
 		}
 		
 		if(playerNearby && actionButtonDown && refillAvailable)

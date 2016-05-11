@@ -13,6 +13,7 @@ public class GameManager : MonoBehaviour {
 	public GameObject playerManager;
 	public GameObject roundUI;
 	public GameObject postRoundUI;
+	public PlayerScoreList roundPlayerScoreList;
 	public PlayerScoreList postPlayerScoreList;
 	public int LevelThatWasLoadedTest = 0;
 	public RoundTimerScript roundTimer;
