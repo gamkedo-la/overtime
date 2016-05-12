@@ -17,6 +17,7 @@ public class SodaGrenadeThrower : WeaponBase {
 	public float ammo = 3;
 	public GameObject ammoCount;
 	public GameObject canInHand;
+	public float maxAmmo = 6;
 	string myName;
 
 	Vector3 origPos;
@@ -98,11 +99,19 @@ public class SodaGrenadeThrower : WeaponBase {
 		
 	}
 
-	public void GiveAmmo(int amt) {
-		ammo += amt;
-		// Prompt gun to display its new ammo
-		loaded = false;
-		shotTime = Time.time;		
+	public bool GiveAmmo(int amt) {
+		if (ammo >= maxAmmo) {
+			return true;
+		} else {
+			ammo += amt;
+			if (ammo > maxAmmo) {
+				ammo = maxAmmo;
+			}
+			// Prompt gun to display its new ammo
+			loaded = false;
+			shotTime = Time.time;
+			return false;
+		}
 	}
 
 	void FixedUpdate ()

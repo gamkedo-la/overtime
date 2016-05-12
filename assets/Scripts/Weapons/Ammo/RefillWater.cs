@@ -34,11 +34,15 @@ public class RefillWater : MonoBehaviour {
 
         if(playerNearby && actionButtonDown && refillAvailable)
         {
-			soaker.GiveAmmo();
+			bool full = soaker.GiveAmmo();
+
+			if (!full)
+			{
 			refillAvailable = false;
 			refillTimer = Random.Range(minRefillTime, maxRefillTime);
 			StartCoroutine(RefillCooldown(refillTimer));
 			Carboy.SetActive(false);
+			}
         }
 
         if(playerNearby && nearbyPlayerController != null && nearbyPlayerController.useButton)

@@ -101,9 +101,14 @@ public class SoakerGun : WeaponBase {
 		ammoCount.GetComponent<Text>().text = (ammo/6).ToString();  // update UI
 	}
 
-    public void GiveAmmo()
+    public bool GiveAmmo()
     {
-        ammo = maxAmmo;
+        if (ammo >= maxAmmo) {
+			return true;
+		} else {
+			ammo = maxAmmo;
+			return false;
+		}
     }
 
 }

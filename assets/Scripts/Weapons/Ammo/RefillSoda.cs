@@ -7,7 +7,8 @@ public class RefillSoda : MonoBehaviour {
 	
 	public float minRefillTime = 15.0f, maxRefillTime = 45.0f;
 	[SerializeField] float refillTimer;
-	[SerializeField] GameObject Can;
+	[SerializeField] GameObject Cans;
+	[SerializeField] GameObject Lights;
 	private SodaGrenadeThrower grenadeThrower;
 	[SerializeField] bool playerNearby;
 	private FirstPersonController nearbyPlayerController;
@@ -31,11 +32,18 @@ public class RefillSoda : MonoBehaviour {
 		
 		if(playerNearby && actionButtonDown && refillAvailable)
 		{
-			grenadeThrower.GiveAmmo(3);
-			refillAvailable = false;
-			refillTimer = Random.Range(minRefillTime, maxRefillTime);
-			StartCoroutine(RefillCooldown(refillTimer));
-			Can.SetActive(false);
+			// ADD AMMO ATTEMPT
+			bool full = grenadeThrower.GiveAmmo(3);
+
+			// THESE SHOULD NOT RUN IF THE PLAYER IS FULL OF AMMO
+			if (!full)
+			{
+				refillAvailable = false;
+				refillTimer = Random.Range(minRefillTime, maxRefillTime);
+				StartCoroutine(RefillCooldown(refillTimer));
+				Cans.SetActive(false);
+				Lights.SetActive(false);
+			}
 		}
 		
 		if(playerNearby && nearbyPlayerController != null && nearbyPlayerController.useButton)
@@ -54,7 +62,8 @@ public class RefillSoda : MonoBehaviour {
 	{
 		yield return new WaitForSeconds (cooldownTime);
 		refillAvailable = true;
-		Can.SetActive(true);
+		Cans.SetActive(true);
+		Lights.SetActive(true);
 	}
 	
 	void OnTriggerEnter(Collider other)
