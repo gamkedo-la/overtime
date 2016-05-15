@@ -29,6 +29,9 @@ public class SoakerGun : WeaponBase {
 	public ParticleSystem waterInTank;
 	Vector3 wepOrig;
 
+	// AIMING VARIABLES //
+	public GameObject firingPointObj;
+
 	// Use this for initialization
 	void Start () 
 	{
@@ -77,16 +80,32 @@ public class SoakerGun : WeaponBase {
 				waterSprayer.enableEmission = false;
 			}
 
+		RaycastHit hitInfo;
+		Vector3 shootToward;
+		Ray centerRay = Camera.main.ScreenPointToRay(new Vector3((Camera.main.pixelWidth/2), (Camera.main.pixelHeight/2), 0f));
+
+		if(loaded == true & ammo > 0) {
+			if(Physics.Raycast(centerRay, out hitInfo, 150.0f)) {
+				shootToward = hitInfo.point;
+			} else {
+				shootToward = centerRay.origin + centerRay.direction * 50.0f;
+			}
+			
+			waterGunModel.transform.LookAt(shootToward);
+		}
 		
+
+
 		if (shooting){ // how we shoot
 			RaycastHit hit;
 			Vector3 fwd = transform.TransformDirection(Vector3.forward);
-			if(Physics.Raycast(transform.position, fwd, out hit, range)){
-				Debug.Log ("It's soaking!");
-				Debug.DrawLine(transform.position, hit.point, Color.blue, 2);  // TEMP display of raycast
-				if (hit.rigidbody != null){ // if we hit a rigidbody, apply force
-					hit.rigidbody.AddForce(fwd * knockbackForce);
-					Debug.Log ("Somebody gettin' soaked!");
+			if(Physics.Raycast(firingPointObj.transform.position, firingPointObj.transform.forward, out hit, range)){
+				Debug.Log ("SOAKER: Firing");
+				//Debug.DrawLine(transform.position, hit.point, Color.blue, 2);  // TEMP display of raycast
+				if (hit.transform.tag == "Enemy")
+				{ // if we hit a rigidbody, apply force
+					hit.transform.GetComponent<PhotonView>().RPC ("GetSoaked", PhotonTargets.All, (fwd * knockbackForce));
+					Debug.Log ("SOAKER: Hit");
 				}
 			}
 			

@@ -17,13 +17,16 @@ public class DartRecoverableScript : WeaponBase {
 	public EventDartTrigger eventDartTrigger;
 	public string lastHit;
 
+
+	// NUKE VERSION - Self Destructs //
+	[SerializeField] bool nukeVariant = false;
+
 	PhotonView photonView;
 
 	// DISTANCE TRAVELED //
 	[SerializeField] Vector3 initialPosition;
 	[SerializeField] float distanceTravelled;
 
-	[SerializeField] float selfdestructTime;
 	[SerializeField] float hitTime = 0;
 
 	void Start() 
@@ -103,12 +106,15 @@ public class DartRecoverableScript : WeaponBase {
 					if((hit.transform.tag == "Map") || (hit.transform.tag == "Ground"))
 					{
 					distanceTravelled = Vector3.Distance (transform.position, initialPosition);
+					if (nukeVariant)
+					{
+						StartCoroutine(SelfDestruct());
+					}
 						//Stop Physics and stick to what we hit
 						if (killMe == false)
 						{
 							//SoundCenter.instance.PlayClipOn(
 								//SoundCenter.instance.dartStick,transform.position);
-							//hitTime = (Time.time + selfdestructTime);
 							recoverable = true;
 							rb.useGravity = false;
 							rb.isKinematic = true;
@@ -123,6 +129,14 @@ public class DartRecoverableScript : WeaponBase {
 			Destroy(gameObject);
 		}
 	}
+
+	IEnumerator SelfDestruct()
+	{
+		float selfDestructTime = Random.Range (3, 6);
+		yield return new WaitForSeconds (selfDestructTime);
+		PhotonNetwork.Destroy (gameObject);
+	}
+
 
 	IEnumerator LastHitReset ()
 	{

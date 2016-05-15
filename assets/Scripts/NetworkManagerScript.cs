@@ -29,6 +29,11 @@ public class NetworkManagerScript : MonoBehaviour {
 	[SerializeField] InputField messageWindow;
 	[SerializeField] PhotonHashtable PlayerCustomProps = new PhotonHashtable();
 	[SerializeField] GameObject playerManager;
+
+	// UI ELEMENTS // 
+
+	[SerializeField] GameObject PlayerUI;
+	[SerializeField] GameObject InfoUI;
 	
 
 	GameObject player;
@@ -147,6 +152,8 @@ public class NetworkManagerScript : MonoBehaviour {
 	{
 		// DL - This starts the coroutine
 		sceneCamera.enabled = true;
+		PlayerUI.SetActive (false);
+		InfoUI.SetActive (false);
 		StartCoroutine ("SpawnPlayer", respawnTime);
 	}
 
@@ -164,13 +171,13 @@ public class NetworkManagerScript : MonoBehaviour {
 		player.GetComponentInChildren<PlayerNetworkMover>().RespawnMe += StartSpawnProcess;
 		//send PNM the kill/spawn message
 		player.GetComponentInChildren<PlayerNetworkMover>().SendNetworkMessage += AddMessage;
-		//send PlayerScore the kill/death update
-		//player.GetComponentInChildren<PlayerNetworkMover>().SendNetworkScore += AddScore;
 
 	
 
 		//Turn off top down view when we spawn
 		sceneCamera.enabled = false;
+		PlayerUI.SetActive (true);
+		InfoUI.SetActive (true);
 
 		AddMessage (PhotonNetwork.player.name + " has entered the office.");
 	}

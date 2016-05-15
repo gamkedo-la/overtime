@@ -42,9 +42,19 @@ public class PlayerNetworkMover : Photon.MonoBehaviour {
 	bool sprint = false;
 	bool initialLoad = true;
 
+	// SOAKER PUSH //
+	//[SerializeField] bool pushable = false;
+	[SerializeField] bool soakerPushing = false;
+	[SerializeField] Vector3 soakerPushForce;
+
+
+
+
 	// ADDITIONAL COLLIDERS //
 	//public GameObject nearMissCollider;
 
+
+	Rigidbody rigidbody;
 	Animator anim;
 
 	// Use this for initialization
@@ -52,6 +62,7 @@ public class PlayerNetworkMover : Photon.MonoBehaviour {
 	{
 		//Get animator for syncing
 		anim = GetComponentInChildren<Animator> ();
+		rigidbody = transform.GetComponent<Rigidbody>();
 
 		if(photonView.isMine)  // Activate player scripts if my character
 		{
@@ -74,6 +85,7 @@ public class PlayerNetworkMover : Photon.MonoBehaviour {
 			myHealth = true;
 			ComboGenerator.ActionRespawn();
 			myName = PhotonNetwork.player.name;
+
 
 
 		}
@@ -119,8 +131,14 @@ public class PlayerNetworkMover : Photon.MonoBehaviour {
 		if (myHealth){
 			healthCount.GetComponent<Text>().text = health.ToString();
 		}
+		if (soakerPushing)
+		{
+			rigidbody.AddForce(soakerPushForce);
+			//soakerPushing = false;
+		}
 		
 	}
+
 
 	void OnPhotonSerializeView (PhotonStream stream, PhotonMessageInfo info)
 	{
@@ -131,7 +149,7 @@ public class PlayerNetworkMover : Photon.MonoBehaviour {
 			stream.SendNext(transform.rotation);
 			stream.SendNext(health);
 			stream.SendNext(anim.GetBool ("Aim"));
-            stream.SendNext(anim.GetBool ("Sprint"));
+            stream.SendNext(anim.GetBool ("Sprint"));		
 			stream.SendNext(myName);
 		}
 		// DL - Stream Output. Read/Write order must be the same
@@ -161,7 +179,6 @@ public class PlayerNetworkMover : Photon.MonoBehaviour {
 			if (RespawnMe != null)
 				RespawnMe (3f);
 			respawnSwitch = true;
-
 			PhotonNetwork.Destroy (transform.parent.gameObject);
 			/*SoundCenter.instance.PlayClipOn(
 				//SoundCenter.instance.playerDie,transform.position);
@@ -175,5 +192,13 @@ public class PlayerNetworkMover : Photon.MonoBehaviour {
 				//SoundCenter.instance.playerHurt,transform.position);
 		}*/
 		}
+	}
+
+	[PunRPC]
+	public void GetSoaked(Vector3 pushForce)
+	{
+		soakerPushForce = pushForce;
+		soakerPushing = true;
+		
 	}
 }
