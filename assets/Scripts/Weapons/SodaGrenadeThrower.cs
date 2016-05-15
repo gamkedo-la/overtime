@@ -8,6 +8,10 @@ public class SodaGrenadeThrower : WeaponBase {
 
 	// DL - This script is responsible for: 1) Graphical Effects of Shooting 2) Physics of shooting 3) Impacts, etc.
 
+	// WEAPON NAME //
+	[SerializeField] string weaponName;
+	GameObject ammoName;
+
 	// Animator anim;
 	[SerializeField] string canPrefab;
 	[SerializeField] bool shooting = false;
@@ -27,9 +31,16 @@ public class SodaGrenadeThrower : WeaponBase {
 	void Start () 
 	{
 		//anim = GetComponentInChildren<Animator> ();
-		ammoCount = this.transform.parent.parent.parent.transform.Find("VitalsCanvas/VitalsBar/AmmoCount").gameObject;
+		ammoCount = PlayerManager.instance.AmmoCount;
+		ammoName = PlayerManager.instance.AmmoName;
+		ammoName.GetComponent<Text> ().text = weaponName;
 		origPos = canInHand.transform.localPosition;
 		myName = PhotonNetwork.player.name;
+	}
+
+	void OnEnable()
+	{
+		ammoName.GetComponent<Text> ().text = weaponName;
 	}
 	
 	// Update is called once per frame

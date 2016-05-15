@@ -7,6 +7,10 @@ public class SoakerGun : WeaponBase {
 
 	// DL - This script is responsible for: 1) Graphical Effects of Shooting 2) Physics of shooting 3) Impacts, etc.
 
+	// WEAPON NAME //
+	[SerializeField] string weaponName;
+	GameObject ammoName;
+
 	Animator anim;
 	// DL - Collection (Matrix? Array?) of impacts that are moved when shooting. Since they already exist and are not repeatedly called, this is more resource friendly.
 	[SerializeField] bool shooting = false;
@@ -28,11 +32,18 @@ public class SoakerGun : WeaponBase {
 	// Use this for initialization
 	void Start () 
 	{
-		ammoCount = this.transform.parent.parent.parent.transform.Find("VitalsCanvas/VitalsBar/AmmoCount").gameObject;
+		ammoCount = PlayerManager.instance.AmmoCount;
+		ammoName = PlayerManager.instance.AmmoName;
+		ammoName.GetComponent<Text> ().text = weaponName;
 		waterPrefab.SetActive(true);
 		waterSprayer = waterPrefab.GetComponent<ParticleSystem>();
 		waterSprayer.enableEmission = false;
 		wepOrig = waterGunModel.transform.localPosition;
+	}
+
+	void OnEnable()
+	{
+		ammoName.GetComponent<Text> ().text = weaponName;
 	}
 	
 	// Update is called once per frame

@@ -73,9 +73,16 @@ public class DartRecoverableScript : WeaponBase {
 					}
 					if(hit.transform.tag == "Dummy" && !recoverable)
 					{
-						GameObject tempGO = hit.transform.gameObject;
-						string hitName = tempGO.transform.name;
-						hit.transform.gameObject.SetActive(false);
+					distanceTravelled = Vector3.Distance (transform.position, initialPosition);
+					GameObject tempGO = hit.transform.gameObject;
+					string hitName = transform.name;
+					if(hitName != lastHit)
+					{
+						hit.transform.GetComponent<PhotonView>().RPC ("GetShot", PhotonTargets.All, damage, owner);
+						ComboGenerator.ActionDartTag(hitName, distanceTravelled);
+						hitName = lastHit;
+					}
+					StartCoroutine ("LastHitReset");
 						//ComboGenerator.ActionDartTag(hitName);
 						//eventDartTrigger.EventDummyKill(hitName);		
 					}

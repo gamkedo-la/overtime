@@ -5,6 +5,10 @@ using PhotonHashtable = ExitGames.Client.Photon.Hashtable;
 
 public class TripwireDropper : WeaponBase {
 
+	// WEAPON NAME //
+	[SerializeField] string weaponName;
+	GameObject ammoName;
+
 	// Animator anim;
 	[SerializeField] string bombPrefab;
 	[SerializeField] bool shooting = false;
@@ -26,8 +30,15 @@ public class TripwireDropper : WeaponBase {
 	void Start () 
 	{
 		//anim = GetComponentInChildren<Animator> ();
-		ammoCount = this.transform.parent.parent.parent.transform.Find("VitalsCanvas/VitalsBar/AmmoCount").gameObject;
+		ammoCount = PlayerManager.instance.AmmoCount;
+		ammoName = PlayerManager.instance.AmmoName;
+		ammoName.GetComponent<Text> ().text = weaponName;
 		origPos = tripwireInHand.transform.localPosition;
+	}
+
+	void OnEnable()
+	{
+		ammoName.GetComponent<Text> ().text = weaponName;
 	}
 	
 	// Update is called once per frame

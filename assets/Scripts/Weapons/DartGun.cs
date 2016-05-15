@@ -8,18 +8,25 @@ public class DartGun : WeaponBase {
 
 	// DL - This script is responsible for: 1) Graphical Effects of Shooting 2) Physics of shooting 3) Impacts, etc.
 
+	// WEAPON NAME //
+	[SerializeField] string weaponName;
+	GameObject ammoName;
+
+
+
 	// Animator anim;
 	[SerializeField] string dartPrefab;
 	[SerializeField] bool shooting = false;
 	[SerializeField] bool loaded = true;
 	[SerializeField] float shotTime;
 	public float loadTime = 2;	
-	public int ammo = 3;
-	public GameObject ammoCount;
 
+	// AMMO // 
+	public int ammo = 3;
 	public int ammoMax = 3;
 	public GameObject gunObj;
-	
+	GameObject ammoCount;
+
 	// DARTS DISAPPEARING //
 	public GameObject dartAmmoGOFirst;
 	public GameObject dartAmmoGOSecond;
@@ -57,9 +64,16 @@ public class DartGun : WeaponBase {
 		//anim = GetComponentInChildren<Animator> ();
 
 		// Grab the Ammo Count Object
-		ammoCount = this.transform.parent.parent.parent.transform.Find("VitalsCanvas/VitalsBar/AmmoCount").gameObject;
 
+		ammoCount = PlayerManager.instance.AmmoCount;
+		ammoName = PlayerManager.instance.AmmoName;
+		ammoName.GetComponent<Text> ().text = weaponName;
 		UpdateAmmoModelVis();
+	}
+
+	void OnEnable()
+	{
+		ammoName.GetComponent<Text> ().text = weaponName;
 	}
 	
 	// Update is called once per frame
