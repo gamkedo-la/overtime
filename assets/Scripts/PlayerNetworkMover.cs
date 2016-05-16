@@ -95,8 +95,6 @@ public class PlayerNetworkMover : Photon.MonoBehaviour {
 		}
 	}
 
-
-
 	public void HealPowerUp(){
 			health += (maxHealth * 0.20f);
 			if (health > maxHealth) {
@@ -131,11 +129,11 @@ public class PlayerNetworkMover : Photon.MonoBehaviour {
 		if (myHealth){
 			healthCount.GetComponent<Text>().text = health.ToString();
 		}
-		if (soakerPushing)
-		{
-			rigidbody.AddForce(soakerPushForce);
-			//soakerPushing = false;
-		}
+
+		/*while (soakerPushing) {
+			rigidbody.MovePosition(transform.position + (soakerPushForce*2));
+		}*/
+
 		
 	}
 
@@ -193,12 +191,19 @@ public class PlayerNetworkMover : Photon.MonoBehaviour {
 		}*/
 		}
 	}
-
+/*
 	[PunRPC]
-	public void GetSoaked(Vector3 pushForce)
+	public void GetSoaked(Vector3 pushForce, int hitRate)
 	{
 		soakerPushForce = pushForce;
 		soakerPushing = true;
-		
+		StartCoroutine (SoakedCooldown (hitRate));		
 	}
+
+	IEnumerator SoakedCooldown(float hitRate)
+	{
+		yield return new WaitForSeconds (hitRate);
+		soakerPushing = false;
+	}
+	*/
 }

@@ -12,10 +12,21 @@ public class RefillWater : MonoBehaviour {
     private FirstPersonController nearbyPlayerController;
     private bool actionButtonDown;
 	[SerializeField] bool refillAvailable = true;
+	public bool randomizeSpawn;
 
 	void Start () {
         refillTimer = 0.0f;
         Carboy = transform.parent.Find("Cylinder_001").gameObject;
+		if (randomizeSpawn) {
+			int randomNumber = Random.Range(1,21);
+			if (randomNumber % 2 == 0)
+			{
+				SetEmpty();
+			}
+			else{
+				return;
+			}
+		}
 	}
 	
 	void Update () {
@@ -34,14 +45,12 @@ public class RefillWater : MonoBehaviour {
 
         if(playerNearby && actionButtonDown && refillAvailable)
         {
+			// CHECK IF AMMO ALREADY FULL AND REFILL IF NOT //
 			bool full = soaker.GiveAmmo();
 
 			if (!full)
 			{
-			refillAvailable = false;
-			refillTimer = Random.Range(minRefillTime, maxRefillTime);
-			StartCoroutine(RefillCooldown(refillTimer));
-			Carboy.SetActive(false);
+				SetEmpty();
 			}
         }
 
@@ -84,6 +93,14 @@ public class RefillWater : MonoBehaviour {
         }
 
     }
+
+	void SetEmpty()
+	{
+		refillAvailable = false;
+		refillTimer = Random.Range(minRefillTime, maxRefillTime);
+		StartCoroutine(RefillCooldown(refillTimer));
+		Carboy.SetActive(false);
+	}
 
     private void actionButtonPressed()
     {

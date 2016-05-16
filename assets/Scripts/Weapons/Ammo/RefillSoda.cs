@@ -14,8 +14,19 @@ public class RefillSoda : MonoBehaviour {
 	private FirstPersonController nearbyPlayerController;
 	private bool actionButtonDown;
 	[SerializeField] bool refillAvailable = true;
+	public bool randomizeSpawn = false;
 	
 	void Start () {
+		if (randomizeSpawn) {
+		int randomNumber = Random.Range(1,21);
+			if (randomNumber % 2 == 0)
+			{
+				SetEmpty();
+			}
+			else{
+				return;
+			}
+		}
 	}
 	
 	void Update () {
@@ -38,11 +49,7 @@ public class RefillSoda : MonoBehaviour {
 			// THESE SHOULD NOT RUN IF THE PLAYER IS FULL OF AMMO
 			if (!full)
 			{
-				refillAvailable = false;
-				refillTimer = Random.Range(minRefillTime, maxRefillTime);
-				StartCoroutine(RefillCooldown(refillTimer));
-				Cans.SetActive(false);
-				Lights.SetActive(false);
+				SetEmpty();
 			}
 		}
 		
@@ -85,6 +92,15 @@ public class RefillSoda : MonoBehaviour {
 			playerNearby = false;
 		}
 		
+	}
+
+	void SetEmpty ()
+	{
+		refillAvailable = false;
+		refillTimer = Random.Range(minRefillTime, maxRefillTime);
+		StartCoroutine(RefillCooldown(refillTimer));
+		Cans.SetActive(false);
+		Lights.SetActive(false);
 	}
 	
 	private void actionButtonPressed()

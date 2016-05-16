@@ -96,38 +96,41 @@ public class SoakerGun : WeaponBase {
 		
 
 
-		if (shooting){ // how we shoot
+		if (shooting) { // how we shoot
 			RaycastHit hit;
-			Vector3 fwd = transform.TransformDirection(Vector3.forward);
-			if(Physics.Raycast(firingPointObj.transform.position, firingPointObj.transform.forward, out hit, range)){
+			Vector3 fwd = transform.TransformDirection (Vector3.forward);
+			if (Physics.Raycast (firingPointObj.transform.position, firingPointObj.transform.forward, out hit, range)) {
 				Debug.Log ("SOAKER: Firing");
 				//Debug.DrawLine(transform.position, hit.point, Color.blue, 2);  // TEMP display of raycast
-				if (hit.transform.tag == "Enemy")
-				{ // if we hit a rigidbody, apply force
-					hit.transform.GetComponent<PhotonView>().RPC ("GetSoaked", PhotonTargets.All, (fwd * knockbackForce));
+				if (hit.transform.tag == "Enemy") { // if we hit a rigidbody, apply force
+					hit.transform.GetComponent<PhotonView> ().RPC ("GetSoaked", PhotonTargets.All, fwd, ammoDecay);
 					Debug.Log ("SOAKER: Hit");
 				}
+
 			}
-			
-		}
 
-		if(ammo <= 0){ // if we run out of ammo, we aren't loaded
-			waterInTank.gameObject.SetActive(false);
-			loaded = false;
-		}
+			if (ammo <= 0) { // if we run out of ammo, we aren't loaded
+				waterInTank.gameObject.SetActive (false);
+				loaded = false;
+			}
 
-		if(loaded == false){ // if we arent loaded...
-			// TODO switch to primary weapon
-			// Destroy (this); // and destroy the special weapon
-		}
+			if (loaded == false) { // if we arent loaded...
+				// TODO switch to primary weapon
+				// Destroy (this); // and destroy the special weapon
+			}
 
-		
+		}
 	}
 
 	void FixedUpdate ()
 	{
 		if (shooting){ 
-			ammo -= (Mathf.RoundToInt(Time.deltaTime * ammoDecay));} // lose ammo gradually as we shoot
+			int DecayRate = (Mathf.RoundToInt(Time.deltaTime * ammoDecay));
+			ammo -= DecayRate;
+			Debug.Log ("SOAKER: Decay Rate = " + DecayRate);
+		
+		} // lose ammo gradually as we shoot
+			
 		ammoCount.GetComponent<Text>().text = (ammo/6).ToString();  // update UI
 	}
 
