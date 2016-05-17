@@ -46,6 +46,8 @@ public class PlayerNetworkMover : Photon.MonoBehaviour {
 	//[SerializeField] bool pushable = false;
 	[SerializeField] bool soakerPushing = false;
 	[SerializeField] Vector3 soakerPushForce;
+	Vector3 positionToPush;
+	int pushSteps = 0;
 
 
 
@@ -129,9 +131,14 @@ public class PlayerNetworkMover : Photon.MonoBehaviour {
 		if (myHealth){
 			healthCount.GetComponent<Text>().text = health.ToString();
 		}
+		if (pushSteps > 0)
+		{
+			rigidbody.MovePosition (positionToPush * Time.deltaTime);
+			pushSteps --;
+		}
 
 		/*while (soakerPushing) {
-			rigidbody.MovePosition(transform.position + (soakerPushForce*2));
+			r;
 		}*/
 
 		
@@ -191,19 +198,18 @@ public class PlayerNetworkMover : Photon.MonoBehaviour {
 		}*/
 		}
 	}
-/*
+
 	[PunRPC]
-	public void GetSoaked(Vector3 pushForce, int hitRate)
+	public void GetSoaked(Vector3 pushDirection, float pushForce)
 	{
-		soakerPushForce = pushForce;
-		soakerPushing = true;
-		StartCoroutine (SoakedCooldown (hitRate));		
+		if (photonView.isMine) {
+			positionToPush = (transform.position + (pushDirection * pushForce));
+			pushSteps = 3;
+			//soakerPushForce = pushForce;
+			//soakerPushing = true;
+		}
 	}
 
-	IEnumerator SoakedCooldown(float hitRate)
-	{
-		yield return new WaitForSeconds (hitRate);
-		soakerPushing = false;
-	}
-	*/
+
+
 }
