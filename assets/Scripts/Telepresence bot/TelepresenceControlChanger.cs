@@ -42,7 +42,7 @@ public class TelepresenceControlChanger : MonoBehaviour {
 
 	void RemovePlayerCharacterControl()
 	{
-		characterControl.enabled = true;
+		characterControl.enabled = false;
 		playerCharacterCamera.enabled = false;
 
 	}
