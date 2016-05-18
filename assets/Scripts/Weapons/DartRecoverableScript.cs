@@ -64,12 +64,10 @@ public class DartRecoverableScript : WeaponBase {
 					{
 						distanceTravelled = Vector3.Distance (transform.position, initialPosition);
 						GameObject tempGO = hit.transform.gameObject;
-						string hitName = hit.transform.GetComponent<PlayerNetworkMover>().myName;
+						string hitName = hit.transform.parent.parent.GetComponent<PlayerNetworkMover>().myName;
 						if(hitName != lastHit)
 						{
-						hit.transform.GetComponent<PhotonView>().RPC ("GetShot", PhotonTargets.All, damage, owner);
-						ComboGenerator.ActionDartTag(hitName, distanceTravelled);
-						hitName = lastHit;
+							HitConfirmed(hit, hitName);
 						}
 						StartCoroutine ("LastHitReset");
 						//Destroy(gameObject);
@@ -81,9 +79,7 @@ public class DartRecoverableScript : WeaponBase {
 					string hitName = transform.name;
 					if(hitName != lastHit)
 					{
-						hit.transform.GetComponent<PhotonView>().RPC ("GetShot", PhotonTargets.All, damage, owner);
-						ComboGenerator.ActionDartTag(hitName, distanceTravelled);
-						hitName = lastHit;
+						HitConfirmed(hit, hitName);
 					}
 					StartCoroutine ("LastHitReset");
 						//ComboGenerator.ActionDartTag(hitName);
@@ -129,6 +125,18 @@ public class DartRecoverableScript : WeaponBase {
 			Destroy(gameObject);
 		}
 	}
+
+	private void HitConfirmed(RaycastHit hit, string hitName)
+	{
+		hit.transform.parent.parent.GetComponent<PhotonView>().RPC ("GetShot", PhotonTargets.All, damage, owner);
+
+		// Disable Other Colliders To Prevent Double Hits //
+		hit.collider.transform.parent.gameObject.SetActive(false);
+
+		ComboGenerator.ActionDartTag(hitName, distanceTravelled, hit.collider.name);
+		hitName = lastHit;
+	}
+
 
 	IEnumerator SelfDestruct()
 	{

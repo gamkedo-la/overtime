@@ -28,11 +28,12 @@ public class ComboGenerator : MonoBehaviour {
     // to UPDATE the COMBO STATS script with new information
 	// and TRIGGER and relevant SCORING PLAY CHECKS
 
-	public static void ActionDartTag (string playerHit, float distanceTravelled)
+	public static void ActionDartTag (string playerHit, float distanceTravelled, string colliderType)
 	{
 		instance.lastTagTime = ComboStats.instance.lastTagTime;
         ComboStats.instance.AddDartTag(playerHit, distanceTravelled);
 		instance.CheckTag (playerHit, distanceTravelled);		
+
 	}
 
 	public static void ActionSodaHit (string playerHit)
@@ -110,6 +111,25 @@ public class ComboGenerator : MonoBehaviour {
         }
         ComboCounter.addComboToScore();
         
+    }
+
+    private void CheckBodyTag (string playerHit, string colliderType)
+    {
+        if (colliderType == "Head")
+        {
+            ComboCounter.addCombo(ComboList.Combos.CsOutsourced, playerHit);
+            float value = ComboList.getComboValue(ComboList.Combos.CsOutsourced);
+            string comboName = ComboList.getComboName (ComboList.Combos.CsOutsourced);
+            instance.scoringPlayHolder.DisplayScoringPlay (comboName + "! " + value + "Pts");
+        }
+
+        if (colliderType == "Hips")
+        {
+            ComboCounter.addCombo(ComboList.Combos.HumanResourceless, playerHit);
+            float value = ComboList.getComboValue(ComboList.Combos.HumanResourceless);
+            string comboName = ComboList.getComboName (ComboList.Combos.HumanResourceless);
+            instance.scoringPlayHolder.DisplayScoringPlay (comboName + "! " + value + "Pts");
+        }
     }
 
     private void CheckStickyHit(string playerHit)

@@ -52,8 +52,9 @@ public class PlayerNetworkMover : Photon.MonoBehaviour {
 
 
 
-	// ADDITIONAL COLLIDERS //
-	//public GameObject nearMissCollider;
+	// COLLIDERS //
+	[SerializeField] GameObject colliderMaster;
+	[SerializeField] Collider[] colliders;
 
 
 	Rigidbody rigidbody;
@@ -65,6 +66,7 @@ public class PlayerNetworkMover : Photon.MonoBehaviour {
 		//Get animator for syncing
 		anim = GetComponentInChildren<Animator> ();
 		rigidbody = transform.GetComponent<Rigidbody>();
+		colliders = colliderMaster.GetComponentsInChildren<Collider>();
 
 		if(photonView.isMine)  // Activate player scripts if my character
 		{
@@ -74,9 +76,14 @@ public class PlayerNetworkMover : Photon.MonoBehaviour {
 			(GetComponent("FirstPersonController") as MonoBehaviour).enabled = true;
 			GetComponentInChildren<DartGun>().enabled = true;
 			playerCamera.GetComponentInChildren<Camera>().enabled = true;
-			//nearMissCollider.SetActive(true);
 			gameObject.tag =  "Player";
 			gameObject.layer = 14;
+			colliderMaster.tag = "Player";
+			foreach(Collider col in colliders)
+			{
+				col.transform.tag = "Player";
+			}
+
 			//GetComponentInChildren<Melee>().enabled = true;
 			//GetComponentInChildren<AudioListener>().enabled = true;
 			/*foreach(Camera cam in GetComponentsInChildren<Camera>())
@@ -131,7 +138,7 @@ public class PlayerNetworkMover : Photon.MonoBehaviour {
 		if (myHealth){
 			healthCount.GetComponent<Text>().text = health.ToString();
 		}
-		if (pushSteps > 0)
+		/*if (pushSteps > 0)
 		{
 			rigidbody.MovePosition (positionToPush * Time.deltaTime);
 			pushSteps --;
@@ -203,8 +210,14 @@ public class PlayerNetworkMover : Photon.MonoBehaviour {
 	public void GetSoaked(Vector3 pushDirection, float pushForce)
 	{
 		if (photonView.isMine) {
-			positionToPush = (transform.position + (pushDirection * pushForce));
-			pushSteps = 3;
+			rigidbody.isKinematic = false;
+			rigidbody.AddForce(pushDirection * pushForce);
+			rigidbody.isKinematic = true;
+
+
+			//positionToPush = (transform.position + (pushDirection * pushForce));
+			//pushSteps = 3;
+
 			//soakerPushForce = pushForce;
 			//soakerPushing = true;
 		}
