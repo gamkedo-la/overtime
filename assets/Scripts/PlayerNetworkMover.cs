@@ -176,7 +176,11 @@ public class PlayerNetworkMover : Photon.MonoBehaviour {
 		}
 	}
 
-
+	public Camera GetPlayerCamera()
+	{
+		Camera playerActiveCamera = playerCamera.GetComponentInChildren<Camera>();
+		return playerActiveCamera;
+	}
 
 	[PunRPC]
 	public void GetShot(float damage, string enemyName)
