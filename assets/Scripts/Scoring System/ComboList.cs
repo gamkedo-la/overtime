@@ -102,7 +102,7 @@ public static class ComboList
         comboNames.Add(Combos.Soaked, "Soaked");
         comboNames.Add(Combos.StarSixtyNine, "*69");
         comboNames.Add(Combos.TheCommuter, "The Commuter");
-        comboNames.Add(Combos.TheWhitesOfTheirEyes, "The whites of their eyes...");
+        comboNames.Add(Combos.TheWhitesOfTheirEyes, "The Whites Of Their Eyes...");
         comboNames.Add(Combos.ThisIsAStickUp, "This is a Stick-Up");
         comboNames.Add(Combos.ThreesCompany, "3's Company");
         comboNames.Add(Combos.TopDownShooter, "Top-Down Shooter");

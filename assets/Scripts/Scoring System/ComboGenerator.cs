@@ -16,6 +16,7 @@ public class ComboGenerator : MonoBehaviour {
     private bool tripleTagEnabled = false;
 
 	public float longRangeShotLimit = 30;
+    public float shortRangeShotLimit = 3;
 
 
 	// Use this for initialization
@@ -32,7 +33,7 @@ public class ComboGenerator : MonoBehaviour {
 	{
 		instance.lastTagTime = ComboStats.instance.lastTagTime;
         ComboStats.instance.AddDartTag(playerHit, distanceTravelled);
-		instance.CheckTag (playerHit, distanceTravelled);		
+		instance.CheckTag (playerHit, distanceTravelled, colliderType);	
 
 	}
 
@@ -70,7 +71,7 @@ public class ComboGenerator : MonoBehaviour {
     // a Scoring Play has been achieved.
 
    
-    private void CheckTag(string playerHit, float distanceTravelled)
+    private void CheckTag(string playerHit, float distanceTravelled, string colliderType)
     {
         
 		// THE COMMUTER - Long Range Tag //
@@ -81,6 +82,15 @@ public class ComboGenerator : MonoBehaviour {
 			string comboName = ComboList.getComboName (ComboList.Combos.TheCommuter);
 			instance.scoringPlayHolder.DisplayScoringPlay (comboName + "! " + value + "Pts");
 		}
+
+        // THE WHITE OF THEIR EYES - Point Blank Tag //
+        if (distanceTravelled < shortRangeShotLimit)
+        {
+            ComboCounter.addCombo(ComboList.Combos.TheWhitesOfTheirEyes, playerHit);
+            float value = ComboList.getComboValue(ComboList.Combos.TheWhitesOfTheirEyes);
+            string comboName = ComboList.getComboName (ComboList.Combos.TheWhitesOfTheirEyes);
+            instance.scoringPlayHolder.DisplayScoringPlay (comboName + "! " + value + "Pts");
+        }
 
 		if (tripleTagEnabled && ComboStats.instance.lastTagTime < (lastTagTime + tripleTagGap)) // TRIPLE TAG //
         {
@@ -109,12 +119,8 @@ public class ComboGenerator : MonoBehaviour {
 			doubleTagEnabled = true;
             tripleTagEnabled = false;
         }
-        ComboCounter.addComboToScore();
-        
-    }
 
-    private void CheckBodyTag (string playerHit, string colliderType)
-    {
+        // CS OUTSOURCED - Head Shot Tag //
         if (colliderType == "Head")
         {
             ComboCounter.addCombo(ComboList.Combos.CsOutsourced, playerHit);
@@ -123,6 +129,7 @@ public class ComboGenerator : MonoBehaviour {
             instance.scoringPlayHolder.DisplayScoringPlay (comboName + "! " + value + "Pts");
         }
 
+        // HUMAN RESOURCELESS - Crotch/Butt Shot Tag //
         if (colliderType == "Hips")
         {
             ComboCounter.addCombo(ComboList.Combos.HumanResourceless, playerHit);
@@ -130,7 +137,12 @@ public class ComboGenerator : MonoBehaviour {
             string comboName = ComboList.getComboName (ComboList.Combos.HumanResourceless);
             instance.scoringPlayHolder.DisplayScoringPlay (comboName + "! " + value + "Pts");
         }
+
+        ComboCounter.addComboToScore();
+        
     }
+
+   
 
     private void CheckStickyHit(string playerHit)
     {        
