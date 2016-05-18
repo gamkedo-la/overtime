@@ -85,7 +85,7 @@ public class Tripwire : WeaponBase
 		if(activated || !deployed || other.gameObject.tag != "Player") {
 			return;
 		}
-		string hitName = other.transform.GetComponent<PlayerNetworkMover> ().myName;	
+		string hitName = other.transform.parent.parent.GetComponent<PlayerNetworkMover> ().myName;	
 		photonView.RPC ("tripwireActivated", PhotonTargets.All, hitName);
 			
 			
