@@ -13,8 +13,23 @@ namespace UnityStandardAssets.Utility
 
         private void LateUpdate()
         {
-            transform.position = target.position + posOffset;
-            transform.rotation = target.rotation;
+			RaycastHit rhInfo;
+			int LayerFilter = ~LayerMask.GetMask ("AmmoBox","Player");
+			if (Physics.Raycast (target.position+Vector3.up,
+			                   target.transform.TransformVector(posOffset).normalized,
+			                     out rhInfo,
+			                     1.2f,
+			                   LayerFilter)) {
+				transform.position = rhInfo.point + rhInfo.normal*0.5f;
+				Debug.Log (rhInfo.collider.name);
+			} else {
+				transform.position = target.position+Vector3.up + 
+					target.transform.TransformVector(posOffset).normalized * 1.2f;
+			}
+
+			transform.rotation = Quaternion.Slerp(transform.rotation,
+			                                      target.rotation,
+			                                      Time.deltaTime*3.5f);
         }
     }
 

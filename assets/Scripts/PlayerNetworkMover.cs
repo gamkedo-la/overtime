@@ -90,7 +90,16 @@ public class PlayerNetworkMover : Photon.MonoBehaviour {
 			{
 			cam.enabled = true;
 			}*/
-			healthCount = this.transform.parent.parent.transform.Find("VitalsCanvas/HealthBar/HealthCount").gameObject;
+			if(this.transform.parent.parent ) {
+				Transform lookingFor = this.transform.parent.parent.transform.Find("VitalsCanvas/HealthBar/HealthCount");
+				if(lookingFor) {
+					healthCount = lookingFor.gameObject;
+				} else {
+					Debug.Log ("If health isn't displaying look here in the code, parent chain mismatch");
+				}
+			} else {
+				Debug.Log ("If health isn't displaying look here in the code");
+			}
 			myHealth = true;
 			ComboGenerator.ActionRespawn();
 			myName = PhotonNetwork.player.name;
@@ -135,7 +144,7 @@ public class PlayerNetworkMover : Photon.MonoBehaviour {
 
 	void FixedUpdate ()
 	{
-		if (myHealth){
+		if (myHealth && healthCount){
 			healthCount.GetComponent<Text>().text = health.ToString();
 		}
 		/*if (pushSteps > 0)

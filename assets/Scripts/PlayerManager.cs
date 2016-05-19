@@ -13,7 +13,6 @@ public class PlayerManager : MonoBehaviour {
 
 	// Use this for initialization
 	void Awake () {
-		Debug.Log ("PlayerManager singleton getting set up");
 		instance = this;
 	}
 	
