@@ -51,6 +51,8 @@ public class WeaponManager : Photon.MonoBehaviour {
 		//SoundCenter.instance.PlayClipOn(
 			//SoundCenter.instance.playerWepSwitch,transform.position);
 
+		PlayerManager.instance.WeaponIcon.sprite = toWep.weaponIcon;
+
 		foreach(WeaponBase eachWep in allWep) {
 			eachWep.enabled = (eachWep == toWep);
 		}
