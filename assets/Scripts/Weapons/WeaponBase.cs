@@ -1,10 +1,12 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.UI;
 
 public class WeaponBase : Photon.MonoBehaviour {
 	// Ammo //
 	protected int ammo = 6;
 	protected int maxAmmo = 6;
+	public Sprite weaponIcon;
 
 	public virtual bool GiveAmmo(int amt)
 	{
