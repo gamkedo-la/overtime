@@ -49,7 +49,7 @@ public class RefillBase : MonoBehaviour {
         {
 			// CHECK IF AMMO ALREADY FULL AND REFILL IF NOT //
 			bool full = playerWepToRecharge.GiveAmmo(ammoToGive);
-
+			PlayerManager.instance.ToolTipGrabAmmo.SetActive(false);
 			if (!full)
 			{
 				SetEmpty();
@@ -67,8 +67,9 @@ public class RefillBase : MonoBehaviour {
 
     void OnTriggerEnter(Collider other)
     {
-		if (other.GetComponent<FirstPersonController>()) // other.tag == "Player")
+		if (other.GetComponent<FirstPersonController>() && refillAvailable) // other.tag == "Player")
         {
+			PlayerManager.instance.ToolTipGrabAmmo.SetActive(true);
 			playerNearby = true;
 			nearbyPlayerController = other.GetComponent<FirstPersonController>();
 			WeaponManager wepMan = other.GetComponent<WeaponManager>();
@@ -96,8 +97,9 @@ public class RefillBase : MonoBehaviour {
 
     void OnTriggerExit(Collider other)
     {
-        if(other.tag == "Player")
+		if(other.GetComponent<FirstPersonController>()) // other.tag == "Player")
         {
+			PlayerManager.instance.ToolTipGrabAmmo.SetActive(false);
             playerNearby = false;
 			playerWepToRecharge = null;
 			nearbyPlayerController = null;

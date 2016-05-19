@@ -7,6 +7,7 @@ public class PlayerManager : MonoBehaviour {
 
 	public GameObject AmmoCount;
 	public GameObject AmmoName;
+	public GameObject ToolTipGrabAmmo;
 
 	// Use this for initialization
 	void Awake () {

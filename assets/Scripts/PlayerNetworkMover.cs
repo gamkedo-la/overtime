@@ -195,6 +195,9 @@ public class PlayerNetworkMover : Photon.MonoBehaviour {
 			if (RespawnMe != null)
 				RespawnMe (3f);
 			respawnSwitch = true;
+
+			PlayerManager.instance.ToolTipGrabAmmo.SetActive(false); // wipe grab ammo tip if spot/respawning
+
 			PhotonNetwork.Destroy (transform.parent.gameObject);
 			/*SoundCenter.instance.PlayClipOn(
 				//SoundCenter.instance.playerDie,transform.position);
