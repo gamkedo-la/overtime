@@ -152,7 +152,9 @@ public class RoundTimerScript : MonoBehaviour
         minutes = (Mathf.Floor(remainingTime / 60).ToString("00"));
 		seconds = (Mathf.Floor(remainingTime % 60).ToString("00"));
 
-		text.text = (minutes + ":" + seconds);
+		if (text) {
+			text.text = (minutes + ":" + seconds);
+		}
 
 		if (remainingTime <= 1) {
 			if (currentLevel == 0 && roundOverCallSwitch) {

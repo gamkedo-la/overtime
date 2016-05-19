@@ -93,12 +93,14 @@ public class NetworkManagerScript : MonoBehaviour {
 		//after OnJoinedLobby, room list needs a minute to populate
 		
 		//Clear room list
-		roomList.text = "";
-		//Get the Room list and populate it
-		RoomInfo[] rooms = PhotonNetwork.GetRoomList ();
-		foreach(RoomInfo room in rooms)
-			roomList.text += room.name + "\n";
-		
+		if (roomList) {
+			roomList.text = "";
+			//Get the Room list and populate it
+			RoomInfo[] rooms = PhotonNetwork.GetRoomList ();
+			foreach(RoomInfo room in rooms)
+				roomList.text += room.name + "\n";
+		}
+
 	}
 
 	public void JoinRoom()

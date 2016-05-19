@@ -16,6 +16,7 @@ public class TripwireDropper : WeaponBase {
 	[SerializeField] float shotTime;
 	public float loadTime = 2;	
 	public float ammo = 3;
+	public float maxAmmo = 3;
 	public GameObject ammoCount;
 
 	public GameObject tripwireInHand;
@@ -106,6 +107,16 @@ public class TripwireDropper : WeaponBase {
 		}
 
 		
+	}
+
+	public bool GiveAmmo()
+	{
+		if (ammo >= maxAmmo) {
+			return true;
+		} else {
+			ammo = maxAmmo;
+			return false;
+		}
 	}
 
 	void FixedUpdate ()
