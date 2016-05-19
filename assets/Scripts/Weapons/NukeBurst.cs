@@ -6,7 +6,7 @@ public class NukeBust : WeaponBase {
 	
 	public string owner;
 
-	void OnTriggerEnter(Collider other) {
+	/*void OnTriggerEnter(Collider other) {
 		StickySlowsMe ssmScript = other.GetComponent<StickySlowsMe>();
 		if(ssmScript) {
 			ssmScript.SpeedStickyZone();
@@ -18,7 +18,7 @@ public class NukeBust : WeaponBase {
 		if(ssmScript) {
 			ssmScript.UnstickySpeed();
 		}
-	}
+	}*/
 
 	[PunRPC]
 	public void NameNukeBurstRPC (string playerName)

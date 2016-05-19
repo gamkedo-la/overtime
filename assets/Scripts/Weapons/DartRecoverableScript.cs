@@ -157,10 +157,10 @@ public class DartRecoverableScript : WeaponBase {
 		if (recoverable = true)
 		{
 			Debug.Log("Attempting Recovery");
-			if (other.transform.tag == "Player")
+			DartGun dartGun = other.GetComponentInChildren<DartGun>();
+			if ( dartGun )
 			{
 				Debug.Log("Attempting Player Recovery");
-				DartGun dartGun = other.GetComponentInChildren<DartGun>();
 				bool wasFull = dartGun.GiveAmmo(1);
 				if (wasFull == false)
 				{

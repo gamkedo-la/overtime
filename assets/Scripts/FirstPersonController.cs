@@ -33,7 +33,6 @@ namespace UnityStandardAssets.Characters.FirstPerson
 		public float hitPoints = 10.0f;
 		public float maxhitPoints = 10.0f;
 
-
         private Camera m_Camera;
         private bool m_Jump;
         private float m_YRotation;
@@ -63,6 +62,7 @@ namespace UnityStandardAssets.Characters.FirstPerson
         // Use this for initialization
         private void Start()
         {
+			m_StickyEffectMult = 1.0f;
 
             m_CharacterController = GetComponent<CharacterController>();
             m_Camera = Camera.main;
@@ -85,6 +85,8 @@ namespace UnityStandardAssets.Characters.FirstPerson
         // Update is called once per frame
         private void Update()
         {
+			StickySafeFix ();
+
             RotateView();
             // the jump state needs to read here to make sure it is not missed
             if (!m_Jump)

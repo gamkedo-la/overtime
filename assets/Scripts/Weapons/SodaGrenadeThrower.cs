@@ -98,6 +98,9 @@ public class SodaGrenadeThrower : WeaponBase {
 		if(ammo <= 0 && canInHand.activeSelf) {
 			canInHand.SetActive(false);
 		}
+		if(ammo > 0 && canInHand.activeSelf == false) {
+			canInHand.SetActive(true);
+		}
 
 		if (shooting){
 			//stop shooting and unload

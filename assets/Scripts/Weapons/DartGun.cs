@@ -60,7 +60,7 @@ public class DartGun : WeaponBase {
 	void Start () 
 	{
 		ammo = 3;
-		maxAmmo = 3;
+		maxAmmo = 5;
 		//anim = GetComponentInChildren<Animator> ();
 
 		// Grab the Ammo Count Object

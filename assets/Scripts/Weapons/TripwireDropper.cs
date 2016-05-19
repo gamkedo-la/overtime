@@ -80,6 +80,9 @@ public class TripwireDropper : WeaponBase {
 		if(ammo <= 0 && tripwireInHand.activeSelf) {
 			tripwireInHand.SetActive(false);
 		}
+		if(ammo > 0 && tripwireInHand.activeSelf == false) {
+			tripwireInHand.SetActive(true);
+		}
 
 		if (shooting){
 			//stop shooting and unload

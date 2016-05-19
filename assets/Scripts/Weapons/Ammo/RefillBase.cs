@@ -75,6 +75,9 @@ public class RefillBase : MonoBehaviour {
 			WeaponManager wepMan = other.GetComponent<WeaponManager>();
 			if (wepMan) {
 				switch(reloadsWepName) {
+				case "dart":
+					playerWepToRecharge = wepMan.GetDartGun ();
+					break;
 				case "soaker":
 					playerWepToRecharge = wepMan.GetSoakerGun ();
 					break;
