@@ -9,7 +9,8 @@ public class PlayerManager : MonoBehaviour {
 	public GameObject AmmoName;
 
 	// Use this for initialization
-	void Start () {
+	void Awake () {
+		Debug.Log ("PlayerManager singleton getting set up");
 		instance = this;
 	}
 	

@@ -79,4 +79,21 @@ public class WeaponManager : Photon.MonoBehaviour {
 			ChangeWep(tripwire);
 		}
 	}
+
+	public DartGun GetDartGun() {
+		return dartGun;
+	}
+	public SoakerGun GetSoakerGun() {
+		return soakerGun;
+	}
+	public SodaGrenadeThrower GetSodaGrenadeThrower() {
+		return sodaGrenadeThrower;
+	}
+	public NukeThrower GetNukeThrower() {
+		return nukeThrower;
+	}
+	public TripwireDropper GetTripwire() {
+		return tripwire;
+	}
+
 }

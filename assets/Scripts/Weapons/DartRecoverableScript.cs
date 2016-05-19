@@ -161,9 +161,9 @@ public class DartRecoverableScript : WeaponBase {
 			{
 				Debug.Log("Attempting Player Recovery");
 				DartGun dartGun = other.GetComponentInChildren<DartGun>();
-				if (dartGun.ammo < dartGun.ammoMax)
+				bool wasFull = dartGun.GiveAmmo(1);
+				if (wasFull == false)
 				{
-					dartGun.GiveAmmo(1);
 					Destroy(gameObject);
 				}
 			}

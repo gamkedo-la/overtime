@@ -9,7 +9,6 @@ public class SoakerGun : WeaponBase {
 
 	// WEAPON NAME //
 	[SerializeField] string weaponName;
-	GameObject ammoName;
 
 	Animator anim;
 	// DL - Collection (Matrix? Array?) of impacts that are moved when shooting. Since they already exist and are not repeatedly called, this is more resource friendly.
@@ -18,10 +17,6 @@ public class SoakerGun : WeaponBase {
 	[SerializeField] float shotTime;
 	[SerializeField] bool shotCooldown = true;
 	[SerializeField] float shotCooldownTime = 0.5f;
-
-	// Ammo //
-	public int ammo = 6;
-	public int maxAmmo = 6;
 
     // OLD STREAM VERSION //
 	/*public int ammo = 1200;
@@ -44,9 +39,11 @@ public class SoakerGun : WeaponBase {
 		// Use this for initialization
 		void Start () 
 		{
+			ammo = 6;
+			maxAmmo = 6;
+
 			ammoCount = PlayerManager.instance.AmmoCount;
-			ammoName = PlayerManager.instance.AmmoName;
-			ammoName.GetComponent<Text> ().text = weaponName;
+			PlayerManager.instance.AmmoName.GetComponent<Text> ().text = weaponName;
 			waterPrefab.SetActive(true);
 			waterSprayer = waterPrefab.GetComponent<ParticleSystem>();
 			waterSprayer.enableEmission = false;
@@ -55,7 +52,7 @@ public class SoakerGun : WeaponBase {
 
 		void OnEnable()
 		{
-			ammoName.GetComponent<Text> ().text = weaponName;
+			PlayerManager.instance.AmmoName.GetComponent<Text> ().text = weaponName;
 		}
 		
 		// Update is called once per frame
@@ -158,15 +155,5 @@ public class SoakerGun : WeaponBase {
 			// OLD STREAM VERSION //
 			//ammoCount.GetComponent<Text>().text = (ammo/6).ToString();  
 		}
-
-	    public bool GiveAmmo()
-	    {
-	        if (ammo >= maxAmmo) {
-				return true;
-			} else {
-				ammo = maxAmmo;
-				return false;
-			}
-	    }
 
 }

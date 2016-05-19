@@ -7,7 +7,6 @@ public class TripwireDropper : WeaponBase {
 
 	// WEAPON NAME //
 	[SerializeField] string weaponName;
-	GameObject ammoName;
 
 	// Animator anim;
 	[SerializeField] string bombPrefab;
@@ -15,8 +14,6 @@ public class TripwireDropper : WeaponBase {
 	[SerializeField] bool loaded = true;
 	[SerializeField] float shotTime;
 	public float loadTime = 2;	
-	public float ammo = 3;
-	public float maxAmmo = 3;
 	public GameObject ammoCount;
 
 	public GameObject tripwireInHand;
@@ -30,16 +27,18 @@ public class TripwireDropper : WeaponBase {
 	// Use this for initialization
 	void Start () 
 	{
+		ammo = 2;
+		maxAmmo = 2;
+
 		//anim = GetComponentInChildren<Animator> ();
 		ammoCount = PlayerManager.instance.AmmoCount;
-		ammoName = PlayerManager.instance.AmmoName;
-		ammoName.GetComponent<Text> ().text = weaponName;
+		PlayerManager.instance.AmmoName.GetComponent<Text> ().text = weaponName;
 		origPos = tripwireInHand.transform.localPosition;
 	}
 
 	void OnEnable()
 	{
-		ammoName.GetComponent<Text> ().text = weaponName;
+		PlayerManager.instance.AmmoName.GetComponent<Text> ().text = weaponName;
 	}
 	
 	// Update is called once per frame
@@ -107,16 +106,6 @@ public class TripwireDropper : WeaponBase {
 		}
 
 		
-	}
-
-	public bool GiveAmmo()
-	{
-		if (ammo >= maxAmmo) {
-			return true;
-		} else {
-			ammo = maxAmmo;
-			return false;
-		}
 	}
 
 	void FixedUpdate ()

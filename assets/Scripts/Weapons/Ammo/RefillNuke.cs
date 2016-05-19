@@ -2,21 +2,20 @@
 using System.Collections;
 using UnityStandardAssets.Characters.FirstPerson;
 
-public class RefillPhone : MonoBehaviour {
+public class RefillNuke : MonoBehaviour {
 
     public float minRefillTime = 15.0f, maxRefillTime = 45.0f;
     [SerializeField] float refillTimer;
     private GameObject LightEffect;
-    private TripwireDropper tripwire;
+    private NukeThrower nukeThrow;
     [SerializeField] bool playerNearby;
     private FirstPersonController nearbyPlayerController;
-    private bool actionButtonDown;
 	[SerializeField] bool refillAvailable = true;
 	public bool randomizeSpawn;
 
 	void Start () {
         refillTimer = 0.0f;
-		LightEffect = transform.Find("PhoneLight").gameObject;
+		LightEffect = transform.Find("Nuke").gameObject;
 		if (randomizeSpawn) {
 			int randomNumber = Random.Range(1,21);
 			if (randomNumber % 2 == 0)
@@ -38,31 +37,16 @@ public class RefillPhone : MonoBehaviour {
             // Debug.Log("Player nearby");
         }
 
-        if (actionButtonDown)
-        {
-            // Debug.Log("ActionButtonDown", gameObject);
-        }
-
-        if(playerNearby && actionButtonDown && refillAvailable)
+		if(playerNearby && refillAvailable && nukeThrow)
         {
 			// CHECK IF AMMO ALREADY FULL AND REFILL IF NOT //
-			bool full = tripwire.GiveAmmo(1);
+			bool full = nukeThrow.GiveAmmo(1);
 
 			if (!full)
 			{
 				SetEmpty();
 			}
         }
-
-        if(playerNearby && nearbyPlayerController != null && nearbyPlayerController.useButton)
-        {
-            actionButtonDown = true;
-        }
-        else
-        {
-            actionButtonDown = false;
-        }
-
      
     }
 
@@ -78,7 +62,7 @@ public class RefillPhone : MonoBehaviour {
 		nearbyPlayerController = other.GetComponent<FirstPersonController>();
 		WeaponManager wepMan = other.GetComponent<WeaponManager>();
 		if (wepMan) {
-			tripwire = wepMan.GetTripwire ();
+			nukeThrow = wepMan.GetNukeThrower ();
 		}
         if (other.tag == "Player")
         {
@@ -88,7 +72,7 @@ public class RefillPhone : MonoBehaviour {
 
     void OnTriggerExit(Collider other)
     {
-		tripwire = null;
+		nukeThrow = null;
         nearbyPlayerController = null;
         if(other.tag == "Player")
         {
@@ -104,13 +88,7 @@ public class RefillPhone : MonoBehaviour {
 		StartCoroutine(RefillCooldown(refillTimer));
 		LightEffect.SetActive(false);
 	}
-
-    private void actionButtonPressed()
-    {
-        Debug.Log("ActionButtonEventMethod");
-        actionButtonDown = true;
-    }
-
+	
    /* void OnEnable()
     {
         EventManager.StartListening(StandardEventName.ActionButton, actionButtonPressed);

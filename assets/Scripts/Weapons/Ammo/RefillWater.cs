@@ -46,7 +46,7 @@ public class RefillWater : MonoBehaviour {
         if(playerNearby && actionButtonDown && refillAvailable)
         {
 			// CHECK IF AMMO ALREADY FULL AND REFILL IF NOT //
-			bool full = soaker.GiveAmmo();
+			bool full = soaker.GiveAmmo(-1);
 
 			if (!full)
 			{
@@ -75,9 +75,12 @@ public class RefillWater : MonoBehaviour {
 
     void OnTriggerEnter(Collider other)
     {
-        soaker = other.GetComponentInChildren<SoakerGun>();
         nearbyPlayerController = other.GetComponent<FirstPersonController>();
-        if (other.tag == "Player")
+		WeaponManager wepMan = other.GetComponent<WeaponManager>();
+		if (wepMan) {
+			soaker = wepMan.GetSoakerGun ();
+		}
+		if (other.tag == "Player")
         {
             playerNearby = true;
         }

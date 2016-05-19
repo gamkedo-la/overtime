@@ -10,7 +10,6 @@ public class NukeThrower : WeaponBase {
 
 	// WEAPON NAME //
 	[SerializeField] string weaponName;
-	GameObject ammoName;
 
 	// Animator anim;
 	[SerializeField] string dartPrefab;
@@ -18,7 +17,6 @@ public class NukeThrower : WeaponBase {
 	[SerializeField] bool loaded = true;
 	[SerializeField] float shotTime;
 	public float loadTime = 2;	
-	public float ammo = 3;
 	public GameObject ammoCount;
 
 	public GameObject canInHand;
@@ -31,16 +29,18 @@ public class NukeThrower : WeaponBase {
 	// Use this for initialization
 	void Start () 
 	{
+		ammo = 0;
+		maxAmmo = 1;
+
 		//anim = GetComponentInChildren<Animator> ();
 		ammoCount = PlayerManager.instance.AmmoCount;
-		ammoName = PlayerManager.instance.AmmoName;
-		ammoName.GetComponent<Text> ().text = weaponName;
+		PlayerManager.instance.AmmoName.GetComponent<Text> ().text = weaponName;
 		origPos = canInHand.transform.localPosition;
 	}
 
 	void OnEnable()
 	{
-		ammoName.GetComponent<Text> ().text = weaponName;
+		PlayerManager.instance.AmmoName.GetComponent<Text> ().text = weaponName;
 	}
 	
 	// Update is called once per frame

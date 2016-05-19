@@ -18,10 +18,8 @@ public class SodaGrenadeThrower : WeaponBase {
 	[SerializeField] bool loaded = true;
 	[SerializeField] float shotTime;
 	public float loadTime = 2;	
-	public float ammo = 3;
 	public GameObject ammoCount;
 	public GameObject canInHand;
-	public float maxAmmo = 6;
 	string myName;
 
 	Vector3 origPos;
@@ -30,17 +28,18 @@ public class SodaGrenadeThrower : WeaponBase {
 	// Use this for initialization
 	void Start () 
 	{
+		ammo = 3;
+		maxAmmo = 6;
 		//anim = GetComponentInChildren<Animator> ();
 		ammoCount = PlayerManager.instance.AmmoCount;
-		ammoName = PlayerManager.instance.AmmoName;
-		ammoName.GetComponent<Text> ().text = weaponName;
+		PlayerManager.instance.AmmoName.GetComponent<Text> ().text = weaponName;
 		origPos = canInHand.transform.localPosition;
 		myName = PhotonNetwork.player.name;
 	}
 
 	void OnEnable()
 	{
-		ammoName.GetComponent<Text> ().text = weaponName;
+		PlayerManager.instance.AmmoName.GetComponent<Text> ().text = weaponName;
 	}
 	
 	// Update is called once per frame

@@ -10,8 +10,6 @@ public class DartGun : WeaponBase {
 
 	// WEAPON NAME //
 	[SerializeField] string weaponName;
-	GameObject ammoName;
-
 
 
 	// Animator anim;
@@ -21,9 +19,6 @@ public class DartGun : WeaponBase {
 	[SerializeField] float shotTime;
 	public float loadTime = 2;	
 
-	// AMMO // 
-	public int ammo = 3;
-	public int ammoMax = 3;
 	public GameObject gunObj;
 	GameObject ammoCount;
 
@@ -49,31 +44,35 @@ public class DartGun : WeaponBase {
 		dartAmmoGOFirst.SetActive(ammo>2);
 	}
 
-	public void GiveAmmo(int amt) {
-			ammo += amt;
-			// Prompt gun to display its new ammo
+	public override bool GiveAmmo(int amt) {
+		bool wasFull = base.GiveAmmo (amt);
+
+		// Prompt gun to display its new ammo
+		if (wasFull == false) {
 			loaded = false;
 			shotTime = Time.time;
 			UpdateAmmoModelVis ();
-
+		}
+		return wasFull;
 	}
 
 	// Use this for initialization
 	void Start () 
 	{
+		ammo = 3;
+		maxAmmo = 3;
 		//anim = GetComponentInChildren<Animator> ();
 
 		// Grab the Ammo Count Object
 
 		ammoCount = PlayerManager.instance.AmmoCount;
-		ammoName = PlayerManager.instance.AmmoName;
-		ammoName.GetComponent<Text> ().text = weaponName;
+		PlayerManager.instance.AmmoName.GetComponent<Text> ().text = weaponName;
 		UpdateAmmoModelVis();
 	}
 
 	void OnEnable()
 	{
-		ammoName.GetComponent<Text> ().text = weaponName;
+		PlayerManager.instance.AmmoName.GetComponent<Text> ().text = weaponName;
 	}
 	
 	// Update is called once per frame

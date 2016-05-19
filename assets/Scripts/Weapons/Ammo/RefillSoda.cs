@@ -33,12 +33,12 @@ public class RefillSoda : MonoBehaviour {
 		
 		if(playerNearby)
 		{
-			Debug.Log("Player nearby");
+			// Debug.Log("Player nearby");
 		}
 		
 		if (actionButtonDown)
 		{
-			Debug.Log("ActionButtonDown", gameObject);
+			// Debug.Log("ActionButtonDown", gameObject);
 		}
 		
 		if(playerNearby && actionButtonDown && refillAvailable)
@@ -75,8 +75,11 @@ public class RefillSoda : MonoBehaviour {
 	
 	void OnTriggerEnter(Collider other)
 	{
-		grenadeThrower = other.GetComponentInChildren<SodaGrenadeThrower>();
 		nearbyPlayerController = other.GetComponent<FirstPersonController>();
+		WeaponManager wepMan = other.GetComponent<WeaponManager>();
+		if (wepMan) {
+			grenadeThrower = wepMan.GetSodaGrenadeThrower ();
+		}
 		if (other.tag == "Player")
 		{
 			playerNearby = true;
