@@ -63,7 +63,11 @@ public class SodaGrenadeThrower : WeaponBase {
 
 		// Aiming
 		if(loaded == true & ammo > 0) {
-			if(Physics.Raycast(centerRay, out hitInfo, 150.0f)) {
+			int filterLayers = ~LayerMask.GetMask("AmmoBox");
+			
+			if(Physics.Raycast(centerRay, out hitInfo, 150.0f, filterLayers) &&
+			   transform.InverseTransformPoint(hitInfo.point).z > 0.5f) {
+
 				shootToward = hitInfo.point;
 			} else {
 				shootToward = centerRay.origin + centerRay.direction * 50.0f;

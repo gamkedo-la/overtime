@@ -91,7 +91,11 @@ public class SoakerGun : WeaponBase {
 			Ray centerRay = Camera.main.ScreenPointToRay(new Vector3((Camera.main.pixelWidth/2), (Camera.main.pixelHeight/2), 0f));
 
 			if(loaded == true & ammo > 0) {
-				if(Physics.Raycast(centerRay, out hitInfo, 150.0f)) {
+				int filterLayers = ~LayerMask.GetMask("AmmoBox");
+				
+				if(Physics.Raycast(centerRay, out hitInfo, 150.0f, filterLayers) &&
+				   transform.InverseTransformPoint(hitInfo.point).z > 0.5f) {
+
 					shootToward = hitInfo.point;
 				} else {
 					shootToward = centerRay.origin + centerRay.direction * 50.0f;
