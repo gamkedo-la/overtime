@@ -69,7 +69,7 @@ public class SoakerGun : WeaponBase {
 			if(Input.GetButton ("Fire1") && !Input.GetKey(KeyCode.LeftShift)){ // While pressing fire, we aren't running, and we have ammo, we are shooting.
 				if(loaded == true && ammo > 0){
 					shooting = true;
-					Debug.Log ("It's shooting");
+					// Debug.Log ("It's shooting");
 					waterSprayer.enableEmission = true;
 					/* SoundCenter.instance.PlayClipOn(
 						SoundCenter.instance.watergunSquirt,transform.position); */
