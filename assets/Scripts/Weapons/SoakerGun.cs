@@ -58,13 +58,13 @@ public class SoakerGun : WeaponBase {
 		// Update is called once per frame
 		void Update (){
 
-			waterGunModel.transform.localPosition = wepOrig
-				+ Mathf.Cos(transform.position.x+transform.position.z) * Vector3.up * 0.03f
+		waterGunModel.transform.localPosition = wepOrig;
+				/*+ Mathf.Cos(transform.position.x+transform.position.z) * Vector3.up * 0.03f
 					+ Mathf.Cos(transform.position.x*0.7f+transform.position.z*0.4f) * Vector3.right * 0.03f
-					+ Mathf.Cos(transform.position.x*0.3f+transform.position.z*0.5f) * Vector3.forward * 0.01f;
-			waterGunModel.transform.localRotation =
+					+ Mathf.Cos(transform.position.x*0.3f+transform.position.z*0.5f) * Vector3.forward * 0.01f*/;
+		/*waterGunModel.transform.localRotation =
 				Quaternion.AngleAxis(-90.0f + Mathf.Cos (Time.time*0.1f)*3.0f,Vector3.right) *
-					Quaternion.AngleAxis(Mathf.Cos (Time.time*0.4f*0.1f)*3.0f,Vector3.up);
+					Quaternion.AngleAxis(Mathf.Cos (Time.time*0.4f*0.1f)*3.0f,Vector3.up)*/;
 
 			if(Input.GetButton ("Fire1") && !Input.GetKey(KeyCode.LeftShift)){ // While pressing fire, we aren't running, and we have ammo, we are shooting.
 				if(loaded == true && ammo > 0){

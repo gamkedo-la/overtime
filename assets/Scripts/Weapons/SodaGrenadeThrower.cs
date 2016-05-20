@@ -46,13 +46,13 @@ public class SodaGrenadeThrower : WeaponBase {
 	void Update (){
 
 		// weapon bob during run
-		canInHand.transform.localPosition = origPos
+		canInHand.transform.localPosition = origPos /*
 			+ Mathf.Cos(transform.position.x) * Vector3.up * 0.05f
-				+ Mathf.Cos(transform.position.z) * Vector3.right * 0.05f;
+				+ Mathf.Cos(transform.position.z) * Vector3.right * 0.05f*/;
 		// raise weapon when reloading
 		if(loaded == false) {
 			canInHand.transform.localPosition -=
-				0.15f*Vector3.up * ((shotTime + loadTime) - Time.time);
+				0.15f*Vector3.forward * ((shotTime + loadTime) - Time.time);
 		}
 
 	

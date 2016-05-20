@@ -45,13 +45,13 @@ public class TripwireDropper : WeaponBase {
 	void Update (){
 
 		// weapon bob during run
-		tripwireInHand.transform.localPosition = origPos
+		tripwireInHand.transform.localPosition = origPos /*
 			+ Mathf.Cos(transform.position.x) * Vector3.up * 0.05f
-				+ Mathf.Cos(transform.position.z) * Vector3.right * 0.05f;
+				+ Mathf.Cos(transform.position.z) * Vector3.right * 0.05f*/;
 		// raise weapon when reloading
 		if(loaded == false) {
 			tripwireInHand.transform.localPosition -=
-				0.15f*Vector3.up * ((shotTime + loadTime) - Time.time);
+				0.15f*Vector3.forward * ((shotTime + loadTime) - Time.time);
 		}
 
 		// No Aiming
