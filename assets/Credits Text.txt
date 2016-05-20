@@ -1,0 +1,11 @@
+Dan Lazar - Project Lead, Concept, Networking, Gameplay Programming, Combo Plays (Concepts, Functionality), Scoring (UI, Functionality), Player UI (Art, Functionality), Lighting, Level Dressing, 3rd Person (Control, Camera), Dart Gun (Functionality), Dart Physics, Prototype Models, Misc. Textures, TV (Model)
+JL Evans - Water Cooler Station (Models, Textures), Cubicles (Models, Textures), Combo Plays (Concepts)
+Tim Waskett - Event System, Level Design, Telepresence Robots (Models, Textures, Ai, Control, Physics), Telepresence Terminal (Model, Functionality), Photocopiers (Models), Ceiling Fluorescents (Model)
+Andreas Lathe - Touchtone Tripwire Weapon (Functionality, Effects)
+Nicholas Polchies - Combo System, Water Cooler Station (Functionality), Refill Station Base (Functionality), Action Button
+Sasha Reneau - Touchtone Tripwire Weapon (Model)
+Jeremy Kenyon - Posters, Combo Plays (Concepts)
+Chris DeLeon - Mentor, Troubleshooter Extraordinaire, General Programming, Tooltips, 3rd Person Camera (Tuning), Aiming (Tuning, Original Prototype), Water Cooler Cannon (Model, Textures, Effects), Dart Nuke (Model, Texture, Functionality), Tripwire/Dart/Nuke Refill Stations (Functionality, Layout), Touchtone Tripwire Weapon (Additional Functionality), Misc. Polish
+Angelo Gazzia - Player (Model, Texture), Dart Gun (Model, Texture), Soda Grenade (Model, Texture), Vending Machine (Model, Texture), Filing Cabinet (Model, Texture), Cubicle Props (Model, Texture), Trees (Model, Texture), Carpet (Texture), Ceiling (Texture), 
+
+Project built on the shoulders of Team Foam Corps
